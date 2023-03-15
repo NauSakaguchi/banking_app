@@ -1,29 +1,45 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:banking_app/constant/string/globar_string.dart';
 import 'package:banking_app/constant/string/login_string.dart';
+import 'package:banking_app/core/hooks/useFlutterToast.dart';
+import 'package:banking_app/main.dart';
+import 'package:banking_app/view/login/state/login_page_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends HookConsumerWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          _backGround(context),
-          Align(
-            alignment: const Alignment(0, 0.5),
-            child: _loginBox(context),
-          ),
-        ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            _backGround(context),
+            Align(
+              alignment: const Alignment(0, 0.5),
+              child: _loginBox(context, ref),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _loginBox(BuildContext context) {
+  Widget _loginBox(BuildContext context, WidgetRef ref) {
+    final loginItems = ref.watch(loginItemsProvider);
+    final notifier = ref.watch(loginItemsProvider.notifier);
+    final usernameEditingController =
+        useTextEditingController(text: loginItems.username);
+    final passwordEditingController =
+        useTextEditingController(text: loginItems.password);
+    final toast = useFlutterToast();
+
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final deviceWidth = MediaQuery.of(context).size.width;
     return Container(
@@ -45,7 +61,12 @@ class LoginPage extends StatelessWidget {
               ),
             ],
           ),
-          const TextField(),
+          TextField(
+            controller: usernameEditingController,
+            onChanged: (str) {
+              notifier.updateUserName(str);
+            },
+          ),
           const SizedBox(height: 15),
           Row(
             children: [
@@ -55,11 +76,32 @@ class LoginPage extends StatelessWidget {
               ),
             ],
           ),
-          const TextField(),
+          TextField(
+            obscureText: true,
+            controller: passwordEditingController,
+            onChanged: (str) {
+              notifier.updatePassword(str);
+            },
+          ),
           const SizedBox(height: 15),
           ElevatedButton(
-            onPressed: () => context.router.pushNamed('/top'),
-            child: const Text(LoginString.signIn),
+            onPressed: loginItems.buttonLoading
+                ? null
+                : () async {
+                    notifier.updateButtonStatus(true, colorScheme);
+                    logger.d('Username: ${loginItems.username}');
+                    logger.d('Password: ${loginItems.password}');
+
+                    final String? errorMessage = await notifier.auth();
+                    notifier.updateButtonStatus(false, colorScheme);
+                    if (errorMessage == null) {
+                      context.router.pushNamed('/top');
+                    } else {
+                      toast.showErrorToast(errorMessage);
+                      return;
+                    }
+                  },
+            child: Text(loginItems.signInButtonTxt),
           ),
           const Text(LoginString.forgot),
         ],

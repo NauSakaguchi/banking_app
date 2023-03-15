@@ -1,4 +1,4 @@
-import 'package:banking_app/core/assets_gen/assets.gen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class TopPage extends StatelessWidget {
@@ -10,15 +10,12 @@ class TopPage extends StatelessWidget {
       onWillPop: () async => false,
       child: Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Assets.img.flutterIcon.image(width: 200),
-              Text(
-                "hello",
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
+          child: ElevatedButton(
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.pop(context);
+            },
+            child: const Text("Sign Out"),
           ),
         ),
       ),
