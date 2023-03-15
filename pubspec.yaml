@@ -40,8 +40,12 @@ dependencies:
   hooks_riverpod:
   riverpod_annotation:
   freezed_annotation:
+
   flutter_svg: ^1.1.6
+
   auto_route: ^5.0.4
+
+  flutter_native_splash:
 
 
 dev_dependencies:
@@ -111,3 +115,8 @@ flutter_gen:
 
   integrations:
     flutter_svg: true
+
+
+flutter_native_splash:
+  image: "assets/img/bank_logo.png"
+  color: "FFFFFF"
