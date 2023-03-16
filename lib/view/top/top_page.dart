@@ -1,22 +1,35 @@
-import 'package:banking_app/core/assets_gen/assets.gen.dart';
+import 'package:banking_app/view_model/user_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TopPage extends StatelessWidget {
+class TopPage extends ConsumerWidget {
   const TopPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userState = ref.watch(userInfoProvider);
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Assets.img.flutterIcon.image(width: 200),
-              Text(
-                "hello",
-                style: Theme.of(context).textTheme.headline4,
+              const Padding(
+                padding: EdgeInsets.all(20),
+                child: Text("Hello, your Unique ID is"),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Text("${userState.uid}"),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pop(context);
+                },
+                child: const Text("Sign Out"),
               ),
             ],
           ),
