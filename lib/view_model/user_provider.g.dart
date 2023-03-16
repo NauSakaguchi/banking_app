@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_page_provider.dart';
+part of 'user_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,19 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$LoginItemsHash() => r'31ea22a16ea14f0adf31d6304930178b9f009c64';
+String _$UserInfoHash() => r'9fab2bd003deb5bbc8526ab48f4afba778fa9005';
 
-/// See also [LoginItems].
-final loginItemsProvider =
-    AutoDisposeNotifierProvider<LoginItems, LoginPageState>(
-  LoginItems.new,
-  name: r'loginItemsProvider',
+/// See also [UserInfo].
+final userInfoProvider = NotifierProvider<UserInfo, User>(
+  UserInfo.new,
+  name: r'userInfoProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$LoginItemsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$UserInfoHash,
 );
-typedef LoginItemsRef = AutoDisposeNotifierProviderRef<LoginPageState>;
+typedef UserInfoRef = NotifierProviderRef<User>;
 
-abstract class _$LoginItems extends AutoDisposeNotifier<LoginPageState> {
+abstract class _$UserInfo extends Notifier<User> {
   @override
-  LoginPageState build();
+  User build();
 }

@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../view_model/user_provider.dart';
+
 part 'login_page_provider.g.dart';
 
 @riverpod
@@ -40,11 +42,18 @@ class LoginItems extends _$LoginItems {
   }
 
   Future<String?> auth() async {
+    final userInfoNotifier = ref.read(userInfoProvider.notifier);
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: state.username,
         password: state.password,
       );
+      if (credential.user != null) {
+        logger.d('uid: ${credential.user!.uid}');
+        userInfoNotifier.updateUID(credential.user!.uid);
+      } else {
+        logger.e('credential.user is null');
+      }
     } on FirebaseAuthException catch (e) {
       logger.e('Login Failed');
       String errorMsg;

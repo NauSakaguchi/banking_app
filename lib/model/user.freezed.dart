@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$User {
-  String? get username => throw _privateConstructorUsedError;
+  String? get uid => throw _privateConstructorUsedError;
   String? get lastname => throw _privateConstructorUsedError;
   String? get firstname => throw _privateConstructorUsedError;
 
@@ -29,7 +29,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String? username, String? lastname, String? firstname});
+  $Res call({String? uid, String? lastname, String? firstname});
 }
 
 /// @nodoc
@@ -45,14 +45,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
+    Object? uid = freezed,
     Object? lastname = freezed,
     Object? firstname = freezed,
   }) {
     return _then(_value.copyWith(
-      username: freezed == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String?,
       lastname: freezed == lastname
           ? _value.lastname
@@ -72,7 +72,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? username, String? lastname, String? firstname});
+  $Res call({String? uid, String? lastname, String? firstname});
 }
 
 /// @nodoc
@@ -84,14 +84,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
+    Object? uid = freezed,
     Object? lastname = freezed,
     Object? firstname = freezed,
   }) {
     return _then(_$_User(
-      username: freezed == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String?,
       lastname: freezed == lastname
           ? _value.lastname
@@ -108,10 +108,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 /// @nodoc
 
 class _$_User implements _User {
-  const _$_User({this.username, this.lastname, this.firstname});
+  const _$_User({this.uid, this.lastname, this.firstname});
 
   @override
-  final String? username;
+  final String? uid;
   @override
   final String? lastname;
   @override
@@ -119,7 +119,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(username: $username, lastname: $lastname, firstname: $firstname)';
+    return 'User(uid: $uid, lastname: $lastname, firstname: $firstname)';
   }
 
   @override
@@ -127,8 +127,7 @@ class _$_User implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            (identical(other.username, username) ||
-                other.username == username) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.lastname, lastname) ||
                 other.lastname == lastname) &&
             (identical(other.firstname, firstname) ||
@@ -136,7 +135,7 @@ class _$_User implements _User {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, lastname, firstname);
+  int get hashCode => Object.hash(runtimeType, uid, lastname, firstname);
 
   @JsonKey(ignore: true)
   @override
@@ -147,12 +146,12 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {final String? username,
+      {final String? uid,
       final String? lastname,
       final String? firstname}) = _$_User;
 
   @override
-  String? get username;
+  String? get uid;
   @override
   String? get lastname;
   @override
