@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:banking_app/constant/route/route_path.dart';
 import 'package:banking_app/view_model/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,12 @@ class TopPage extends ConsumerWidget {
                   Navigator.pop(context);
                 },
                 child: const Text("Sign Out"),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  context.router.pushNamed(RoutePath.atmMapRouteLogin);
+                },
+                child: const Text("ATM MAP"),
               ),
             ],
           ),

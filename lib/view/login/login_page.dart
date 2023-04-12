@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:banking_app/constant/route/route_path.dart';
 import 'package:banking_app/constant/string/globar_string.dart';
 import 'package:banking_app/constant/string/login_string.dart';
 import 'package:banking_app/core/hooks/useFlutterToast.dart';
@@ -95,7 +96,7 @@ class LoginPage extends HookConsumerWidget {
                     final String? errorMessage = await notifier.auth();
                     notifier.updateButtonStatus(false, colorScheme);
                     if (errorMessage == null) {
-                      context.router.pushNamed('/top');
+                      context.router.pushNamed(RoutePath.appRouteTop);
                     } else {
                       toast.showErrorToast(errorMessage);
                       return;
