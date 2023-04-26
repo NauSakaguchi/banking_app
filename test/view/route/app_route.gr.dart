@@ -12,11 +12,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:banking_app/view/atm_map/atm_map_page.dart' as _i3;
+import 'package:banking_app/view/login/login_page.dart' as _i2;
+import 'package:banking_app/view/top/top_page.dart' as _i1;
 import 'package:flutter/material.dart' as _i5;
-
-import '../atm_map/atm_map_page.dart' as _i3;
-import '../login/login_page.dart' as _i2;
-import '../top/top_page.dart' as _i1;
 
 class AppRouter extends _i4.RootStackRouter {
   AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])

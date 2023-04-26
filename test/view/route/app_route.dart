@@ -8,16 +8,16 @@ import 'package:banking_app/view/top/top_page.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
-      path: RoutePath.appRouteTop,
+      path: RoutePath.topRoute,
       page: TopPage,
     ),
     AutoRoute(
-      path: RoutePath.appRouteLogin,
+      path: RoutePath.loginRoute,
       page: LoginPage,
       initial: true,
     ),
     AutoRoute(
-      path: RoutePath.atmMapRouteLogin,
+      path: RoutePath.atmMapRoute,
       page: AtmMapPage,
     )
   ],
