@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:banking_app/constant/route/route_path.dart';
+import 'package:banking_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -120,8 +123,7 @@ class AccountPage extends StatelessWidget {
                   ),
                 ),
                 MenuWidget(
-                  width: screenWidth - padding * 2,
-                ),
+                    width: screenWidth - padding * 2, colorScheme: colorScheme),
                 const SizedBox(
                   height: 60,
                 ),
@@ -144,15 +146,15 @@ class AccountPage extends StatelessWidget {
 class MenuWidget extends StatelessWidget {
   final double width;
   final double itemCount = 4;
-  late ColorScheme colorScheme;
-  MenuWidget({
+  final ColorScheme colorScheme;
+  const MenuWidget({
     Key? key,
     required this.width,
+    required this.colorScheme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    colorScheme = Theme.of(context).colorScheme;
     return Container(
       // round corner
       decoration: BoxDecoration(
@@ -165,50 +167,75 @@ class MenuWidget extends StatelessWidget {
         alignment: WrapAlignment.center,
         children: [
           _buildMenuItem(
-            Icons.currency_exchange_outlined,
-            "Transfer",
+            context,
+            icon: Icons.currency_exchange_outlined,
+            title: "Transfer\n",
+            path: RoutePath.transferRoute,
           ),
           _buildMenuItem(
-            Icons.payments_outlined,
-            "Check\nDeposit",
+            context,
+            icon: Icons.payments_outlined,
+            title: "Check\nDeposit",
+            path: RoutePath.checkDepositRoute,
           ),
           _buildMenuItem(
-            Icons.account_balance_wallet_outlined,
-            "Open\nAccount",
+            context,
+            icon: Icons.account_balance_wallet_outlined,
+            title: "Open\nAccount",
+            path: RoutePath.openAccountRoute,
           ),
           _buildMenuItem(
-            Icons.person_off_outlined,
-            "Close\nAccount",
+            context,
+            icon: Icons.person_off_outlined,
+            title: "Close\nAccount",
+            path: RoutePath.closeAccountRoute,
           ),
         ],
       ),
     );
   }
 
-  _buildMenuItem(IconData icon, String title) {
+  _buildMenuItem(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String path,
+  }) {
     double itemWidth = width / itemCount - 1;
-    return Container(
-      // color: Colors.red,
-      width: itemWidth,
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          const SizedBox(height: 8),
-          Icon(
-            icon,
-            size: itemWidth / 3,
-            color: colorScheme.primary,
-          ),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 11,
-              color: colorScheme.onBackground,
-              fontWeight: FontWeight.bold,
+    return MaterialButton(
+      padding: const EdgeInsets.all(0),
+      // round corner
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      minWidth: 0,
+      onPressed: () {
+        logger.d("path: $path");
+        context.router.pushNamed(path);
+      },
+      child: Container(
+        // color: Colors.red,
+        width: itemWidth,
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            const SizedBox(height: 8),
+            Icon(
+              icon,
+              size: itemWidth / 3,
+              color: colorScheme.primary,
             ),
-          ),
-        ],
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 11,
+                color: colorScheme.onBackground,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

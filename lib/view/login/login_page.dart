@@ -96,7 +96,7 @@ class LoginPage extends HookConsumerWidget {
                     final String? errorMessage = await notifier.auth();
                     notifier.updateButtonStatus(false, colorScheme);
                     if (errorMessage == null) {
-                      context.router.pushNamed(RoutePath.appRouteTop);
+                      context.router.pushNamed(RoutePath.topRoute);
                     } else {
                       toast.showErrorToast(errorMessage);
                       return;
