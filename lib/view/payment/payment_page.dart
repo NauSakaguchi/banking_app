@@ -65,7 +65,7 @@ class PaymentPage extends StatelessWidget {
                   // number keyboard
                   keyboardType: TextInputType.number,
                   decoration: Decorations.inputDecoration(
-                    "Account Name",
+                    "Routing Number",
                     colorScheme,
                   ),
                 ),
