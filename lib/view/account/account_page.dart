@@ -190,6 +190,27 @@ class MenuWidget extends StatelessWidget {
             title: "Close\nAccount",
             path: RoutePath.closeAccountRoute,
           ),
+          _buildMenuItem(
+            context,
+            icon: Icons.payment_outlined,
+            title: "Payment\n",
+            path: RoutePath.paymentRoute,
+          ),
+          _buildMenuItem(
+            context,
+            icon: Icons.info_outline,
+            title: "Information\n",
+            path: RoutePath.informationRoute,
+          ),
+          // dummy item
+          SizedBox(
+            width: width / itemCount - 1,
+            height: width / itemCount - 1,
+          ),
+          SizedBox(
+            width: width / itemCount - 1,
+            height: width / itemCount - 1,
+          ),
         ],
       ),
     );

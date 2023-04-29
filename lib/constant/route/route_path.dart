@@ -7,4 +7,7 @@ class RoutePath {
   static const accountRoute = '$topRoute/account';
   static const openAccountRoute = '$accountRoute/open';
   static const closeAccountRoute = '$accountRoute/close';
+  static const transactionHistoryRoute = '$topRoute/transaction';
+  static const paymentRoute = '$topRoute/payment';
+  static const informationRoute = '$topRoute/information';
 }
