@@ -1,20 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'open_account_page_state.freezed.dart';
+part 'transfer_page_state.freezed.dart';
 
-//State for open account page
+//State for transfer page
 // This is a freezed class
 // https://pub.dev/packages/freezed
 @freezed
-class OpenAccountPageState with _$OpenAccountPageState {
+class TransferPageState with _$TransferPageState {
   // accountNumber, routingNumber, accountType, balance are default values
   // buttonLoading is false
   // openAccountButtonTxt is 'Open Account'
-  const factory OpenAccountPageState({
+  const factory TransferPageState({
     @Default(<String>[]) List<String> accounts,
-    @Default('') String accountName,
-    @Default('Savings') String accountType,
+    @Default('') String fromAccountNumber,
+    @Default('') String toAccountNumber,
+    int? amount,
     @Default(false) bool buttonLoading,
-    @Default('Open Account') String openAccountButtonTxt,
-  }) = _OpenAccountPageState;
+    @Default('Transfer') String transferButtonTxt,
+  }) = _TransferPageState;
 }
