@@ -1,27 +1,12 @@
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/account/open_account/state/open_account_provider.dart';
+import 'package:banking_app/view/style/decorations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OpenAccountPage extends HookConsumerWidget {
   const OpenAccountPage({Key? key}) : super(key: key);
-
-  InputDecoration inputDecoration(String label, ColorScheme colorScheme) {
-    final enableBorder = OutlineInputBorder(
-      borderSide: BorderSide(
-        color: colorScheme.onPrimaryContainer,
-      ),
-    );
-
-    return InputDecoration(
-      fillColor: colorScheme.surface,
-      filled: true,
-      border: const OutlineInputBorder(),
-      enabledBorder: enableBorder,
-      labelText: label,
-    );
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +29,8 @@ class OpenAccountPage extends HookConsumerWidget {
               TextField(
                 onChanged: (value) => provider.updateAccountName(value),
                 controller: textController,
-                decoration: inputDecoration("Account Name", colorScheme),
+                decoration:
+                    Decorations.inputDecoration("Account Name", colorScheme),
               ),
               // chose account type: savings or checking
               const SizedBox(height: 20),

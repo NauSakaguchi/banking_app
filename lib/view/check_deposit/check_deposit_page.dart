@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:banking_app/core/ui_core/date_time_formatter.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/check_deposit/state/check_deposit_provider.dart';
+import 'package:banking_app/view/style/decorations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -11,22 +12,6 @@ import 'package:image_picker/image_picker.dart';
 
 class CheckDepositPage extends HookConsumerWidget {
   const CheckDepositPage({Key? key}) : super(key: key);
-
-  InputDecoration inputDecoration(String label, ColorScheme colorScheme) {
-    final enableBorder = OutlineInputBorder(
-      borderSide: BorderSide(
-        color: colorScheme.onPrimaryContainer,
-      ),
-    );
-
-    return InputDecoration(
-      fillColor: colorScheme.surface,
-      filled: true,
-      border: const OutlineInputBorder(),
-      enabledBorder: enableBorder,
-      labelText: label,
-    );
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,7 +51,8 @@ class CheckDepositPage extends HookConsumerWidget {
                   controller: accountNumberController,
                   // number keyboard
                   keyboardType: TextInputType.number,
-                  decoration: inputDecoration("Account Number", colorScheme),
+                  decoration: Decorations.inputDecoration(
+                      "Account Number", colorScheme),
                   onChanged: (value) {
                     notifier.updateAccountNumber(value);
                   },
@@ -76,7 +62,8 @@ class CheckDepositPage extends HookConsumerWidget {
                   controller: routingNumberController,
                   // number keyboard
                   keyboardType: TextInputType.number,
-                  decoration: inputDecoration("Routing Number", colorScheme),
+                  decoration: Decorations.inputDecoration(
+                      "Routing Number", colorScheme),
                   onChanged: (value) {
                     notifier.updateRoutingNumber(value);
                   },
@@ -86,7 +73,8 @@ class CheckDepositPage extends HookConsumerWidget {
                   controller: amountController,
                   // number keyboard
                   keyboardType: TextInputType.number,
-                  decoration: inputDecoration("Amount", colorScheme),
+                  decoration:
+                      Decorations.inputDecoration("Amount", colorScheme),
                   onChanged: (value) {
                     // convert str to int
                     final value = int.tryParse(amountController.text) ?? 0;
