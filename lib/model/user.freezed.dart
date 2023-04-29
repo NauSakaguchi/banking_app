@@ -14,12 +14,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+User _$UserFromJson(Map<String, dynamic> json) {
+  return _User.fromJson(json);
+}
+
 /// @nodoc
 mixin _$User {
-  String? get uid => throw _privateConstructorUsedError;
-  String? get lastname => throw _privateConstructorUsedError;
-  String? get firstname => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get middleName => throw _privateConstructorUsedError;
+  String? get streetAddress => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -29,7 +38,14 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String? uid, String? lastname, String? firstname});
+  $Res call(
+      {String? id,
+      String? lastName,
+      String? firstName,
+      String? middleName,
+      String? streetAddress,
+      String? city,
+      String? state});
 }
 
 /// @nodoc
@@ -45,22 +61,42 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? lastname = freezed,
-    Object? firstname = freezed,
+    Object? id = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
+    Object? middleName = freezed,
+    Object? streetAddress = freezed,
+    Object? city = freezed,
+    Object? state = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: freezed == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastname: freezed == lastname
-          ? _value.lastname
-          : lastname // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      firstname: freezed == firstname
-          ? _value.firstname
-          : firstname // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      middleName: freezed == middleName
+          ? _value.middleName
+          : middleName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      streetAddress: freezed == streetAddress
+          ? _value.streetAddress
+          : streetAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -72,7 +108,14 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? uid, String? lastname, String? firstname});
+  $Res call(
+      {String? id,
+      String? lastName,
+      String? firstName,
+      String? middleName,
+      String? streetAddress,
+      String? city,
+      String? state});
 }
 
 /// @nodoc
@@ -84,42 +127,80 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? lastname = freezed,
-    Object? firstname = freezed,
+    Object? id = freezed,
+    Object? lastName = freezed,
+    Object? firstName = freezed,
+    Object? middleName = freezed,
+    Object? streetAddress = freezed,
+    Object? city = freezed,
+    Object? state = freezed,
   }) {
     return _then(_$_User(
-      uid: freezed == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastname: freezed == lastname
-          ? _value.lastname
-          : lastname // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
-      firstname: freezed == firstname
-          ? _value.firstname
-          : firstname // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      middleName: freezed == middleName
+          ? _value.middleName
+          : middleName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      streetAddress: freezed == streetAddress
+          ? _value.streetAddress
+          : streetAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$_User extends _User {
+  const _$_User(
+      {this.id,
+      this.lastName,
+      this.firstName,
+      this.middleName,
+      this.streetAddress,
+      this.city,
+      this.state})
+      : super._();
 
-class _$_User implements _User {
-  const _$_User({this.uid, this.lastname, this.firstname});
+  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
-  final String? uid;
+  final String? id;
   @override
-  final String? lastname;
+  final String? lastName;
   @override
-  final String? firstname;
+  final String? firstName;
+  @override
+  final String? middleName;
+  @override
+  final String? streetAddress;
+  @override
+  final String? city;
+  @override
+  final String? state;
 
   @override
   String toString() {
-    return 'User(uid: $uid, lastname: $lastname, firstname: $firstname)';
+    return 'User(id: $id, lastName: $lastName, firstName: $firstName, middleName: $middleName, streetAddress: $streetAddress, city: $city, state: $state)';
   }
 
   @override
@@ -127,35 +208,65 @@ class _$_User implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.lastname, lastname) ||
-                other.lastname == lastname) &&
-            (identical(other.firstname, firstname) ||
-                other.firstname == firstname));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.middleName, middleName) ||
+                other.middleName == middleName) &&
+            (identical(other.streetAddress, streetAddress) ||
+                other.streetAddress == streetAddress) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.state, state) || other.state == state));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, lastname, firstname);
+  int get hashCode => Object.hash(runtimeType, id, lastName, firstName,
+      middleName, streetAddress, city, state);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserToJson(
+      this,
+    );
+  }
 }
 
-abstract class _User implements User {
+abstract class _User extends User {
   const factory _User(
-      {final String? uid,
-      final String? lastname,
-      final String? firstname}) = _$_User;
+      {final String? id,
+      final String? lastName,
+      final String? firstName,
+      final String? middleName,
+      final String? streetAddress,
+      final String? city,
+      final String? state}) = _$_User;
+  const _User._() : super._();
+
+  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  String? get uid;
+  String? get id;
   @override
-  String? get lastname;
+  String? get lastName;
   @override
-  String? get firstname;
+  String? get firstName;
+  @override
+  String? get middleName;
+  @override
+  String? get streetAddress;
+  @override
+  String? get city;
+  @override
+  String? get state;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

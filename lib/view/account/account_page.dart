@@ -48,7 +48,11 @@ class AccountPage extends StatelessWidget {
       ),
       backgroundColor: colorScheme.background,
       body: Padding(
-          padding: const EdgeInsets.all(padding),
+          padding: const EdgeInsets.only(
+            left: padding,
+            right: padding,
+            top: padding,
+          ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,17 +129,8 @@ class AccountPage extends StatelessWidget {
                 MenuWidget(
                     width: screenWidth - padding * 2, colorScheme: colorScheme),
                 const SizedBox(
-                  height: 60,
+                  height: 40,
                 ),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Sign Out"),
-                  ),
-                )
               ],
             ),
           )),
@@ -189,6 +184,28 @@ class MenuWidget extends StatelessWidget {
             icon: Icons.person_off_outlined,
             title: "Close\nAccount",
             path: RoutePath.closeAccountRoute,
+          ),
+          _buildMenuItem(
+            context,
+            icon: Icons.payment_outlined,
+            title: "Payment\n",
+            path: RoutePath.paymentRoute,
+          ),
+          _buildMenuItem(
+            context,
+            icon: Icons.info_outline,
+            title: "Information\n",
+            path: RoutePath.informationRoute,
+          ),
+          // dummy item
+          SizedBox(
+            width: width / itemCount - 1,
+            height: width / itemCount - 1,
+          ),
+          // dummy item
+          SizedBox(
+            width: width / itemCount - 1,
+            height: width / itemCount - 1,
           ),
         ],
       ),

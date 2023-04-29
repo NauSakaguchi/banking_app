@@ -10,7 +10,7 @@ class UserInfo extends _$UserInfo {
     return const User();
   }
 
-  void updateUID(String uid) {
-    state = state.copyWith(uid: uid);
+  void updateUID(String id) {
+    state = state.copyWith(id: id);
   }
 }

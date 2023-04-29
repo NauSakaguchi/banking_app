@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_provider.dart';
+part of 'open_account_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,22 @@ class _SystemHash {
   }
 }
 
-String _$UserInfoHash() => r'a33b8cd4c9a718eab8b14b2b96f21d3ed784b762';
+String _$OpenAccountItemsHash() => r'02bededc367fc923901e61714dd526d48440bf49';
 
-/// See also [UserInfo].
-final userInfoProvider = NotifierProvider<UserInfo, User>(
-  UserInfo.new,
-  name: r'userInfoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$UserInfoHash,
+/// See also [OpenAccountItems].
+final openAccountItemsProvider =
+    AutoDisposeNotifierProvider<OpenAccountItems, OpenAccountPageState>(
+  OpenAccountItems.new,
+  name: r'openAccountItemsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$OpenAccountItemsHash,
 );
-typedef UserInfoRef = NotifierProviderRef<User>;
+typedef OpenAccountItemsRef
+    = AutoDisposeNotifierProviderRef<OpenAccountPageState>;
 
-abstract class _$UserInfo extends Notifier<User> {
+abstract class _$OpenAccountItems
+    extends AutoDisposeNotifier<OpenAccountPageState> {
   @override
-  User build();
+  OpenAccountPageState build();
 }

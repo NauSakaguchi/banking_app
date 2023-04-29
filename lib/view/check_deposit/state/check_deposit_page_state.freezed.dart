@@ -22,6 +22,8 @@ mixin _$CheckDepositPageState {
   DateTime? get checkDate => throw _privateConstructorUsedError;
   File? get checkFrontImage => throw _privateConstructorUsedError;
   File? get checkBackImage => throw _privateConstructorUsedError;
+  bool get buttonLoading => throw _privateConstructorUsedError;
+  String get depositButtonTxt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CheckDepositPageStateCopyWith<CheckDepositPageState> get copyWith =>
@@ -40,7 +42,9 @@ abstract class $CheckDepositPageStateCopyWith<$Res> {
       int? checkAmount,
       DateTime? checkDate,
       File? checkFrontImage,
-      File? checkBackImage});
+      File? checkBackImage,
+      bool buttonLoading,
+      String depositButtonTxt});
 }
 
 /// @nodoc
@@ -63,6 +67,8 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
     Object? checkDate = freezed,
     Object? checkFrontImage = freezed,
     Object? checkBackImage = freezed,
+    Object? buttonLoading = null,
+    Object? depositButtonTxt = null,
   }) {
     return _then(_value.copyWith(
       accountNumber: null == accountNumber
@@ -89,6 +95,14 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
           ? _value.checkBackImage
           : checkBackImage // ignore: cast_nullable_to_non_nullable
               as File?,
+      buttonLoading: null == buttonLoading
+          ? _value.buttonLoading
+          : buttonLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      depositButtonTxt: null == depositButtonTxt
+          ? _value.depositButtonTxt
+          : depositButtonTxt // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -107,7 +121,9 @@ abstract class _$$_CheckDepositPageStateCopyWith<$Res>
       int? checkAmount,
       DateTime? checkDate,
       File? checkFrontImage,
-      File? checkBackImage});
+      File? checkBackImage,
+      bool buttonLoading,
+      String depositButtonTxt});
 }
 
 /// @nodoc
@@ -127,6 +143,8 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
     Object? checkDate = freezed,
     Object? checkFrontImage = freezed,
     Object? checkBackImage = freezed,
+    Object? buttonLoading = null,
+    Object? depositButtonTxt = null,
   }) {
     return _then(_$_CheckDepositPageState(
       accountNumber: null == accountNumber
@@ -153,6 +171,14 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
           ? _value.checkBackImage
           : checkBackImage // ignore: cast_nullable_to_non_nullable
               as File?,
+      buttonLoading: null == buttonLoading
+          ? _value.buttonLoading
+          : buttonLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      depositButtonTxt: null == depositButtonTxt
+          ? _value.depositButtonTxt
+          : depositButtonTxt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -166,7 +192,9 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
       this.checkAmount,
       this.checkDate,
       this.checkFrontImage,
-      this.checkBackImage});
+      this.checkBackImage,
+      this.buttonLoading = false,
+      this.depositButtonTxt = 'Deposit'});
 
   @override
   @JsonKey()
@@ -182,10 +210,16 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
   final File? checkFrontImage;
   @override
   final File? checkBackImage;
+  @override
+  @JsonKey()
+  final bool buttonLoading;
+  @override
+  @JsonKey()
+  final String depositButtonTxt;
 
   @override
   String toString() {
-    return 'CheckDepositPageState(accountNumber: $accountNumber, routingNumber: $routingNumber, checkAmount: $checkAmount, checkDate: $checkDate, checkFrontImage: $checkFrontImage, checkBackImage: $checkBackImage)';
+    return 'CheckDepositPageState(accountNumber: $accountNumber, routingNumber: $routingNumber, checkAmount: $checkAmount, checkDate: $checkDate, checkFrontImage: $checkFrontImage, checkBackImage: $checkBackImage, buttonLoading: $buttonLoading, depositButtonTxt: $depositButtonTxt)';
   }
 
   @override
@@ -204,12 +238,24 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
             (identical(other.checkFrontImage, checkFrontImage) ||
                 other.checkFrontImage == checkFrontImage) &&
             (identical(other.checkBackImage, checkBackImage) ||
-                other.checkBackImage == checkBackImage));
+                other.checkBackImage == checkBackImage) &&
+            (identical(other.buttonLoading, buttonLoading) ||
+                other.buttonLoading == buttonLoading) &&
+            (identical(other.depositButtonTxt, depositButtonTxt) ||
+                other.depositButtonTxt == depositButtonTxt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, accountNumber, routingNumber,
-      checkAmount, checkDate, checkFrontImage, checkBackImage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      accountNumber,
+      routingNumber,
+      checkAmount,
+      checkDate,
+      checkFrontImage,
+      checkBackImage,
+      buttonLoading,
+      depositButtonTxt);
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +272,9 @@ abstract class _CheckDepositPageState implements CheckDepositPageState {
       final int? checkAmount,
       final DateTime? checkDate,
       final File? checkFrontImage,
-      final File? checkBackImage}) = _$_CheckDepositPageState;
+      final File? checkBackImage,
+      final bool buttonLoading,
+      final String depositButtonTxt}) = _$_CheckDepositPageState;
 
   @override
   String get accountNumber;
@@ -240,6 +288,10 @@ abstract class _CheckDepositPageState implements CheckDepositPageState {
   File? get checkFrontImage;
   @override
   File? get checkBackImage;
+  @override
+  bool get buttonLoading;
+  @override
+  String get depositButtonTxt;
   @override
   @JsonKey(ignore: true)
   _$$_CheckDepositPageStateCopyWith<_$_CheckDepositPageState> get copyWith =>

@@ -5,6 +5,7 @@ import 'package:banking_app/constant/string/globar_string.dart';
 import 'package:banking_app/constant/url/google_map_string.dart';
 import 'package:banking_app/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -103,6 +104,7 @@ class AtmMapPageState extends State<AtmMapPage> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context).brightness;
 
     return Scaffold(
       appBar: AppBar(
@@ -121,8 +123,13 @@ class AtmMapPageState extends State<AtmMapPage> {
                     target: _initialPosition,
                     zoom: 14.4746,
                   ),
-                  onMapCreated: (controller) {
+                  onMapCreated: (controller) async {
                     _controller = controller;
+                    final googleMapStyle = await rootBundle
+                        .loadString('assets/jsons/google_map_style.json');
+                    if (theme == Brightness.dark) {
+                      await controller.setMapStyle(googleMapStyle);
+                    }
                   },
                 ),
 

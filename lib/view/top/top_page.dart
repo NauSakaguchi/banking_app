@@ -15,8 +15,9 @@ class TopPage extends ConsumerWidget {
         length: 2,
         child: Scaffold(
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            color: colorScheme.background,
+            padding:
+                const EdgeInsets.only(top: 8, bottom: 18, left: 20, right: 20),
+            color: colorScheme.surface,
             height: 70,
             child: TabBar(
               indicator: BoxDecoration(
