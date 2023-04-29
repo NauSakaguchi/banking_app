@@ -4,7 +4,7 @@ import 'package:banking_app/view/account/close_account/close_account_page.dart';
 import 'package:banking_app/view/account/open_account/open_account_page.dart';
 import 'package:banking_app/view/atm_map/atm_map_page.dart';
 import 'package:banking_app/view/check_deposit/check_deposit_page.dart';
-import 'package:banking_app/view/information_page.dart';
+import 'package:banking_app/view/information/information_page.dart';
 import 'package:banking_app/view/login/login_page.dart';
 import 'package:banking_app/view/payment/payment_page.dart';
 import 'package:banking_app/view/top/top_page.dart';

@@ -18,7 +18,7 @@ import '../account/close_account/close_account_page.dart' as _i7;
 import '../account/open_account/open_account_page.dart' as _i6;
 import '../atm_map/atm_map_page.dart' as _i3;
 import '../check_deposit/check_deposit_page.dart' as _i5;
-import '../information_page.dart' as _i10;
+import '../information/information_page.dart' as _i10;
 import '../login/login_page.dart' as _i2;
 import '../payment/payment_page.dart' as _i9;
 import '../top/top_page.dart' as _i1;
