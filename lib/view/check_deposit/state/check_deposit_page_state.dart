@@ -19,5 +19,7 @@ class CheckDepositPageState with _$CheckDepositPageState {
     DateTime? checkDate,
     File? checkFrontImage,
     File? checkBackImage,
+    @Default(false) bool buttonLoading,
+    @Default('Deposit') String depositButtonTxt,
   }) = _CheckDepositPageState;
 }

@@ -44,4 +44,18 @@ class CheckDepositItems extends _$CheckDepositItems {
   void removeCheckBackImage() {
     state = state.copyWith(checkBackImage: null);
   }
+
+  void updateButtonStatus(bool isLoading) {
+    if (isLoading) {
+      state = state.copyWith(
+        buttonLoading: isLoading,
+        depositButtonTxt: 'Depositing...',
+      );
+    } else {
+      state = state.copyWith(
+        buttonLoading: isLoading,
+        depositButtonTxt: 'Deposit',
+      );
+    }
+  }
 }

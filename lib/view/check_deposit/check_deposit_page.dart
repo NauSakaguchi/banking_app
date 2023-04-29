@@ -141,15 +141,44 @@ class CheckDepositPage extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    logger.d(
-                        "Account Number: ${checkDepositItems.accountNumber}");
-                    logger.d(
-                        "Routing Number: ${checkDepositItems.routingNumber}");
-                    logger.d("Amount: ${checkDepositItems.checkAmount}");
-                    logger.d("Check Date: ${checkDepositItems.checkDate}");
-                  },
-                  child: const Text("Submit"),
+                  onPressed: checkDepositItems.buttonLoading
+                      ? null
+                      : () async {
+                          // start loading
+                          notifier.updateButtonStatus(true);
+
+                          // if there is an empty field or null field, show error toast message
+                          if (checkDepositItems.accountNumber.isEmpty ||
+                              checkDepositItems.routingNumber.isEmpty ||
+                              checkDepositItems.checkAmount == null ||
+                              checkDepositItems.checkAmount! <= 0 ||
+                              checkDepositItems.checkDate == null ||
+                              checkDepositItems.checkFrontImage == null ||
+                              checkDepositItems.checkBackImage == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Please fill all fields"),
+                              ),
+                            );
+                            // stop loading
+                            notifier.updateButtonStatus(false);
+                            return;
+                          }
+
+                          logger.d(
+                              "Account Number: ${checkDepositItems.accountNumber}");
+                          logger.d(
+                              "Routing Number: ${checkDepositItems.routingNumber}");
+                          logger.d("Amount: ${checkDepositItems.checkAmount}");
+                          logger
+                              .d("Check Date: ${checkDepositItems.checkDate}");
+                          // wait 2 seconds
+                          await Future.delayed(const Duration(seconds: 2));
+
+                          // stop loading
+                          notifier.updateButtonStatus(false);
+                        },
+                  child: Text(checkDepositItems.depositButtonTxt),
                 ),
               ],
             ),
