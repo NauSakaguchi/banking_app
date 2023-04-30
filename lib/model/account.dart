@@ -6,7 +6,7 @@ part 'account.g.dart';
 @freezed
 class Account with _$Account {
   const factory Account({
-    String? accountNumber,
+    @Default("") String accountNumber,
     String? routingNumber,
     AccountType? accountType,
     String? balance,
