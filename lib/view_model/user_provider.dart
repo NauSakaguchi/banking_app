@@ -1,4 +1,4 @@
-import 'package:banking_app/model/user.dart';
+import 'package:banking_app/model/user/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_provider.g.dart';

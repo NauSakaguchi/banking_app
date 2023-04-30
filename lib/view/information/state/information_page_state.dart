@@ -1,4 +1,4 @@
-import 'package:banking_app/model/chat_text.dart';
+import 'package:banking_app/model/chat_text/chat_text.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'information_page_state.freezed.dart';

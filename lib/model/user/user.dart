@@ -1,4 +1,4 @@
-import 'package:banking_app/model/account.dart';
+import 'package:banking_app/model/account/account.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';

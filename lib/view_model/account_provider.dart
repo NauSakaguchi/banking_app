@@ -1,4 +1,4 @@
-import 'package:banking_app/model/account.dart';
+import 'package:banking_app/model/account/account.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'account_provider.g.dart';
