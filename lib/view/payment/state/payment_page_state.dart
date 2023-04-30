@@ -11,13 +11,12 @@ class PaymentPageState with _$PaymentPageState {
   // buttonLoading is false
   // openAccountButtonTxt is 'Open Account'
   const factory PaymentPageState({
-    @Default(<String>[]) List<String> accounts,
-    @Default('') String fromAccountNumber,
+    required String fromAccountNumber,
     @Default('') String toAccountNumber,
     @Default('') String toRoutingNumber,
     int? centAmount,
     @Default('') String description,
     @Default(false) bool buttonLoading,
-    @Default('Pay') String payButtonTxt,
+    @Default('Make Payment') String payButtonTxt,
   }) = _PaymentPageState;
 }
