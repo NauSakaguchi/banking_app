@@ -13,8 +13,9 @@ class CheckDepositPageState with _$CheckDepositPageState {
   // buttonLoading is false
   // depositButtonTxt is 'Deposit'
   const factory CheckDepositPageState({
-    @Default('') String accountNumber,
+    @Default('') String fromAccountNumber,
     @Default('') String routingNumber,
+    required String toAccountNumber,
     int? checkAmount,
     DateTime? checkDate,
     File? checkFrontImage,

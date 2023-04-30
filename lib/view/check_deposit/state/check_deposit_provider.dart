@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:banking_app/view_model/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'check_deposit_page_state.dart';
@@ -10,15 +11,20 @@ part 'check_deposit_provider.g.dart';
 class CheckDepositItems extends _$CheckDepositItems {
   @override
   CheckDepositPageState build() {
-    return const CheckDepositPageState();
+    final num = ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+    return CheckDepositPageState(toAccountNumber: num);
   }
 
-  void updateAccountNumber(String str) {
-    state = state.copyWith(accountNumber: str);
+  void updateToAccountNumber(String str) {
+    state = state.copyWith(toAccountNumber: str);
   }
 
   void updateCheckAmount(int amount) {
     state = state.copyWith(checkAmount: amount);
+  }
+
+  void updateFromAccountNumber(String str) {
+    state = state.copyWith(fromAccountNumber: str);
   }
 
   void updateRoutingNumber(String str) {

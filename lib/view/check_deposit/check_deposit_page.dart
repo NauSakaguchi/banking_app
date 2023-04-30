@@ -24,7 +24,7 @@ class CheckDepositPage extends HookConsumerWidget {
 
     // text controller
     final TextEditingController accountNumberController =
-        useTextEditingController(text: checkDepositItems.accountNumber);
+        useTextEditingController(text: checkDepositItems.fromAccountNumber);
     final TextEditingController routingNumberController =
         useTextEditingController(text: checkDepositItems.routingNumber);
     final TextEditingController amountController = useTextEditingController(
@@ -62,7 +62,7 @@ class CheckDepositPage extends HookConsumerWidget {
                   decoration: Decorations.inputDecoration(
                       "Account Number", colorScheme),
                   onChanged: (value) {
-                    notifier.updateAccountNumber(value);
+                    notifier.updateFromAccountNumber(value);
                   },
                 ),
                 const SizedBox(height: 20),
@@ -87,7 +87,11 @@ class CheckDepositPage extends HookConsumerWidget {
                   colorScheme: colorScheme,
                   accountList:
                       ref.watch(userInfoProvider.notifier).getAccountNumbers(),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    if (value != null) {
+                      notifier.updateToAccountNumber(value);
+                    }
+                  },
                 ),
                 const SizedBox(height: 20),
                 TextField(
@@ -157,7 +161,8 @@ class CheckDepositPage extends HookConsumerWidget {
                           notifier.updateButtonStatus(true);
 
                           // if there is an empty field or null field, show error toast message
-                          if (checkDepositItems.accountNumber.isEmpty ||
+                          if (checkDepositItems.toAccountNumber.isEmpty ||
+                              checkDepositItems.fromAccountNumber.isEmpty ||
                               checkDepositItems.routingNumber.isEmpty ||
                               checkDepositItems.checkAmount == null ||
                               checkDepositItems.checkAmount! <= 0 ||
@@ -175,9 +180,11 @@ class CheckDepositPage extends HookConsumerWidget {
                           }
 
                           logger.d(
-                              "Account Number: ${checkDepositItems.accountNumber}");
+                              "from Account Number: ${checkDepositItems.fromAccountNumber}");
                           logger.d(
-                              "Routing Number: ${checkDepositItems.routingNumber}");
+                              "from Routing Number: ${checkDepositItems.routingNumber}");
+                          logger.d(
+                              "to Account Number: ${checkDepositItems.toAccountNumber}");
                           logger.d("Amount: ${checkDepositItems.checkAmount}");
                           logger
                               .d("Check Date: ${checkDepositItems.checkDate}");
