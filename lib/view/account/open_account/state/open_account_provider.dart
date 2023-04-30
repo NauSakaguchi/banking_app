@@ -11,10 +11,6 @@ class OpenAccountItems extends _$OpenAccountItems {
     return const OpenAccountPageState();
   }
 
-  void updateAccountName(String str) {
-    state = state.copyWith(accountName: str);
-  }
-
   void updateAccountType(String str) {
     state = state.copyWith(accountType: str);
   }

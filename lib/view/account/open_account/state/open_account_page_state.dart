@@ -12,7 +12,6 @@ class OpenAccountPageState with _$OpenAccountPageState {
   // openAccountButtonTxt is 'Open Account'
   const factory OpenAccountPageState({
     @Default(<String>[]) List<String> accounts,
-    @Default('') String accountName,
     @Default('Savings') String accountType,
     @Default(false) bool buttonLoading,
     @Default('Open Account') String openAccountButtonTxt,

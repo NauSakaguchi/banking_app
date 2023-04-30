@@ -1,8 +1,6 @@
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/account/open_account/state/open_account_provider.dart';
-import 'package:banking_app/view/style/decorations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OpenAccountPage extends HookConsumerWidget {
@@ -14,7 +12,6 @@ class OpenAccountPage extends HookConsumerWidget {
     final openAccountItems = ref.watch(openAccountItemsProvider);
     final provider = ref.watch(openAccountItemsProvider.notifier);
     final List<String> accountTypes = ["Savings", "Checking"];
-    final textController = useTextEditingController();
 
     return Scaffold(
       backgroundColor: colorScheme.background,
@@ -24,14 +21,6 @@ class OpenAccountPage extends HookConsumerWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              // account name
-              const SizedBox(height: 20),
-              TextField(
-                onChanged: (value) => provider.updateAccountName(value),
-                controller: textController,
-                decoration:
-                    Decorations.inputDecoration("Account Name", colorScheme),
-              ),
               // chose account type: savings or checking
               const SizedBox(height: 20),
               Container(
@@ -87,24 +76,10 @@ class OpenAccountPage extends HookConsumerWidget {
                         // isLoading
                         provider.updateButtonStatus(true);
 
-                        // if there is empty value, show error toast message
-                        if (openAccountItems.accountName == "") {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Please fill in all fields"),
-                            ),
-                          );
-                          provider.updateButtonStatus(false);
-                          return;
-                        }
-
-                        // show items
-                        logger
-                            .d("Account Name: ${openAccountItems.accountName}");
                         logger
                             .d("Account Type: ${openAccountItems.accountType}");
                         // wait 3 seconds
-                        await Future.delayed(const Duration(seconds: 3));
+                        await Future.delayed(const Duration(seconds: 2));
 
                         // stop loading
                         provider.updateButtonStatus(false);
