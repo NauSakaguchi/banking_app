@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TransferPageState {
-  List<String> get accounts => throw _privateConstructorUsedError;
   String get fromAccountNumber => throw _privateConstructorUsedError;
   String get toAccountNumber => throw _privateConstructorUsedError;
   int? get amount => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get transferButtonTxt => throw _privateConstructorUsedError;
 
@@ -35,10 +35,10 @@ abstract class $TransferPageStateCopyWith<$Res> {
       _$TransferPageStateCopyWithImpl<$Res, TransferPageState>;
   @useResult
   $Res call(
-      {List<String> accounts,
-      String fromAccountNumber,
+      {String fromAccountNumber,
       String toAccountNumber,
       int? amount,
+      String description,
       bool buttonLoading,
       String transferButtonTxt});
 }
@@ -56,18 +56,14 @@ class _$TransferPageStateCopyWithImpl<$Res, $Val extends TransferPageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accounts = null,
     Object? fromAccountNumber = null,
     Object? toAccountNumber = null,
     Object? amount = freezed,
+    Object? description = null,
     Object? buttonLoading = null,
     Object? transferButtonTxt = null,
   }) {
     return _then(_value.copyWith(
-      accounts: null == accounts
-          ? _value.accounts
-          : accounts // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       fromAccountNumber: null == fromAccountNumber
           ? _value.fromAccountNumber
           : fromAccountNumber // ignore: cast_nullable_to_non_nullable
@@ -80,6 +76,10 @@ class _$TransferPageStateCopyWithImpl<$Res, $Val extends TransferPageState>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       buttonLoading: null == buttonLoading
           ? _value.buttonLoading
           : buttonLoading // ignore: cast_nullable_to_non_nullable
@@ -101,10 +101,10 @@ abstract class _$$_TransferPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<String> accounts,
-      String fromAccountNumber,
+      {String fromAccountNumber,
       String toAccountNumber,
       int? amount,
+      String description,
       bool buttonLoading,
       String transferButtonTxt});
 }
@@ -120,18 +120,14 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accounts = null,
     Object? fromAccountNumber = null,
     Object? toAccountNumber = null,
     Object? amount = freezed,
+    Object? description = null,
     Object? buttonLoading = null,
     Object? transferButtonTxt = null,
   }) {
     return _then(_$_TransferPageState(
-      accounts: null == accounts
-          ? _value._accounts
-          : accounts // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       fromAccountNumber: null == fromAccountNumber
           ? _value.fromAccountNumber
           : fromAccountNumber // ignore: cast_nullable_to_non_nullable
@@ -144,6 +140,10 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
       buttonLoading: null == buttonLoading
           ? _value.buttonLoading
           : buttonLoading // ignore: cast_nullable_to_non_nullable
@@ -160,31 +160,22 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
 
 class _$_TransferPageState implements _TransferPageState {
   const _$_TransferPageState(
-      {final List<String> accounts = const <String>[],
-      this.fromAccountNumber = '',
-      this.toAccountNumber = '',
+      {required this.fromAccountNumber,
+      required this.toAccountNumber,
       this.amount,
+      this.description = "",
       this.buttonLoading = false,
-      this.transferButtonTxt = 'Transfer'})
-      : _accounts = accounts;
-
-  final List<String> _accounts;
-  @override
-  @JsonKey()
-  List<String> get accounts {
-    if (_accounts is EqualUnmodifiableListView) return _accounts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_accounts);
-  }
+      this.transferButtonTxt = 'Transfer'});
 
   @override
-  @JsonKey()
   final String fromAccountNumber;
   @override
-  @JsonKey()
   final String toAccountNumber;
   @override
   final int? amount;
+  @override
+  @JsonKey()
+  final String description;
   @override
   @JsonKey()
   final bool buttonLoading;
@@ -194,7 +185,7 @@ class _$_TransferPageState implements _TransferPageState {
 
   @override
   String toString() {
-    return 'TransferPageState(accounts: $accounts, fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, amount: $amount, buttonLoading: $buttonLoading, transferButtonTxt: $transferButtonTxt)';
+    return 'TransferPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, amount: $amount, description: $description, buttonLoading: $buttonLoading, transferButtonTxt: $transferButtonTxt)';
   }
 
   @override
@@ -202,12 +193,13 @@ class _$_TransferPageState implements _TransferPageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TransferPageState &&
-            const DeepCollectionEquality().equals(other._accounts, _accounts) &&
             (identical(other.fromAccountNumber, fromAccountNumber) ||
                 other.fromAccountNumber == fromAccountNumber) &&
             (identical(other.toAccountNumber, toAccountNumber) ||
                 other.toAccountNumber == toAccountNumber) &&
             (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.buttonLoading, buttonLoading) ||
                 other.buttonLoading == buttonLoading) &&
             (identical(other.transferButtonTxt, transferButtonTxt) ||
@@ -215,14 +207,8 @@ class _$_TransferPageState implements _TransferPageState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_accounts),
-      fromAccountNumber,
-      toAccountNumber,
-      amount,
-      buttonLoading,
-      transferButtonTxt);
+  int get hashCode => Object.hash(runtimeType, fromAccountNumber,
+      toAccountNumber, amount, description, buttonLoading, transferButtonTxt);
 
   @JsonKey(ignore: true)
   @override
@@ -234,21 +220,21 @@ class _$_TransferPageState implements _TransferPageState {
 
 abstract class _TransferPageState implements TransferPageState {
   const factory _TransferPageState(
-      {final List<String> accounts,
-      final String fromAccountNumber,
-      final String toAccountNumber,
+      {required final String fromAccountNumber,
+      required final String toAccountNumber,
       final int? amount,
+      final String description,
       final bool buttonLoading,
       final String transferButtonTxt}) = _$_TransferPageState;
 
-  @override
-  List<String> get accounts;
   @override
   String get fromAccountNumber;
   @override
   String get toAccountNumber;
   @override
   int? get amount;
+  @override
+  String get description;
   @override
   bool get buttonLoading;
   @override
