@@ -20,7 +20,7 @@ mixin _$PaymentPageState {
   String get fromAccountNumber => throw _privateConstructorUsedError;
   String get toAccountNumber => throw _privateConstructorUsedError;
   String get toRoutingNumber => throw _privateConstructorUsedError;
-  int? get amount => throw _privateConstructorUsedError;
+  int? get centAmount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get payButtonTxt => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $PaymentPageStateCopyWith<$Res> {
       String fromAccountNumber,
       String toAccountNumber,
       String toRoutingNumber,
-      int? amount,
+      int? centAmount,
       String description,
       bool buttonLoading,
       String payButtonTxt});
@@ -64,7 +64,7 @@ class _$PaymentPageStateCopyWithImpl<$Res, $Val extends PaymentPageState>
     Object? fromAccountNumber = null,
     Object? toAccountNumber = null,
     Object? toRoutingNumber = null,
-    Object? amount = freezed,
+    Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? payButtonTxt = null,
@@ -86,9 +86,9 @@ class _$PaymentPageStateCopyWithImpl<$Res, $Val extends PaymentPageState>
           ? _value.toRoutingNumber
           : toRoutingNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
+      centAmount: freezed == centAmount
+          ? _value.centAmount
+          : centAmount // ignore: cast_nullable_to_non_nullable
               as int?,
       description: null == description
           ? _value.description
@@ -119,7 +119,7 @@ abstract class _$$_PaymentPageStateCopyWith<$Res>
       String fromAccountNumber,
       String toAccountNumber,
       String toRoutingNumber,
-      int? amount,
+      int? centAmount,
       String description,
       bool buttonLoading,
       String payButtonTxt});
@@ -140,7 +140,7 @@ class __$$_PaymentPageStateCopyWithImpl<$Res>
     Object? fromAccountNumber = null,
     Object? toAccountNumber = null,
     Object? toRoutingNumber = null,
-    Object? amount = freezed,
+    Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? payButtonTxt = null,
@@ -162,9 +162,9 @@ class __$$_PaymentPageStateCopyWithImpl<$Res>
           ? _value.toRoutingNumber
           : toRoutingNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
+      centAmount: freezed == centAmount
+          ? _value.centAmount
+          : centAmount // ignore: cast_nullable_to_non_nullable
               as int?,
       description: null == description
           ? _value.description
@@ -190,7 +190,7 @@ class _$_PaymentPageState implements _PaymentPageState {
       this.fromAccountNumber = '',
       this.toAccountNumber = '',
       this.toRoutingNumber = '',
-      this.amount,
+      this.centAmount,
       this.description = '',
       this.buttonLoading = false,
       this.payButtonTxt = 'Pay'})
@@ -215,7 +215,7 @@ class _$_PaymentPageState implements _PaymentPageState {
   @JsonKey()
   final String toRoutingNumber;
   @override
-  final int? amount;
+  final int? centAmount;
   @override
   @JsonKey()
   final String description;
@@ -228,7 +228,7 @@ class _$_PaymentPageState implements _PaymentPageState {
 
   @override
   String toString() {
-    return 'PaymentPageState(accounts: $accounts, fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, toRoutingNumber: $toRoutingNumber, amount: $amount, description: $description, buttonLoading: $buttonLoading, payButtonTxt: $payButtonTxt)';
+    return 'PaymentPageState(accounts: $accounts, fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, toRoutingNumber: $toRoutingNumber, centAmount: $centAmount, description: $description, buttonLoading: $buttonLoading, payButtonTxt: $payButtonTxt)';
   }
 
   @override
@@ -243,7 +243,8 @@ class _$_PaymentPageState implements _PaymentPageState {
                 other.toAccountNumber == toAccountNumber) &&
             (identical(other.toRoutingNumber, toRoutingNumber) ||
                 other.toRoutingNumber == toRoutingNumber) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.centAmount, centAmount) ||
+                other.centAmount == centAmount) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.buttonLoading, buttonLoading) ||
@@ -259,7 +260,7 @@ class _$_PaymentPageState implements _PaymentPageState {
       fromAccountNumber,
       toAccountNumber,
       toRoutingNumber,
-      amount,
+      centAmount,
       description,
       buttonLoading,
       payButtonTxt);
@@ -277,7 +278,7 @@ abstract class _PaymentPageState implements PaymentPageState {
       final String fromAccountNumber,
       final String toAccountNumber,
       final String toRoutingNumber,
-      final int? amount,
+      final int? centAmount,
       final String description,
       final bool buttonLoading,
       final String payButtonTxt}) = _$_PaymentPageState;
@@ -291,7 +292,7 @@ abstract class _PaymentPageState implements PaymentPageState {
   @override
   String get toRoutingNumber;
   @override
-  int? get amount;
+  int? get centAmount;
   @override
   String get description;
   @override

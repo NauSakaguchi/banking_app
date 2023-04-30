@@ -4,6 +4,7 @@ import 'package:banking_app/component/account_picker.dart';
 import 'package:banking_app/core/ui_core/date_time_formatter.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/check_deposit/state/check_deposit_provider.dart';
+import 'package:banking_app/view/style/balance_formatter.dart';
 import 'package:banking_app/view/style/decorations.dart';
 import 'package:banking_app/view_model/user_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,7 @@ class CheckDepositPage extends HookConsumerWidget {
         useTextEditingController(text: checkDepositItems.fromAccountNumber);
     final TextEditingController routingNumberController =
         useTextEditingController(text: checkDepositItems.routingNumber);
-    final TextEditingController amountController = useTextEditingController(
+    final TextEditingController centAmountController = useTextEditingController(
         text: checkDepositItems.checkAmount == null
             ? ""
             : checkDepositItems.checkAmount.toString());
@@ -85,6 +86,7 @@ class CheckDepositPage extends HookConsumerWidget {
                 // account picker
                 AccountPicker(
                   colorScheme: colorScheme,
+                  value: checkDepositItems.toAccountNumber,
                   accountList:
                       ref.watch(userInfoProvider.notifier).getAccountNumbers(),
                   onChanged: (value) {
@@ -95,15 +97,21 @@ class CheckDepositPage extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 TextField(
-                  controller: amountController,
+                  controller: centAmountController,
                   // number keyboard
                   keyboardType: TextInputType.number,
+                  inputFormatters: [BalanceFormatter()],
                   decoration:
                       Decorations.inputDecoration("Amount", colorScheme),
                   onChanged: (value) {
+                    // Remove all non-digit characters
+                    final newValue = value.replaceAll(RegExp(r'\D'), '');
+
+                    // Convert the cleaned string to a number
+                    int numberValue = int.tryParse(newValue) ?? 0;
+
                     // convert str to int
-                    final value = int.tryParse(amountController.text) ?? 0;
-                    notifier.updateCheckAmount(value);
+                    notifier.updateCheckAmount(numberValue);
                   },
                 ),
                 // check date with showDatePicker

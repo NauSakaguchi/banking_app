@@ -4,12 +4,14 @@ class AccountPicker extends StatelessWidget {
   final ColorScheme colorScheme;
   final List<String> accountList;
   final void Function(String?) onChanged;
+  final String? value;
 
   const AccountPicker({
     Key? key,
     required this.colorScheme,
     required this.accountList,
     required this.onChanged,
+    this.value,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class AccountPicker extends StatelessWidget {
       ),
       child: DropdownButton(
         isExpanded: true,
-        value: accountList[0],
+        value: value,
         onChanged: onChanged,
         items: accountList.map<DropdownMenuItem<String>>((value) {
           return DropdownMenuItem<String>(

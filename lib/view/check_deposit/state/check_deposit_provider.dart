@@ -19,8 +19,8 @@ class CheckDepositItems extends _$CheckDepositItems {
     state = state.copyWith(toAccountNumber: str);
   }
 
-  void updateCheckAmount(int amount) {
-    state = state.copyWith(checkAmount: amount);
+  void updateCheckAmount(int centAmount) {
+    state = state.copyWith(checkAmount: centAmount);
   }
 
   void updateFromAccountNumber(String str) {

@@ -20,7 +20,7 @@ class TransferPage extends HookConsumerWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // textController to get the value of the text field
-    final TextEditingController amountController = useTextEditingController();
+    final TextEditingController centAmountController = useTextEditingController();
     final TextEditingController descriptionController =
         useTextEditingController(text: transferPageState.description);
 
@@ -73,7 +73,7 @@ class TransferPage extends HookConsumerWidget {
                 // Amount
                 const SizedBox(height: 20),
                 TextField(
-                  controller: amountController,
+                  controller: centAmountController,
                   inputFormatters: [BalanceFormatter()],
                   // number keyboard
                   keyboardType: TextInputType.number,
@@ -83,7 +83,7 @@ class TransferPage extends HookConsumerWidget {
 
                     // Convert the cleaned string to a number
                     int numberValue = int.tryParse(newValue) ?? 0;
-                    logger.d("amount: $numberValue");
+                    logger.d("centAmount: $numberValue");
                     notifier.updateAmount(numberValue);
                   },
                   decoration: Decorations.inputDecoration(
@@ -111,8 +111,8 @@ class TransferPage extends HookConsumerWidget {
                       ? null
                       : () async {
                           // if there is null value or empty string or 0, show error toast message
-                          if (transferPageState.amount == null ||
-                              transferPageState.amount == 0) {
+                          if (transferPageState.centAmount == null ||
+                              transferPageState.centAmount == 0) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text("Please fill all the fields"),
@@ -127,8 +127,8 @@ class TransferPage extends HookConsumerWidget {
                               ),
                             );
                           } else {
-                            final amountTxt =
-                                "Transfer \$${(transferPageState.amount! / 100).toStringAsFixed(2)}";
+                            final centAmountTxt =
+                                "Transfer \$${(transferPageState.centAmount! / 100).toStringAsFixed(2)}";
                             final fromTxt =
                                 " from ${transferPageState.fromAccountNumber}";
                             final toTxt =
@@ -142,7 +142,7 @@ class TransferPage extends HookConsumerWidget {
                                     Theme.of(context).colorScheme;
                                 return AlertDialog(
                                   title: const Text("Confirm Transfer"),
-                                  content: Text("$amountTxt"
+                                  content: Text("$centAmountTxt"
                                       "\n   $fromTxt"
                                       "\n   $toTxt?"),
                                   actions: [

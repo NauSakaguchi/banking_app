@@ -22,8 +22,8 @@ class TransferPageStateNotifier extends _$TransferPageStateNotifier {
     state = state.copyWith(fromAccountNumber: str);
   }
 
-  void updateAmount(int amount) {
-    state = state.copyWith(amount: amount);
+  void updateAmount(int centAmount) {
+    state = state.copyWith(centAmount: centAmount);
   }
 
   void updateDescription(String description) {

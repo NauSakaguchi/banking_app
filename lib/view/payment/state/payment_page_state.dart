@@ -15,7 +15,7 @@ class PaymentPageState with _$PaymentPageState {
     @Default('') String fromAccountNumber,
     @Default('') String toAccountNumber,
     @Default('') String toRoutingNumber,
-    int? amount,
+    int? centAmount,
     @Default('') String description,
     @Default(false) bool buttonLoading,
     @Default('Pay') String payButtonTxt,

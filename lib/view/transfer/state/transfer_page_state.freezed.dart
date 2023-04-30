@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransferPageState {
   String get fromAccountNumber => throw _privateConstructorUsedError;
   String get toAccountNumber => throw _privateConstructorUsedError;
-  int? get amount => throw _privateConstructorUsedError;
+  int? get centAmount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get transferButtonTxt => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $TransferPageStateCopyWith<$Res> {
   $Res call(
       {String fromAccountNumber,
       String toAccountNumber,
-      int? amount,
+      int? centAmount,
       String description,
       bool buttonLoading,
       String transferButtonTxt});
@@ -58,7 +58,7 @@ class _$TransferPageStateCopyWithImpl<$Res, $Val extends TransferPageState>
   $Res call({
     Object? fromAccountNumber = null,
     Object? toAccountNumber = null,
-    Object? amount = freezed,
+    Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? transferButtonTxt = null,
@@ -72,9 +72,9 @@ class _$TransferPageStateCopyWithImpl<$Res, $Val extends TransferPageState>
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
+      centAmount: freezed == centAmount
+          ? _value.centAmount
+          : centAmount // ignore: cast_nullable_to_non_nullable
               as int?,
       description: null == description
           ? _value.description
@@ -103,7 +103,7 @@ abstract class _$$_TransferPageStateCopyWith<$Res>
   $Res call(
       {String fromAccountNumber,
       String toAccountNumber,
-      int? amount,
+      int? centAmount,
       String description,
       bool buttonLoading,
       String transferButtonTxt});
@@ -122,7 +122,7 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
   $Res call({
     Object? fromAccountNumber = null,
     Object? toAccountNumber = null,
-    Object? amount = freezed,
+    Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? transferButtonTxt = null,
@@ -136,9 +136,9 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
+      centAmount: freezed == centAmount
+          ? _value.centAmount
+          : centAmount // ignore: cast_nullable_to_non_nullable
               as int?,
       description: null == description
           ? _value.description
@@ -162,7 +162,7 @@ class _$_TransferPageState implements _TransferPageState {
   const _$_TransferPageState(
       {required this.fromAccountNumber,
       required this.toAccountNumber,
-      this.amount,
+      this.centAmount,
       this.description = "",
       this.buttonLoading = false,
       this.transferButtonTxt = 'Transfer'});
@@ -172,7 +172,7 @@ class _$_TransferPageState implements _TransferPageState {
   @override
   final String toAccountNumber;
   @override
-  final int? amount;
+  final int? centAmount;
   @override
   @JsonKey()
   final String description;
@@ -185,7 +185,7 @@ class _$_TransferPageState implements _TransferPageState {
 
   @override
   String toString() {
-    return 'TransferPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, amount: $amount, description: $description, buttonLoading: $buttonLoading, transferButtonTxt: $transferButtonTxt)';
+    return 'TransferPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, centAmount: $centAmount, description: $description, buttonLoading: $buttonLoading, transferButtonTxt: $transferButtonTxt)';
   }
 
   @override
@@ -197,7 +197,8 @@ class _$_TransferPageState implements _TransferPageState {
                 other.fromAccountNumber == fromAccountNumber) &&
             (identical(other.toAccountNumber, toAccountNumber) ||
                 other.toAccountNumber == toAccountNumber) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.centAmount, centAmount) ||
+                other.centAmount == centAmount) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.buttonLoading, buttonLoading) ||
@@ -207,8 +208,14 @@ class _$_TransferPageState implements _TransferPageState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fromAccountNumber,
-      toAccountNumber, amount, description, buttonLoading, transferButtonTxt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      fromAccountNumber,
+      toAccountNumber,
+      centAmount,
+      description,
+      buttonLoading,
+      transferButtonTxt);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +229,7 @@ abstract class _TransferPageState implements TransferPageState {
   const factory _TransferPageState(
       {required final String fromAccountNumber,
       required final String toAccountNumber,
-      final int? amount,
+      final int? centAmount,
       final String description,
       final bool buttonLoading,
       final String transferButtonTxt}) = _$_TransferPageState;
@@ -232,7 +239,7 @@ abstract class _TransferPageState implements TransferPageState {
   @override
   String get toAccountNumber;
   @override
-  int? get amount;
+  int? get centAmount;
   @override
   String get description;
   @override

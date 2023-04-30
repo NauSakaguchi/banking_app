@@ -13,7 +13,7 @@ class TransferPageState with _$TransferPageState {
   const factory TransferPageState({
     required String fromAccountNumber,
     required String toAccountNumber,
-    int? amount,
+    int? centAmount,
     @Default("") String description,
     @Default(false) bool buttonLoading,
     @Default('Transfer') String transferButtonTxt,
