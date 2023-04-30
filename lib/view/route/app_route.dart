@@ -10,6 +10,7 @@ import 'package:banking_app/view/payment/payment_page.dart';
 import 'package:banking_app/view/top/top_page.dart';
 import 'package:banking_app/view/transaction/transaction_page.dart';
 import 'package:banking_app/view/transfer/transfer_page.dart';
+import 'package:banking_app/view/withdraw/withdraw_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -54,6 +55,10 @@ import 'package:banking_app/view/transfer/transfer_page.dart';
     AutoRoute(
       path: RoutePath.informationRoute,
       page: InformationPage,
+    ),
+    AutoRoute(
+      path: RoutePath.withdrawRoute,
+      page: WithdrawPage,
     ),
   ],
 )

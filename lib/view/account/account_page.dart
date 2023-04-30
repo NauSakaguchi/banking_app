@@ -3,6 +3,7 @@ import 'package:banking_app/constant/route/route_path.dart';
 import 'package:banking_app/core/ui_core/cent_balance_formatter.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/model/account/account.dart';
+import 'package:banking_app/view/route/app_route.gr.dart';
 import 'package:banking_app/view_model/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,7 @@ class AccountPage extends ConsumerWidget {
                 ),
                 for (var account in accounts) ...{
                   _buildAccountItem(
+                    context,
                     colorScheme: colorScheme,
                     account: account,
                   ),
@@ -90,7 +92,8 @@ class AccountPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildAccountItem({
+  Widget _buildAccountItem(
+    BuildContext context, {
     required ColorScheme colorScheme,
     required Account account,
   }) {
@@ -150,6 +153,16 @@ class AccountPage extends ConsumerWidget {
             ),
             const Divider(),
           },
+
+          // to transaction page
+          OutlinedButton(
+            onPressed: () {
+              context.router.push(
+                TransactionHistoryRoute(accountNumber: account.accountNumber),
+              );
+            },
+            child: const Text("See all transactions"),
+          ),
         ],
       ),
     );
@@ -211,14 +224,15 @@ class MenuWidget extends StatelessWidget {
           ),
           _buildMenuItem(
             context,
+            icon: Icons.account_balance_outlined,
+            title: "Withdraw\n",
+            path: RoutePath.withdrawRoute,
+          ),
+          _buildMenuItem(
+            context,
             icon: Icons.info_outline,
             title: "Information\n",
             path: RoutePath.informationRoute,
-          ),
-          // dummy item
-          SizedBox(
-            width: width / itemCount - 1,
-            height: width / itemCount - 1,
           ),
           // dummy item
           SizedBox(
