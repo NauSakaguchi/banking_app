@@ -20,7 +20,8 @@ class TransferPage extends HookConsumerWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     // textController to get the value of the text field
-    final TextEditingController centAmountController = useTextEditingController();
+    final TextEditingController centAmountController =
+        useTextEditingController();
     final TextEditingController descriptionController =
         useTextEditingController(text: transferPageState.description);
 
@@ -41,6 +42,7 @@ class TransferPage extends HookConsumerWidget {
                 const SizedBox(height: 20),
                 AccountPicker(
                   colorScheme: colorScheme,
+                  value: transferPageState.fromAccountNumber,
                   accountList:
                       ref.watch(userInfoProvider.notifier).getAccountNumbers(),
                   onChanged: (value) {
@@ -63,6 +65,7 @@ class TransferPage extends HookConsumerWidget {
                 const SizedBox(height: 20),
                 AccountPicker(
                   colorScheme: colorScheme,
+                  value: transferPageState.toAccountNumber,
                   accountList:
                       ref.watch(userInfoProvider.notifier).getAccountNumbers(),
                   onChanged: (value) {
