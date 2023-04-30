@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_provider.dart';
+part of 'account_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$UserInfoHash() => r'a103a6932b8fc3c769aff039d2c08720555ca577';
+String _$AccountInfoHash() => r'e158a802b2ee9ef30995590de48e4739e02d5555';
 
-/// See also [UserInfo].
-final userInfoProvider = NotifierProvider<UserInfo, User>(
-  UserInfo.new,
-  name: r'userInfoProvider',
+/// See also [AccountInfo].
+final accountInfoProvider = NotifierProvider<AccountInfo, Account>(
+  AccountInfo.new,
+  name: r'accountInfoProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$UserInfoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$AccountInfoHash,
 );
-typedef UserInfoRef = NotifierProviderRef<User>;
+typedef AccountInfoRef = NotifierProviderRef<Account>;
 
-abstract class _$UserInfo extends Notifier<User> {
+abstract class _$AccountInfo extends Notifier<Account> {
   @override
-  User build();
+  Account build();
 }
