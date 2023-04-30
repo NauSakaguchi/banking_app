@@ -14,6 +14,10 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       streetAddress: json['streetAddress'] as String?,
       city: json['city'] as String?,
       state: json['state'] as String?,
+      accounts: (json['accounts'] as List<dynamic>?)
+              ?.map((e) => Account.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Account>[],
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -24,4 +28,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'streetAddress': instance.streetAddress,
       'city': instance.city,
       'state': instance.state,
+      'accounts': instance.accounts,
     };

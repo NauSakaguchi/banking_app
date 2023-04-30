@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CheckDepositPageState {
-  String get accountNumber => throw _privateConstructorUsedError;
+  String get fromAccountNumber => throw _privateConstructorUsedError;
   String get routingNumber => throw _privateConstructorUsedError;
+  String get toAccountNumber => throw _privateConstructorUsedError;
   int? get checkAmount => throw _privateConstructorUsedError;
   DateTime? get checkDate => throw _privateConstructorUsedError;
   File? get checkFrontImage => throw _privateConstructorUsedError;
@@ -37,8 +38,9 @@ abstract class $CheckDepositPageStateCopyWith<$Res> {
       _$CheckDepositPageStateCopyWithImpl<$Res, CheckDepositPageState>;
   @useResult
   $Res call(
-      {String accountNumber,
+      {String fromAccountNumber,
       String routingNumber,
+      String toAccountNumber,
       int? checkAmount,
       DateTime? checkDate,
       File? checkFrontImage,
@@ -61,8 +63,9 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = null,
+    Object? fromAccountNumber = null,
     Object? routingNumber = null,
+    Object? toAccountNumber = null,
     Object? checkAmount = freezed,
     Object? checkDate = freezed,
     Object? checkFrontImage = freezed,
@@ -71,13 +74,17 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
     Object? depositButtonTxt = null,
   }) {
     return _then(_value.copyWith(
-      accountNumber: null == accountNumber
-          ? _value.accountNumber
-          : accountNumber // ignore: cast_nullable_to_non_nullable
+      fromAccountNumber: null == fromAccountNumber
+          ? _value.fromAccountNumber
+          : fromAccountNumber // ignore: cast_nullable_to_non_nullable
               as String,
       routingNumber: null == routingNumber
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      toAccountNumber: null == toAccountNumber
+          ? _value.toAccountNumber
+          : toAccountNumber // ignore: cast_nullable_to_non_nullable
               as String,
       checkAmount: freezed == checkAmount
           ? _value.checkAmount
@@ -116,8 +123,9 @@ abstract class _$$_CheckDepositPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String accountNumber,
+      {String fromAccountNumber,
       String routingNumber,
+      String toAccountNumber,
       int? checkAmount,
       DateTime? checkDate,
       File? checkFrontImage,
@@ -137,8 +145,9 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = null,
+    Object? fromAccountNumber = null,
     Object? routingNumber = null,
+    Object? toAccountNumber = null,
     Object? checkAmount = freezed,
     Object? checkDate = freezed,
     Object? checkFrontImage = freezed,
@@ -147,13 +156,17 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
     Object? depositButtonTxt = null,
   }) {
     return _then(_$_CheckDepositPageState(
-      accountNumber: null == accountNumber
-          ? _value.accountNumber
-          : accountNumber // ignore: cast_nullable_to_non_nullable
+      fromAccountNumber: null == fromAccountNumber
+          ? _value.fromAccountNumber
+          : fromAccountNumber // ignore: cast_nullable_to_non_nullable
               as String,
       routingNumber: null == routingNumber
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      toAccountNumber: null == toAccountNumber
+          ? _value.toAccountNumber
+          : toAccountNumber // ignore: cast_nullable_to_non_nullable
               as String,
       checkAmount: freezed == checkAmount
           ? _value.checkAmount
@@ -187,8 +200,9 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
 
 class _$_CheckDepositPageState implements _CheckDepositPageState {
   const _$_CheckDepositPageState(
-      {this.accountNumber = '',
+      {this.fromAccountNumber = '',
       this.routingNumber = '',
+      required this.toAccountNumber,
       this.checkAmount,
       this.checkDate,
       this.checkFrontImage,
@@ -198,10 +212,12 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
 
   @override
   @JsonKey()
-  final String accountNumber;
+  final String fromAccountNumber;
   @override
   @JsonKey()
   final String routingNumber;
+  @override
+  final String toAccountNumber;
   @override
   final int? checkAmount;
   @override
@@ -219,7 +235,7 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
 
   @override
   String toString() {
-    return 'CheckDepositPageState(accountNumber: $accountNumber, routingNumber: $routingNumber, checkAmount: $checkAmount, checkDate: $checkDate, checkFrontImage: $checkFrontImage, checkBackImage: $checkBackImage, buttonLoading: $buttonLoading, depositButtonTxt: $depositButtonTxt)';
+    return 'CheckDepositPageState(fromAccountNumber: $fromAccountNumber, routingNumber: $routingNumber, toAccountNumber: $toAccountNumber, checkAmount: $checkAmount, checkDate: $checkDate, checkFrontImage: $checkFrontImage, checkBackImage: $checkBackImage, buttonLoading: $buttonLoading, depositButtonTxt: $depositButtonTxt)';
   }
 
   @override
@@ -227,10 +243,12 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CheckDepositPageState &&
-            (identical(other.accountNumber, accountNumber) ||
-                other.accountNumber == accountNumber) &&
+            (identical(other.fromAccountNumber, fromAccountNumber) ||
+                other.fromAccountNumber == fromAccountNumber) &&
             (identical(other.routingNumber, routingNumber) ||
                 other.routingNumber == routingNumber) &&
+            (identical(other.toAccountNumber, toAccountNumber) ||
+                other.toAccountNumber == toAccountNumber) &&
             (identical(other.checkAmount, checkAmount) ||
                 other.checkAmount == checkAmount) &&
             (identical(other.checkDate, checkDate) ||
@@ -248,8 +266,9 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      accountNumber,
+      fromAccountNumber,
       routingNumber,
+      toAccountNumber,
       checkAmount,
       checkDate,
       checkFrontImage,
@@ -267,8 +286,9 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
 
 abstract class _CheckDepositPageState implements CheckDepositPageState {
   const factory _CheckDepositPageState(
-      {final String accountNumber,
+      {final String fromAccountNumber,
       final String routingNumber,
+      required final String toAccountNumber,
       final int? checkAmount,
       final DateTime? checkDate,
       final File? checkFrontImage,
@@ -277,9 +297,11 @@ abstract class _CheckDepositPageState implements CheckDepositPageState {
       final String depositButtonTxt}) = _$_CheckDepositPageState;
 
   @override
-  String get accountNumber;
+  String get fromAccountNumber;
   @override
   String get routingNumber;
+  @override
+  String get toAccountNumber;
   @override
   int? get checkAmount;
   @override

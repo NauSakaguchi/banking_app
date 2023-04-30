@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$CheckDepositItemsHash() => r'644ff6990f1527311333d138d0c96371050ff1d0';
+String _$CheckDepositItemsHash() => r'76b813b6bc5d9d2f95966e5622b69aa7643eee75';
 
 /// See also [CheckDepositItems].
 final checkDepositItemsProvider =

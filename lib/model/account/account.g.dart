@@ -7,7 +7,7 @@ part of 'account.dart';
 // **************************************************************************
 
 _$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
-      accountNumber: json['accountNumber'] as String?,
+      accountNumber: json['accountNumber'] as String? ?? "",
       routingNumber: json['routingNumber'] as String?,
       accountType:
           $enumDecodeNullable(_$AccountTypeEnumMap, json['accountType']),

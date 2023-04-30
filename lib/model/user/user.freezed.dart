@@ -27,6 +27,7 @@ mixin _$User {
   String? get streetAddress => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
+  List<Account> get accounts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $UserCopyWith<$Res> {
       String? middleName,
       String? streetAddress,
       String? city,
-      String? state});
+      String? state,
+      List<Account> accounts});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? streetAddress = freezed,
     Object? city = freezed,
     Object? state = freezed,
+    Object? accounts = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -98,6 +101,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
+      accounts: null == accounts
+          ? _value.accounts
+          : accounts // ignore: cast_nullable_to_non_nullable
+              as List<Account>,
     ) as $Val);
   }
 }
@@ -115,7 +122,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? middleName,
       String? streetAddress,
       String? city,
-      String? state});
+      String? state,
+      List<Account> accounts});
 }
 
 /// @nodoc
@@ -134,6 +142,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? streetAddress = freezed,
     Object? city = freezed,
     Object? state = freezed,
+    Object? accounts = null,
   }) {
     return _then(_$_User(
       id: freezed == id
@@ -164,6 +173,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
+      accounts: null == accounts
+          ? _value._accounts
+          : accounts // ignore: cast_nullable_to_non_nullable
+              as List<Account>,
     ));
   }
 }
@@ -178,8 +191,10 @@ class _$_User extends _User {
       this.middleName,
       this.streetAddress,
       this.city,
-      this.state})
-      : super._();
+      this.state,
+      final List<Account> accounts = const <Account>[]})
+      : _accounts = accounts,
+        super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -197,10 +212,18 @@ class _$_User extends _User {
   final String? city;
   @override
   final String? state;
+  final List<Account> _accounts;
+  @override
+  @JsonKey()
+  List<Account> get accounts {
+    if (_accounts is EqualUnmodifiableListView) return _accounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_accounts);
+  }
 
   @override
   String toString() {
-    return 'User(id: $id, lastName: $lastName, firstName: $firstName, middleName: $middleName, streetAddress: $streetAddress, city: $city, state: $state)';
+    return 'User(id: $id, lastName: $lastName, firstName: $firstName, middleName: $middleName, streetAddress: $streetAddress, city: $city, state: $state, accounts: $accounts)';
   }
 
   @override
@@ -218,13 +241,22 @@ class _$_User extends _User {
             (identical(other.streetAddress, streetAddress) ||
                 other.streetAddress == streetAddress) &&
             (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state));
+            (identical(other.state, state) || other.state == state) &&
+            const DeepCollectionEquality().equals(other._accounts, _accounts));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, lastName, firstName,
-      middleName, streetAddress, city, state);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      lastName,
+      firstName,
+      middleName,
+      streetAddress,
+      city,
+      state,
+      const DeepCollectionEquality().hash(_accounts));
 
   @JsonKey(ignore: true)
   @override
@@ -248,7 +280,8 @@ abstract class _User extends User {
       final String? middleName,
       final String? streetAddress,
       final String? city,
-      final String? state}) = _$_User;
+      final String? state,
+      final List<Account> accounts}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -267,6 +300,8 @@ abstract class _User extends User {
   String? get city;
   @override
   String? get state;
+  @override
+  List<Account> get accounts;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

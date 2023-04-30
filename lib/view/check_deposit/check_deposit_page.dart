@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:banking_app/component/account_picker.dart';
 import 'package:banking_app/core/ui_core/date_time_formatter.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/check_deposit/state/check_deposit_provider.dart';
+import 'package:banking_app/view/style/balance_formatter.dart';
 import 'package:banking_app/view/style/decorations.dart';
+import 'package:banking_app/view_model/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,10 +25,10 @@ class CheckDepositPage extends HookConsumerWidget {
 
     // text controller
     final TextEditingController accountNumberController =
-        useTextEditingController(text: checkDepositItems.accountNumber);
+        useTextEditingController(text: checkDepositItems.fromAccountNumber);
     final TextEditingController routingNumberController =
         useTextEditingController(text: checkDepositItems.routingNumber);
-    final TextEditingController amountController = useTextEditingController(
+    final TextEditingController centAmountController = useTextEditingController(
         text: checkDepositItems.checkAmount == null
             ? ""
             : checkDepositItems.checkAmount.toString());
@@ -47,6 +50,12 @@ class CheckDepositPage extends HookConsumerWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
+                // from
+                const Text(
+                  "From",
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 20),
                 TextField(
                   controller: accountNumberController,
                   // number keyboard
@@ -54,7 +63,7 @@ class CheckDepositPage extends HookConsumerWidget {
                   decoration: Decorations.inputDecoration(
                       "Account Number", colorScheme),
                   onChanged: (value) {
-                    notifier.updateAccountNumber(value);
+                    notifier.updateFromAccountNumber(value);
                   },
                 ),
                 const SizedBox(height: 20),
@@ -68,17 +77,41 @@ class CheckDepositPage extends HookConsumerWidget {
                     notifier.updateRoutingNumber(value);
                   },
                 ),
+                // to
+                const SizedBox(height: 20),
+                const Text(
+                  "To",
+                  style: TextStyle(fontSize: 20),
+                ),
+                // account picker
+                AccountPicker(
+                  colorScheme: colorScheme,
+                  value: checkDepositItems.toAccountNumber,
+                  accountList:
+                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      notifier.updateToAccountNumber(value);
+                    }
+                  },
+                ),
                 const SizedBox(height: 20),
                 TextField(
-                  controller: amountController,
+                  controller: centAmountController,
                   // number keyboard
                   keyboardType: TextInputType.number,
+                  inputFormatters: [BalanceFormatter()],
                   decoration:
                       Decorations.inputDecoration("Amount", colorScheme),
                   onChanged: (value) {
+                    // Remove all non-digit characters
+                    final newValue = value.replaceAll(RegExp(r'\D'), '');
+
+                    // Convert the cleaned string to a number
+                    int numberValue = int.tryParse(newValue) ?? 0;
+
                     // convert str to int
-                    final value = int.tryParse(amountController.text) ?? 0;
-                    notifier.updateCheckAmount(value);
+                    notifier.updateCheckAmount(numberValue);
                   },
                 ),
                 // check date with showDatePicker
@@ -136,10 +169,10 @@ class CheckDepositPage extends HookConsumerWidget {
                           notifier.updateButtonStatus(true);
 
                           // if there is an empty field or null field, show error toast message
-                          if (checkDepositItems.accountNumber.isEmpty ||
+                          if (checkDepositItems.toAccountNumber.isEmpty ||
+                              checkDepositItems.fromAccountNumber.isEmpty ||
                               checkDepositItems.routingNumber.isEmpty ||
                               checkDepositItems.checkAmount == null ||
-                              checkDepositItems.checkAmount! <= 0 ||
                               checkDepositItems.checkDate == null ||
                               checkDepositItems.checkFrontImage == null ||
                               checkDepositItems.checkBackImage == null) {
@@ -153,10 +186,22 @@ class CheckDepositPage extends HookConsumerWidget {
                             return;
                           }
 
+                          // if cent amount is less than 0 or equal, print error toast message
+                          if (checkDepositItems.checkAmount! <= 0) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Amount must be greater than 0"),
+                              ),
+                            );
+                            return;
+                          }
+
                           logger.d(
-                              "Account Number: ${checkDepositItems.accountNumber}");
+                              "from Account Number: ${checkDepositItems.fromAccountNumber}");
                           logger.d(
-                              "Routing Number: ${checkDepositItems.routingNumber}");
+                              "from Routing Number: ${checkDepositItems.routingNumber}");
+                          logger.d(
+                              "to Account Number: ${checkDepositItems.toAccountNumber}");
                           logger.d("Amount: ${checkDepositItems.checkAmount}");
                           logger
                               .d("Check Date: ${checkDepositItems.checkDate}");
@@ -168,6 +213,7 @@ class CheckDepositPage extends HookConsumerWidget {
                         },
                   child: Text(checkDepositItems.depositButtonTxt),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),

@@ -20,7 +20,7 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Account {
-  String? get accountNumber => throw _privateConstructorUsedError;
+  String get accountNumber => throw _privateConstructorUsedError;
   String? get routingNumber => throw _privateConstructorUsedError;
   AccountType? get accountType => throw _privateConstructorUsedError;
   String? get balance => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $AccountCopyWith<$Res> {
       _$AccountCopyWithImpl<$Res, Account>;
   @useResult
   $Res call(
-      {String? accountNumber,
+      {String accountNumber,
       String? routingNumber,
       AccountType? accountType,
       String? balance});
@@ -55,16 +55,16 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = freezed,
+    Object? accountNumber = null,
     Object? routingNumber = freezed,
     Object? accountType = freezed,
     Object? balance = freezed,
   }) {
     return _then(_value.copyWith(
-      accountNumber: freezed == accountNumber
+      accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       routingNumber: freezed == routingNumber
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? accountNumber,
+      {String accountNumber,
       String? routingNumber,
       AccountType? accountType,
       String? balance});
@@ -105,16 +105,16 @@ class __$$_AccountCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = freezed,
+    Object? accountNumber = null,
     Object? routingNumber = freezed,
     Object? accountType = freezed,
     Object? balance = freezed,
   }) {
     return _then(_$_Account(
-      accountNumber: freezed == accountNumber
+      accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       routingNumber: freezed == routingNumber
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
@@ -135,14 +135,18 @@ class __$$_AccountCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Account extends _Account {
   const _$_Account(
-      {this.accountNumber, this.routingNumber, this.accountType, this.balance})
+      {this.accountNumber = "",
+      this.routingNumber,
+      this.accountType,
+      this.balance})
       : super._();
 
   factory _$_Account.fromJson(Map<String, dynamic> json) =>
       _$$_AccountFromJson(json);
 
   @override
-  final String? accountNumber;
+  @JsonKey()
+  final String accountNumber;
   @override
   final String? routingNumber;
   @override
@@ -190,7 +194,7 @@ class _$_Account extends _Account {
 
 abstract class _Account extends Account {
   const factory _Account(
-      {final String? accountNumber,
+      {final String accountNumber,
       final String? routingNumber,
       final AccountType? accountType,
       final String? balance}) = _$_Account;
@@ -199,7 +203,7 @@ abstract class _Account extends Account {
   factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
 
   @override
-  String? get accountNumber;
+  String get accountNumber;
   @override
   String? get routingNumber;
   @override

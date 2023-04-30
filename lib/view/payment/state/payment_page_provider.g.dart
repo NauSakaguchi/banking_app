@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_page_provider.dart';
+part of 'payment_page_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,19 +29,19 @@ class _SystemHash {
   }
 }
 
-String _$LoginItemsHash() => r'2793ac747e94ed786ce9caccc4c39ee39e888195';
+String _$PaymentItemsHash() => r'143523f766892d774115f0fc7ed5f6d7bddfd400';
 
-/// See also [LoginItems].
-final loginItemsProvider =
-    AutoDisposeNotifierProvider<LoginItems, LoginPageState>(
-  LoginItems.new,
-  name: r'loginItemsProvider',
+/// See also [PaymentItems].
+final paymentItemsProvider =
+    AutoDisposeNotifierProvider<PaymentItems, PaymentPageState>(
+  PaymentItems.new,
+  name: r'paymentItemsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$LoginItemsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$PaymentItemsHash,
 );
-typedef LoginItemsRef = AutoDisposeNotifierProviderRef<LoginPageState>;
+typedef PaymentItemsRef = AutoDisposeNotifierProviderRef<PaymentPageState>;
 
-abstract class _$LoginItems extends AutoDisposeNotifier<LoginPageState> {
+abstract class _$PaymentItems extends AutoDisposeNotifier<PaymentPageState> {
   @override
-  LoginPageState build();
+  PaymentPageState build();
 }

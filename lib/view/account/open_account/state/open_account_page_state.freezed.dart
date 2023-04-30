@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OpenAccountPageState {
-  String get accountName => throw _privateConstructorUsedError;
+  List<String> get accounts => throw _privateConstructorUsedError;
   String get accountType => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get openAccountButtonTxt => throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ abstract class $OpenAccountPageStateCopyWith<$Res> {
       _$OpenAccountPageStateCopyWithImpl<$Res, OpenAccountPageState>;
   @useResult
   $Res call(
-      {String accountName,
+      {List<String> accounts,
       String accountType,
       bool buttonLoading,
       String openAccountButtonTxt});
@@ -53,16 +53,16 @@ class _$OpenAccountPageStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountName = null,
+    Object? accounts = null,
     Object? accountType = null,
     Object? buttonLoading = null,
     Object? openAccountButtonTxt = null,
   }) {
     return _then(_value.copyWith(
-      accountName: null == accountName
-          ? _value.accountName
-          : accountName // ignore: cast_nullable_to_non_nullable
-              as String,
+      accounts: null == accounts
+          ? _value.accounts
+          : accounts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
@@ -88,7 +88,7 @@ abstract class _$$_OpenAccountPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String accountName,
+      {List<String> accounts,
       String accountType,
       bool buttonLoading,
       String openAccountButtonTxt});
@@ -105,16 +105,16 @@ class __$$_OpenAccountPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountName = null,
+    Object? accounts = null,
     Object? accountType = null,
     Object? buttonLoading = null,
     Object? openAccountButtonTxt = null,
   }) {
     return _then(_$_OpenAccountPageState(
-      accountName: null == accountName
-          ? _value.accountName
-          : accountName // ignore: cast_nullable_to_non_nullable
-              as String,
+      accounts: null == accounts
+          ? _value._accounts
+          : accounts // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
@@ -135,14 +135,21 @@ class __$$_OpenAccountPageStateCopyWithImpl<$Res>
 
 class _$_OpenAccountPageState implements _OpenAccountPageState {
   const _$_OpenAccountPageState(
-      {this.accountName = '',
+      {final List<String> accounts = const <String>[],
       this.accountType = 'Savings',
       this.buttonLoading = false,
-      this.openAccountButtonTxt = 'Open Account'});
+      this.openAccountButtonTxt = 'Open Account'})
+      : _accounts = accounts;
 
+  final List<String> _accounts;
   @override
   @JsonKey()
-  final String accountName;
+  List<String> get accounts {
+    if (_accounts is EqualUnmodifiableListView) return _accounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_accounts);
+  }
+
   @override
   @JsonKey()
   final String accountType;
@@ -155,7 +162,7 @@ class _$_OpenAccountPageState implements _OpenAccountPageState {
 
   @override
   String toString() {
-    return 'OpenAccountPageState(accountName: $accountName, accountType: $accountType, buttonLoading: $buttonLoading, openAccountButtonTxt: $openAccountButtonTxt)';
+    return 'OpenAccountPageState(accounts: $accounts, accountType: $accountType, buttonLoading: $buttonLoading, openAccountButtonTxt: $openAccountButtonTxt)';
   }
 
   @override
@@ -163,8 +170,7 @@ class _$_OpenAccountPageState implements _OpenAccountPageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OpenAccountPageState &&
-            (identical(other.accountName, accountName) ||
-                other.accountName == accountName) &&
+            const DeepCollectionEquality().equals(other._accounts, _accounts) &&
             (identical(other.accountType, accountType) ||
                 other.accountType == accountType) &&
             (identical(other.buttonLoading, buttonLoading) ||
@@ -174,8 +180,12 @@ class _$_OpenAccountPageState implements _OpenAccountPageState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, accountName, accountType,
-      buttonLoading, openAccountButtonTxt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_accounts),
+      accountType,
+      buttonLoading,
+      openAccountButtonTxt);
 
   @JsonKey(ignore: true)
   @override
@@ -187,13 +197,13 @@ class _$_OpenAccountPageState implements _OpenAccountPageState {
 
 abstract class _OpenAccountPageState implements OpenAccountPageState {
   const factory _OpenAccountPageState(
-      {final String accountName,
+      {final List<String> accounts,
       final String accountType,
       final bool buttonLoading,
       final String openAccountButtonTxt}) = _$_OpenAccountPageState;
 
   @override
-  String get accountName;
+  List<String> get accounts;
   @override
   String get accountType;
   @override

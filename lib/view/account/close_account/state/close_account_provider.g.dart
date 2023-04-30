@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_page_provider.dart';
+part of 'close_account_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,19 +29,22 @@ class _SystemHash {
   }
 }
 
-String _$LoginItemsHash() => r'2793ac747e94ed786ce9caccc4c39ee39e888195';
+String _$CloseAccountItemsHash() => r'79cc3ed36b0f795c84503a38eaf1ca9f5fa0fc0a';
 
-/// See also [LoginItems].
-final loginItemsProvider =
-    AutoDisposeNotifierProvider<LoginItems, LoginPageState>(
-  LoginItems.new,
-  name: r'loginItemsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$LoginItemsHash,
+/// See also [CloseAccountItems].
+final closeAccountItemsProvider =
+    AutoDisposeNotifierProvider<CloseAccountItems, CloseAccountPageState>(
+  CloseAccountItems.new,
+  name: r'closeAccountItemsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$CloseAccountItemsHash,
 );
-typedef LoginItemsRef = AutoDisposeNotifierProviderRef<LoginPageState>;
+typedef CloseAccountItemsRef
+    = AutoDisposeNotifierProviderRef<CloseAccountPageState>;
 
-abstract class _$LoginItems extends AutoDisposeNotifier<LoginPageState> {
+abstract class _$CloseAccountItems
+    extends AutoDisposeNotifier<CloseAccountPageState> {
   @override
-  LoginPageState build();
+  CloseAccountPageState build();
 }
