@@ -1,13 +1,17 @@
+import 'package:banking_app/component/account_picker.dart';
 import 'package:banking_app/view/style/decorations.dart';
+import 'package:banking_app/view_model/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TransferPage extends StatelessWidget {
+class TransferPage extends HookConsumerWidget {
   const TransferPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Transfer")),
       body: GestureDetector(
@@ -23,27 +27,11 @@ class TransferPage extends StatelessWidget {
                 ),
                 // dropdown button to select account
                 const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: colorScheme.onPrimaryContainer),
-                    borderRadius: BorderRadius.circular(5),
-                    color: colorScheme.surface,
-                  ),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    value: "Account (6683)",
-                    onChanged: (newValue) {},
-                    items: <String>['Account (6683)', 'Saving', 'Credit Card']
-                        .map<DropdownMenuItem<String>>((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value,
-                            style: TextStyle(
-                                fontSize: 20, color: colorScheme.primary)),
-                      );
-                    }).toList(),
-                  ),
+                AccountPicker(
+                  colorScheme: colorScheme,
+                  accountList:
+                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
+                  onChanged: (value) {},
                 ),
 
                 const SizedBox(height: 10),
@@ -59,27 +47,11 @@ class TransferPage extends StatelessWidget {
                 ),
                 // dropdown button to select account
                 const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: colorScheme.onPrimaryContainer),
-                    borderRadius: BorderRadius.circular(5),
-                    color: colorScheme.surface,
-                  ),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    value: "Account (6683)",
-                    onChanged: (newValue) {},
-                    items: <String>['Account (6683)', 'Saving', 'Credit Card']
-                        .map<DropdownMenuItem<String>>((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value,
-                            style: TextStyle(
-                                fontSize: 20, color: colorScheme.primary)),
-                      );
-                    }).toList(),
-                  ),
+                AccountPicker(
+                  colorScheme: colorScheme,
+                  accountList:
+                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
+                  onChanged: (value) {},
                 ),
 
                 // Amount

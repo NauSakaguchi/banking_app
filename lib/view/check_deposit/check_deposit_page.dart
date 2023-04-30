@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:banking_app/component/account_picker.dart';
 import 'package:banking_app/core/ui_core/date_time_formatter.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/check_deposit/state/check_deposit_provider.dart';
 import 'package:banking_app/view/style/decorations.dart';
+import 'package:banking_app/view_model/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -47,6 +49,12 @@ class CheckDepositPage extends HookConsumerWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
+                // from
+                const Text(
+                  "From",
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 20),
                 TextField(
                   controller: accountNumberController,
                   // number keyboard
@@ -67,6 +75,19 @@ class CheckDepositPage extends HookConsumerWidget {
                   onChanged: (value) {
                     notifier.updateRoutingNumber(value);
                   },
+                ),
+                // to
+                const SizedBox(height: 20),
+                const Text(
+                  "To",
+                  style: TextStyle(fontSize: 20),
+                ),
+                // account picker
+                AccountPicker(
+                  colorScheme: colorScheme,
+                  accountList:
+                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
+                  onChanged: (value) {},
                 ),
                 const SizedBox(height: 20),
                 TextField(
@@ -168,6 +189,7 @@ class CheckDepositPage extends HookConsumerWidget {
                         },
                   child: Text(checkDepositItems.depositButtonTxt),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
