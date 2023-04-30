@@ -21,9 +21,9 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Account {
   String get accountNumber => throw _privateConstructorUsedError;
-  String? get routingNumber => throw _privateConstructorUsedError;
-  AccountType? get accountType => throw _privateConstructorUsedError;
-  String? get balance => throw _privateConstructorUsedError;
+  dynamic get routingNumber => throw _privateConstructorUsedError;
+  AccountType get accountType => throw _privateConstructorUsedError;
+  int? get centBalance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,9 +37,9 @@ abstract class $AccountCopyWith<$Res> {
   @useResult
   $Res call(
       {String accountNumber,
-      String? routingNumber,
-      AccountType? accountType,
-      String? balance});
+      dynamic routingNumber,
+      AccountType accountType,
+      int? centBalance});
 }
 
 /// @nodoc
@@ -57,8 +57,8 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
   $Res call({
     Object? accountNumber = null,
     Object? routingNumber = freezed,
-    Object? accountType = freezed,
-    Object? balance = freezed,
+    Object? accountType = null,
+    Object? centBalance = freezed,
   }) {
     return _then(_value.copyWith(
       accountNumber: null == accountNumber
@@ -68,15 +68,15 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
       routingNumber: freezed == routingNumber
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      accountType: freezed == accountType
+              as dynamic,
+      accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
-              as AccountType?,
-      balance: freezed == balance
-          ? _value.balance
-          : balance // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as AccountType,
+      centBalance: freezed == centBalance
+          ? _value.centBalance
+          : centBalance // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -90,9 +90,9 @@ abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
   @useResult
   $Res call(
       {String accountNumber,
-      String? routingNumber,
-      AccountType? accountType,
-      String? balance});
+      dynamic routingNumber,
+      AccountType accountType,
+      int? centBalance});
 }
 
 /// @nodoc
@@ -107,26 +107,24 @@ class __$$_AccountCopyWithImpl<$Res>
   $Res call({
     Object? accountNumber = null,
     Object? routingNumber = freezed,
-    Object? accountType = freezed,
-    Object? balance = freezed,
+    Object? accountType = null,
+    Object? centBalance = freezed,
   }) {
     return _then(_$_Account(
       accountNumber: null == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      routingNumber: freezed == routingNumber
-          ? _value.routingNumber
-          : routingNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      accountType: freezed == accountType
+      routingNumber:
+          freezed == routingNumber ? _value.routingNumber! : routingNumber,
+      accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
-              as AccountType?,
-      balance: freezed == balance
-          ? _value.balance
-          : balance // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as AccountType,
+      centBalance: freezed == centBalance
+          ? _value.centBalance
+          : centBalance // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -136,9 +134,9 @@ class __$$_AccountCopyWithImpl<$Res>
 class _$_Account extends _Account {
   const _$_Account(
       {this.accountNumber = "",
-      this.routingNumber,
-      this.accountType,
-      this.balance})
+      this.routingNumber = "",
+      this.accountType = AccountType.saving,
+      this.centBalance})
       : super._();
 
   factory _$_Account.fromJson(Map<String, dynamic> json) =>
@@ -148,15 +146,17 @@ class _$_Account extends _Account {
   @JsonKey()
   final String accountNumber;
   @override
-  final String? routingNumber;
+  @JsonKey()
+  final dynamic routingNumber;
   @override
-  final AccountType? accountType;
+  @JsonKey()
+  final AccountType accountType;
   @override
-  final String? balance;
+  final int? centBalance;
 
   @override
   String toString() {
-    return 'Account(accountNumber: $accountNumber, routingNumber: $routingNumber, accountType: $accountType, balance: $balance)';
+    return 'Account(accountNumber: $accountNumber, routingNumber: $routingNumber, accountType: $accountType, centBalance: $centBalance)';
   }
 
   @override
@@ -166,17 +166,22 @@ class _$_Account extends _Account {
             other is _$_Account &&
             (identical(other.accountNumber, accountNumber) ||
                 other.accountNumber == accountNumber) &&
-            (identical(other.routingNumber, routingNumber) ||
-                other.routingNumber == routingNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.routingNumber, routingNumber) &&
             (identical(other.accountType, accountType) ||
                 other.accountType == accountType) &&
-            (identical(other.balance, balance) || other.balance == balance));
+            (identical(other.centBalance, centBalance) ||
+                other.centBalance == centBalance));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, accountNumber, routingNumber, accountType, balance);
+      runtimeType,
+      accountNumber,
+      const DeepCollectionEquality().hash(routingNumber),
+      accountType,
+      centBalance);
 
   @JsonKey(ignore: true)
   @override
@@ -195,9 +200,9 @@ class _$_Account extends _Account {
 abstract class _Account extends Account {
   const factory _Account(
       {final String accountNumber,
-      final String? routingNumber,
-      final AccountType? accountType,
-      final String? balance}) = _$_Account;
+      final dynamic routingNumber,
+      final AccountType accountType,
+      final int? centBalance}) = _$_Account;
   const _Account._() : super._();
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
@@ -205,11 +210,11 @@ abstract class _Account extends Account {
   @override
   String get accountNumber;
   @override
-  String? get routingNumber;
+  dynamic get routingNumber;
   @override
-  AccountType? get accountType;
+  AccountType get accountType;
   @override
-  String? get balance;
+  int? get centBalance;
   @override
   @JsonKey(ignore: true)
   _$$_AccountCopyWith<_$_Account> get copyWith =>

@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:banking_app/constant/route/route_path.dart';
+import 'package:banking_app/core/ui_core/cent_balance_formatter.dart';
 import 'package:banking_app/main.dart';
+import 'package:banking_app/model/account/account.dart';
+import 'package:banking_app/view_model/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AccountDetailItem {
   final String title;
@@ -14,23 +18,18 @@ class AccountDetailItem {
   });
 }
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends ConsumerWidget {
   const AccountPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    //dummy data
-    List<AccountDetailItem> accountDetailItems = [
-      AccountDetailItem(title: "User Name", value: "John Doe"),
-      AccountDetailItem(title: "Account number", value: "123456789"),
-      AccountDetailItem(title: "Routing number", value: "987654321"),
-      AccountDetailItem(title: "Last statement date", value: "Apr 10, 2023"),
-    ];
-    final String user_name = "John Doe";
-    final double deposit = 10000;
+  Widget build(BuildContext context, WidgetRef ref) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     const double padding = 20;
     final double screenWidth = MediaQuery.of(context).size.width;
+
+    final userState = ref.watch(userInfoProvider);
+    final accounts =
+        ref.watch(userInfoProvider.select((value) => value.accounts));
 
     return Scaffold(
       appBar: AppBar(
@@ -51,74 +50,11 @@ class AccountPage extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: padding,
             right: padding,
-            top: padding,
           ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    "$user_name's Account",
-                    style: const TextStyle(
-                        fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: colorScheme.surface,
-                    border: Border.all(color: colorScheme.onPrimaryContainer),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "\$$deposit",
-                            style: const TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
-                              "Account details",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // map AccountDetailItem to Row Widget
-                      for (final item in accountDetailItems) ...{
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(item.title),
-                            Text(
-                              item.value,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        const Divider(),
-                      },
-                    ],
-                  ),
-                ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(
@@ -129,11 +65,93 @@ class AccountPage extends StatelessWidget {
                 MenuWidget(
                     width: screenWidth - padding * 2, colorScheme: colorScheme),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    "${userState.firstName} ${userState.lastName}'s Accounts",
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                for (var account in accounts) ...{
+                  _buildAccountItem(
+                    colorScheme: colorScheme,
+                    account: account,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                }
               ],
             ),
           )),
+    );
+  }
+
+  Widget _buildAccountItem({
+    required ColorScheme colorScheme,
+    required Account account,
+  }) {
+    final _accountDetailItems = [
+      AccountDetailItem(title: "Account number", value: account.accountNumber),
+      AccountDetailItem(title: "Routing number", value: account.routingNumber),
+      AccountDetailItem(
+          title: "Account type", value: account.accountType.toDisplayString()),
+    ];
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        border: Border.all(color: colorScheme.onPrimaryContainer),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                CentBalanceFormatter.toDollarString(account.centBalance),
+                style: const TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Account details",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // map AccountDetailItem to Row Widget
+          for (final item in _accountDetailItems) ...{
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(item.title),
+                Text(
+                  item.value,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const Divider(),
+          },
+        ],
+      ),
     );
   }
 }

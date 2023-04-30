@@ -10,14 +10,23 @@ class Transaction with _$Transaction {
     String? targetId,
     String? accountNumber,
     String? routingNumber,
-    String? amount,
-    String? date,
+    int? centAmount,
+    DateTime? timestamp,
     String? description,
-    // TransactionType? transactionType,
+    TransactionType? transactionType,
   }) = _Transaction;
 
   const Transaction._();
 
   factory Transaction.fromJson(Map<String, dynamic> json) =>
       _$TransactionFromJson(json);
+}
+
+enum TransactionType {
+  @JsonValue('deposit')
+  deposit,
+  @JsonValue('withdrawal')
+  withdrawal,
+  @JsonValue('transfer')
+  transfer,
 }
