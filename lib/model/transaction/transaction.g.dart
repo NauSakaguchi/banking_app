@@ -18,7 +18,8 @@ _$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['timestamp'] as String),
       description: json['description'] as String?,
       transactionType: $enumDecodeNullable(
-          _$TransactionTypeEnumMap, json['transactionType']),
+              _$TransactionTypeEnumMap, json['transactionType']) ??
+          TransactionType.deposit,
     );
 
 Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
@@ -30,7 +31,7 @@ Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
       'centAmount': instance.centAmount,
       'timestamp': instance.timestamp?.toIso8601String(),
       'description': instance.description,
-      'transactionType': _$TransactionTypeEnumMap[instance.transactionType],
+      'transactionType': _$TransactionTypeEnumMap[instance.transactionType]!,
     };
 
 const _$TransactionTypeEnumMap = {

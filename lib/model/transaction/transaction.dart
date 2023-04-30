@@ -13,7 +13,7 @@ class Transaction with _$Transaction {
     int? centAmount,
     DateTime? timestamp,
     String? description,
-    TransactionType? transactionType,
+    @Default(TransactionType.deposit) TransactionType transactionType,
   }) = _Transaction;
 
   const Transaction._();
@@ -29,4 +29,19 @@ enum TransactionType {
   withdrawal,
   @JsonValue('transfer')
   transfer,
+}
+
+extension ParseToString on TransactionType {
+  String toDisplayString() {
+    switch (this) {
+      case TransactionType.deposit:
+        return "Deposit";
+      case TransactionType.withdrawal:
+        return "Withdrawal";
+      case TransactionType.transfer:
+        return "Transfer";
+      default:
+        return "";
+    }
+  }
 }

@@ -119,7 +119,7 @@ class UserInfo extends _$UserInfo {
       ),
       Transaction(
         accountNumber: '111111111',
-        transactionType: TransactionType.deposit,
+        transactionType: TransactionType.transfer,
         centAmount: 100000,
         timestamp: DateTime.now(),
       ),

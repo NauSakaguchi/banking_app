@@ -27,7 +27,7 @@ mixin _$Transaction {
   int? get centAmount => throw _privateConstructorUsedError;
   DateTime? get timestamp => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  TransactionType? get transactionType => throw _privateConstructorUsedError;
+  TransactionType get transactionType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +49,7 @@ abstract class $TransactionCopyWith<$Res> {
       int? centAmount,
       DateTime? timestamp,
       String? description,
-      TransactionType? transactionType});
+      TransactionType transactionType});
 }
 
 /// @nodoc
@@ -72,7 +72,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? centAmount = freezed,
     Object? timestamp = freezed,
     Object? description = freezed,
-    Object? transactionType = freezed,
+    Object? transactionType = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -103,10 +103,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionType: freezed == transactionType
+      transactionType: null == transactionType
           ? _value.transactionType
           : transactionType // ignore: cast_nullable_to_non_nullable
-              as TransactionType?,
+              as TransactionType,
     ) as $Val);
   }
 }
@@ -127,7 +127,7 @@ abstract class _$$_TransactionCopyWith<$Res>
       int? centAmount,
       DateTime? timestamp,
       String? description,
-      TransactionType? transactionType});
+      TransactionType transactionType});
 }
 
 /// @nodoc
@@ -148,7 +148,7 @@ class __$$_TransactionCopyWithImpl<$Res>
     Object? centAmount = freezed,
     Object? timestamp = freezed,
     Object? description = freezed,
-    Object? transactionType = freezed,
+    Object? transactionType = null,
   }) {
     return _then(_$_Transaction(
       id: freezed == id
@@ -179,10 +179,10 @@ class __$$_TransactionCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionType: freezed == transactionType
+      transactionType: null == transactionType
           ? _value.transactionType
           : transactionType // ignore: cast_nullable_to_non_nullable
-              as TransactionType?,
+              as TransactionType,
     ));
   }
 }
@@ -198,7 +198,7 @@ class _$_Transaction extends _Transaction {
       this.centAmount,
       this.timestamp,
       this.description,
-      this.transactionType})
+      this.transactionType = TransactionType.deposit})
       : super._();
 
   factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
@@ -219,7 +219,8 @@ class _$_Transaction extends _Transaction {
   @override
   final String? description;
   @override
-  final TransactionType? transactionType;
+  @JsonKey()
+  final TransactionType transactionType;
 
   @override
   String toString() {
@@ -276,7 +277,7 @@ abstract class _Transaction extends Transaction {
       final int? centAmount,
       final DateTime? timestamp,
       final String? description,
-      final TransactionType? transactionType}) = _$_Transaction;
+      final TransactionType transactionType}) = _$_Transaction;
   const _Transaction._() : super._();
 
   factory _Transaction.fromJson(Map<String, dynamic> json) =
@@ -297,7 +298,7 @@ abstract class _Transaction extends Transaction {
   @override
   String? get description;
   @override
-  TransactionType? get transactionType;
+  TransactionType get transactionType;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionCopyWith<_$_Transaction> get copyWith =>

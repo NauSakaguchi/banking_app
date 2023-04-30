@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_provider.dart';
+part of 'transaction_page_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,22 @@ class _SystemHash {
   }
 }
 
-String _$UserInfoHash() => r'9154df80026aa00e83631bc6ce8656e0d73d3941';
+String _$TransactionItemsHash() => r'90c9ab090bd49fe1aa47314c1a4b2db6a9b3c4a6';
 
-/// See also [UserInfo].
-final userInfoProvider = NotifierProvider<UserInfo, User>(
-  UserInfo.new,
-  name: r'userInfoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$UserInfoHash,
+/// See also [TransactionItems].
+final transactionItemsProvider =
+    AutoDisposeNotifierProvider<TransactionItems, TransactionPageState>(
+  TransactionItems.new,
+  name: r'transactionItemsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$TransactionItemsHash,
 );
-typedef UserInfoRef = NotifierProviderRef<User>;
+typedef TransactionItemsRef
+    = AutoDisposeNotifierProviderRef<TransactionPageState>;
 
-abstract class _$UserInfo extends Notifier<User> {
+abstract class _$TransactionItems
+    extends AutoDisposeNotifier<TransactionPageState> {
   @override
-  User build();
+  TransactionPageState build();
 }
