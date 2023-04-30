@@ -173,7 +173,6 @@ class CheckDepositPage extends HookConsumerWidget {
                               checkDepositItems.fromAccountNumber.isEmpty ||
                               checkDepositItems.routingNumber.isEmpty ||
                               checkDepositItems.checkAmount == null ||
-                              checkDepositItems.checkAmount! <= 0 ||
                               checkDepositItems.checkDate == null ||
                               checkDepositItems.checkFrontImage == null ||
                               checkDepositItems.checkBackImage == null) {
@@ -184,6 +183,16 @@ class CheckDepositPage extends HookConsumerWidget {
                             );
                             // stop loading
                             notifier.updateButtonStatus(false);
+                            return;
+                          }
+
+                          // if cent amount is less than 0 or equal, print error toast message
+                          if (checkDepositItems.checkAmount! <= 0) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Amount must be greater than 0"),
+                              ),
+                            );
                             return;
                           }
 
