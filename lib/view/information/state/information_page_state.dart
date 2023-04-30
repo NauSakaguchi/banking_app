@@ -12,8 +12,16 @@ class InformationPageState with _$InformationPageState {
   // buttonLoading is false
   // openAccountButtonTxt is 'Open Account'
   const factory InformationPageState({
-    @Default("") String text,
-    @Default(<ChatText>[]) List<ChatText> chatHistory,
-    @Default(false) bool buttonLoading,
+    @Default("")
+        String text,
+    @Default(<ChatText>[
+      ChatText(
+        text: "Hi, I'm your virtual assistant. How can I help you?",
+        sender: Sender.bot,
+      )
+    ])
+        List<ChatText> chatHistory,
+    @Default(false)
+        bool buttonLoading,
   }) = _InformationPageState;
 }

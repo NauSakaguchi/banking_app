@@ -117,7 +117,11 @@ class __$$_InformationPageStateCopyWithImpl<$Res>
 class _$_InformationPageState implements _InformationPageState {
   const _$_InformationPageState(
       {this.text = "",
-      final List<ChatText> chatHistory = const <ChatText>[],
+      final List<ChatText> chatHistory = const <ChatText>[
+        ChatText(
+            text: "Hi, I'm your virtual assistant. How can I help you?",
+            sender: Sender.bot)
+      ],
       this.buttonLoading = false})
       : _chatHistory = chatHistory;
 
