@@ -143,20 +143,69 @@ class PaymentPage extends HookConsumerWidget {
                             return;
                           }
 
-                          provider.updateButtonStatus(true);
+                          // if all the fields are filled, show confirmation dialog
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text("Confirm Payment"),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "From: ${paymentPageItems.fromAccountNumber}",
+                                      ),
+                                      Text(
+                                        "To: ${paymentPageItems.toAccountNumber}",
+                                      ),
+                                      Text(
+                                        "Amount: \$${paymentPageItems.centAmount! / 100}",
+                                      ),
+                                      Text(
+                                        "Memo: ${paymentPageItems.description}",
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(
+                                            color: colorScheme.onBackground),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        provider.updateButtonStatus(true);
+                                        Navigator.pop(context);
 
-                          // print log
-                          logger
-                              .d("from: ${paymentPageItems.fromAccountNumber}");
-                          logger.d("to: ${paymentPageItems.toAccountNumber}");
-                          logger.d(
-                              "routing: ${paymentPageItems.toRoutingNumber}");
-                          logger.d("amount: ${paymentPageItems.centAmount}");
-                          logger.d("memo: ${paymentPageItems.description}");
+                                        // print log
+                                        logger.d(
+                                            "from: ${paymentPageItems.fromAccountNumber}");
+                                        logger.d(
+                                            "to: ${paymentPageItems.toAccountNumber}");
+                                        logger.d(
+                                            "routing: ${paymentPageItems.toRoutingNumber}");
+                                        logger.d(
+                                            "amount: ${paymentPageItems.centAmount}");
+                                        logger.d(
+                                            "memo: ${paymentPageItems.description}");
 
-                          // wait for 2 sec
-                          await Future.delayed(const Duration(seconds: 2));
-                          provider.updateButtonStatus(false);
+                                        // wait for 2 sec
+                                        await Future.delayed(
+                                            const Duration(seconds: 2));
+                                        provider.updateButtonStatus(false);
+                                      },
+                                      child: const Text("Confirm"),
+                                    ),
+                                  ],
+                                );
+                              });
                         },
                   child: Text(paymentPageItems.payButtonTxt),
                 ),

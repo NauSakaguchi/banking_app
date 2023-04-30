@@ -114,8 +114,7 @@ class TransferPage extends HookConsumerWidget {
                       ? null
                       : () async {
                           // if there is null value or empty string or 0, show error toast message
-                          if (transferPageState.centAmount == null ||
-                              transferPageState.centAmount == 0) {
+                          if (transferPageState.centAmount == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text("Please fill all the fields"),
@@ -127,6 +126,12 @@ class TransferPage extends HookConsumerWidget {
                               const SnackBar(
                                 content:
                                     Text("Cannot transfer to the same account"),
+                              ),
+                            );
+                          } else if (transferPageState.centAmount! <= 0) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Amount must be greater than 0"),
                               ),
                             );
                           } else {
