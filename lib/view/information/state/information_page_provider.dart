@@ -1,3 +1,5 @@
+import 'package:banking_app/core/tools/oepn_ai.dart';
+import 'package:banking_app/main.dart';
 import 'package:banking_app/model/chat_text/chat_text.dart';
 import 'package:banking_app/view/information/state/information_page_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -31,9 +33,14 @@ class InformationItems extends _$InformationItems {
 
     // loading
     updateButtonStatus(true);
-    // wait two sec
-    await Future.delayed(const Duration(seconds: 2));
+
+    // get response from openai
+    final message = await OpenAI.fromQuestion(question: state.text);
+    logger.d(message);
+    ChatText responseText = ChatText(text: message, sender: Sender.bot);
+    addChatHistory(responseText);
     updateButtonStatus(false);
+
     return Future.value();
   }
 
