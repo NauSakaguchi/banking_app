@@ -110,6 +110,22 @@ class WithdrawPage extends HookConsumerWidget {
                                   return;
                                 }
 
+                                // if cent amount is greater than balance, print error toast message
+                                if (withdrawState.centAmount! >
+                                    ref
+                                        .watch(userInfoProvider.notifier)
+                                        .getAccountBalance(
+                                          withdrawState.accountNumber!,
+                                        )) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          "The amount must be less than balance"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
                                 // disable button
                                 provider.updateButtonLoading(true);
 
@@ -118,9 +134,12 @@ class WithdrawPage extends HookConsumerWidget {
                                 logger.d(
                                     "Account number: ${withdrawState.accountNumber}");
                                 logger.d("Amount: ${withdrawState.centAmount}");
-                                // wait for 1 seconds
-                                await Future.delayed(
-                                    const Duration(seconds: 1));
+
+                                // withdraw
+                                await provider.withdraw();
+
+                                // back to previous page
+                                Navigator.pop(context);
 
                                 provider.updateButtonLoading(false);
                               },
