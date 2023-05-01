@@ -73,16 +73,12 @@ class OpenAccountPage extends HookConsumerWidget {
                 onPressed: openAccountItems.buttonLoading
                     ? null
                     : () async {
-                        // isLoading
-                        provider.updateButtonStatus(true);
-
                         logger
                             .d("Account Type: ${openAccountItems.accountType}");
                         // wait 3 seconds
-                        await Future.delayed(const Duration(seconds: 2));
-
-                        // stop loading
-                        provider.updateButtonStatus(false);
+                        await provider.onSubmit();
+                        // back to previous page
+                        Navigator.pop(context);
                       },
                 child: Text(openAccountItems.openAccountButtonTxt),
               ),

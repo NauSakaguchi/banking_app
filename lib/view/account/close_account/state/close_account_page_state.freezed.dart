@@ -16,10 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CloseAccountPageState {
-  String get accountNumber => throw _privateConstructorUsedError;
+  String? get accountNumber => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get closeAccountButtonTxt => throw _privateConstructorUsedError;
+  bool get initialized => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CloseAccountPageStateCopyWith<CloseAccountPageState> get copyWith =>
@@ -33,10 +34,11 @@ abstract class $CloseAccountPageStateCopyWith<$Res> {
       _$CloseAccountPageStateCopyWithImpl<$Res, CloseAccountPageState>;
   @useResult
   $Res call(
-      {String accountNumber,
+      {String? accountNumber,
       String password,
       bool buttonLoading,
-      String closeAccountButtonTxt});
+      String closeAccountButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -53,16 +55,17 @@ class _$CloseAccountPageStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = null,
+    Object? accountNumber = freezed,
     Object? password = null,
     Object? buttonLoading = null,
     Object? closeAccountButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_value.copyWith(
-      accountNumber: null == accountNumber
+      accountNumber: freezed == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -75,6 +78,10 @@ class _$CloseAccountPageStateCopyWithImpl<$Res,
           ? _value.closeAccountButtonTxt
           : closeAccountButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -88,10 +95,11 @@ abstract class _$$_CloseAccountPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String accountNumber,
+      {String? accountNumber,
       String password,
       bool buttonLoading,
-      String closeAccountButtonTxt});
+      String closeAccountButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -105,16 +113,17 @@ class __$$_CloseAccountPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = null,
+    Object? accountNumber = freezed,
     Object? password = null,
     Object? buttonLoading = null,
     Object? closeAccountButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_$_CloseAccountPageState(
-      accountNumber: null == accountNumber
+      accountNumber: freezed == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -127,6 +136,10 @@ class __$$_CloseAccountPageStateCopyWithImpl<$Res>
           ? _value.closeAccountButtonTxt
           : closeAccountButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -135,13 +148,14 @@ class __$$_CloseAccountPageStateCopyWithImpl<$Res>
 
 class _$_CloseAccountPageState implements _CloseAccountPageState {
   const _$_CloseAccountPageState(
-      {required this.accountNumber,
+      {this.accountNumber,
       this.password = 'password',
       this.buttonLoading = false,
-      this.closeAccountButtonTxt = 'Close Account'});
+      this.closeAccountButtonTxt = 'Close Account',
+      this.initialized = false});
 
   @override
-  final String accountNumber;
+  final String? accountNumber;
   @override
   @JsonKey()
   final String password;
@@ -151,10 +165,13 @@ class _$_CloseAccountPageState implements _CloseAccountPageState {
   @override
   @JsonKey()
   final String closeAccountButtonTxt;
+  @override
+  @JsonKey()
+  final bool initialized;
 
   @override
   String toString() {
-    return 'CloseAccountPageState(accountNumber: $accountNumber, password: $password, buttonLoading: $buttonLoading, closeAccountButtonTxt: $closeAccountButtonTxt)';
+    return 'CloseAccountPageState(accountNumber: $accountNumber, password: $password, buttonLoading: $buttonLoading, closeAccountButtonTxt: $closeAccountButtonTxt, initialized: $initialized)';
   }
 
   @override
@@ -169,12 +186,14 @@ class _$_CloseAccountPageState implements _CloseAccountPageState {
             (identical(other.buttonLoading, buttonLoading) ||
                 other.buttonLoading == buttonLoading) &&
             (identical(other.closeAccountButtonTxt, closeAccountButtonTxt) ||
-                other.closeAccountButtonTxt == closeAccountButtonTxt));
+                other.closeAccountButtonTxt == closeAccountButtonTxt) &&
+            (identical(other.initialized, initialized) ||
+                other.initialized == initialized));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, accountNumber, password,
-      buttonLoading, closeAccountButtonTxt);
+      buttonLoading, closeAccountButtonTxt, initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -186,19 +205,22 @@ class _$_CloseAccountPageState implements _CloseAccountPageState {
 
 abstract class _CloseAccountPageState implements CloseAccountPageState {
   const factory _CloseAccountPageState(
-      {required final String accountNumber,
+      {final String? accountNumber,
       final String password,
       final bool buttonLoading,
-      final String closeAccountButtonTxt}) = _$_CloseAccountPageState;
+      final String closeAccountButtonTxt,
+      final bool initialized}) = _$_CloseAccountPageState;
 
   @override
-  String get accountNumber;
+  String? get accountNumber;
   @override
   String get password;
   @override
   bool get buttonLoading;
   @override
   String get closeAccountButtonTxt;
+  @override
+  bool get initialized;
   @override
   @JsonKey(ignore: true)
   _$$_CloseAccountPageStateCopyWith<_$_CloseAccountPageState> get copyWith =>

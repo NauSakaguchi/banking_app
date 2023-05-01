@@ -1,8 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:banking_app/constant/route/route_path.dart';
+import 'package:banking_app/core/ui_core/cent_balance_formatter.dart';
 import 'package:banking_app/main.dart';
+import 'package:banking_app/model/account/account.dart';
+import 'package:banking_app/view/account/state/account_page_provider.dart';
+import 'package:banking_app/view/route/app_route.gr.dart';
+import 'package:banking_app/view_model/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class AccountDetailItem {
   final String title;
@@ -14,23 +21,21 @@ class AccountDetailItem {
   });
 }
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends ConsumerWidget {
   const AccountPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    //dummy data
-    List<AccountDetailItem> accountDetailItems = [
-      AccountDetailItem(title: "User Name", value: "John Doe"),
-      AccountDetailItem(title: "Account number", value: "123456789"),
-      AccountDetailItem(title: "Routing number", value: "987654321"),
-      AccountDetailItem(title: "Last statement date", value: "Apr 10, 2023"),
-    ];
-    final String user_name = "John Doe";
-    final double deposit = 10000;
+  Widget build(BuildContext context, WidgetRef ref) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     const double padding = 20;
     final double screenWidth = MediaQuery.of(context).size.width;
+
+    final userState = ref.watch(userInfoProvider);
+    final accounts =
+        ref.watch(userInfoProvider.select((value) => value.accounts));
+    final initialized =
+        ref.watch(accountItemsProvider.select((value) => value.initialized));
+    final provider = ref.watch(accountItemsProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -47,93 +52,133 @@ class AccountPage extends StatelessWidget {
         ],
       ),
       backgroundColor: colorScheme.background,
-      body: Padding(
-          padding: const EdgeInsets.only(
-            left: padding,
-            right: padding,
-            top: padding,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    "$user_name's Account",
-                    style: const TextStyle(
-                        fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
+      body: initialized
+          ? LoaderOverlay(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: padding,
+                  right: padding,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: colorScheme.surface,
-                    border: Border.all(color: colorScheme.onPrimaryContainer),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.all(15),
+                child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "\$$deposit",
-                            style: const TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                        ],
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          "Menu",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      MenuWidget(
+                        width: screenWidth - padding * 2,
+                        colorScheme: colorScheme,
+                        renewState:
+                            ref.read(userInfoProvider.notifier).fetchUser,
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
-                              "Account details",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          "${userState.firstName} ${userState.lastName}'s Accounts",
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
                         ),
                       ),
-
-                      // map AccountDetailItem to Row Widget
-                      for (final item in accountDetailItems) ...{
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(item.title),
-                            Text(
-                              item.value,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                      for (var account in accounts) ...{
+                        _buildAccountItem(
+                          context,
+                          colorScheme: colorScheme,
+                          account: account,
                         ),
-                        const Divider(),
-                      },
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      }
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    "Menu",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
+              ),
+            )
+          : const Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget _buildAccountItem(
+    BuildContext context, {
+    required ColorScheme colorScheme,
+    required Account account,
+  }) {
+    final _accountDetailItems = [
+      AccountDetailItem(title: "Account number", value: account.accountNumber),
+      AccountDetailItem(title: "Routing number", value: account.routingNumber),
+      AccountDetailItem(title: "Account type", value: account.accountType),
+    ];
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        border: Border.all(color: colorScheme.onPrimaryContainer),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                CentBalanceFormatter.toDollarString(account.centBalance),
+                style: const TextStyle(
+                  fontSize: 30,
                 ),
-                MenuWidget(
-                    width: screenWidth - padding * 2, colorScheme: colorScheme),
-                const SizedBox(
-                  height: 40,
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Account details",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
-          )),
+          ),
+
+          // map AccountDetailItem to Row Widget
+          for (final item in _accountDetailItems) ...{
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(item.title),
+                Text(
+                  item.value,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const Divider(),
+          },
+
+          // to transaction page
+          OutlinedButton(
+            onPressed: () {
+              context.router.push(
+                TransactionHistoryRoute(accountNumber: account.accountNumber),
+              );
+            },
+            child: const Text("See all transactions"),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -142,10 +187,12 @@ class MenuWidget extends StatelessWidget {
   final double width;
   final double itemCount = 4;
   final ColorScheme colorScheme;
+  final Future<void> Function() renewState;
   const MenuWidget({
     Key? key,
     required this.width,
     required this.colorScheme,
+    required this.renewState,
   }) : super(key: key);
 
   @override
@@ -166,41 +213,49 @@ class MenuWidget extends StatelessWidget {
             icon: Icons.currency_exchange_outlined,
             title: "Transfer\n",
             path: RoutePath.transferRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.payments_outlined,
             title: "Check\nDeposit",
             path: RoutePath.checkDepositRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.account_balance_wallet_outlined,
             title: "Open\nAccount",
             path: RoutePath.openAccountRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.person_off_outlined,
             title: "Close\nAccount",
             path: RoutePath.closeAccountRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.payment_outlined,
             title: "Payment\n",
             path: RoutePath.paymentRoute,
+            renewState: renewState,
+          ),
+          _buildMenuItem(
+            context,
+            icon: Icons.account_balance_outlined,
+            title: "Withdraw\n",
+            path: RoutePath.withdrawRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.info_outline,
             title: "Information\n",
             path: RoutePath.informationRoute,
-          ),
-          // dummy item
-          SizedBox(
-            width: width / itemCount - 1,
-            height: width / itemCount - 1,
+            renewState: renewState,
           ),
           // dummy item
           SizedBox(
@@ -217,6 +272,7 @@ class MenuWidget extends StatelessWidget {
     required IconData icon,
     required String title,
     required String path,
+    required Future<void> Function() renewState,
   }) {
     double itemWidth = width / itemCount - 1;
     return MaterialButton(
@@ -226,9 +282,11 @@ class MenuWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       minWidth: 0,
-      onPressed: () {
+      onPressed: () async {
         logger.d("path: $path");
-        context.router.pushNamed(path);
+        context.loaderOverlay.show();
+        await context.router.pushNamed(path);
+        renewState().then((_) => context.loaderOverlay.hide());
       },
       child: Container(
         // color: Colors.red,

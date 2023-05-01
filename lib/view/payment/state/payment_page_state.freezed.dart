@@ -16,13 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PaymentPageState {
-  String get fromAccountNumber => throw _privateConstructorUsedError;
+  String? get fromAccountNumber => throw _privateConstructorUsedError;
   String get toAccountNumber => throw _privateConstructorUsedError;
   String get toRoutingNumber => throw _privateConstructorUsedError;
   int? get centAmount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get payButtonTxt => throw _privateConstructorUsedError;
+  bool get initialized => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentPageStateCopyWith<PaymentPageState> get copyWith =>
@@ -36,13 +37,14 @@ abstract class $PaymentPageStateCopyWith<$Res> {
       _$PaymentPageStateCopyWithImpl<$Res, PaymentPageState>;
   @useResult
   $Res call(
-      {String fromAccountNumber,
+      {String? fromAccountNumber,
       String toAccountNumber,
       String toRoutingNumber,
       int? centAmount,
       String description,
       bool buttonLoading,
-      String payButtonTxt});
+      String payButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -58,19 +60,20 @@ class _$PaymentPageStateCopyWithImpl<$Res, $Val extends PaymentPageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fromAccountNumber = null,
+    Object? fromAccountNumber = freezed,
     Object? toAccountNumber = null,
     Object? toRoutingNumber = null,
     Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? payButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_value.copyWith(
-      fromAccountNumber: null == fromAccountNumber
+      fromAccountNumber: freezed == fromAccountNumber
           ? _value.fromAccountNumber
           : fromAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       toAccountNumber: null == toAccountNumber
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
@@ -95,6 +98,10 @@ class _$PaymentPageStateCopyWithImpl<$Res, $Val extends PaymentPageState>
           ? _value.payButtonTxt
           : payButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -108,13 +115,14 @@ abstract class _$$_PaymentPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String fromAccountNumber,
+      {String? fromAccountNumber,
       String toAccountNumber,
       String toRoutingNumber,
       int? centAmount,
       String description,
       bool buttonLoading,
-      String payButtonTxt});
+      String payButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -128,19 +136,20 @@ class __$$_PaymentPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fromAccountNumber = null,
+    Object? fromAccountNumber = freezed,
     Object? toAccountNumber = null,
     Object? toRoutingNumber = null,
     Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? payButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_$_PaymentPageState(
-      fromAccountNumber: null == fromAccountNumber
+      fromAccountNumber: freezed == fromAccountNumber
           ? _value.fromAccountNumber
           : fromAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       toAccountNumber: null == toAccountNumber
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
@@ -165,6 +174,10 @@ class __$$_PaymentPageStateCopyWithImpl<$Res>
           ? _value.payButtonTxt
           : payButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -173,16 +186,17 @@ class __$$_PaymentPageStateCopyWithImpl<$Res>
 
 class _$_PaymentPageState implements _PaymentPageState {
   const _$_PaymentPageState(
-      {required this.fromAccountNumber,
+      {this.fromAccountNumber,
       this.toAccountNumber = '',
       this.toRoutingNumber = '',
       this.centAmount,
       this.description = '',
       this.buttonLoading = false,
-      this.payButtonTxt = 'Make Payment'});
+      this.payButtonTxt = 'Make Payment',
+      this.initialized = false});
 
   @override
-  final String fromAccountNumber;
+  final String? fromAccountNumber;
   @override
   @JsonKey()
   final String toAccountNumber;
@@ -200,10 +214,13 @@ class _$_PaymentPageState implements _PaymentPageState {
   @override
   @JsonKey()
   final String payButtonTxt;
+  @override
+  @JsonKey()
+  final bool initialized;
 
   @override
   String toString() {
-    return 'PaymentPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, toRoutingNumber: $toRoutingNumber, centAmount: $centAmount, description: $description, buttonLoading: $buttonLoading, payButtonTxt: $payButtonTxt)';
+    return 'PaymentPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, toRoutingNumber: $toRoutingNumber, centAmount: $centAmount, description: $description, buttonLoading: $buttonLoading, payButtonTxt: $payButtonTxt, initialized: $initialized)';
   }
 
   @override
@@ -224,7 +241,9 @@ class _$_PaymentPageState implements _PaymentPageState {
             (identical(other.buttonLoading, buttonLoading) ||
                 other.buttonLoading == buttonLoading) &&
             (identical(other.payButtonTxt, payButtonTxt) ||
-                other.payButtonTxt == payButtonTxt));
+                other.payButtonTxt == payButtonTxt) &&
+            (identical(other.initialized, initialized) ||
+                other.initialized == initialized));
   }
 
   @override
@@ -236,7 +255,8 @@ class _$_PaymentPageState implements _PaymentPageState {
       centAmount,
       description,
       buttonLoading,
-      payButtonTxt);
+      payButtonTxt,
+      initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -247,16 +267,17 @@ class _$_PaymentPageState implements _PaymentPageState {
 
 abstract class _PaymentPageState implements PaymentPageState {
   const factory _PaymentPageState(
-      {required final String fromAccountNumber,
+      {final String? fromAccountNumber,
       final String toAccountNumber,
       final String toRoutingNumber,
       final int? centAmount,
       final String description,
       final bool buttonLoading,
-      final String payButtonTxt}) = _$_PaymentPageState;
+      final String payButtonTxt,
+      final bool initialized}) = _$_PaymentPageState;
 
   @override
-  String get fromAccountNumber;
+  String? get fromAccountNumber;
   @override
   String get toAccountNumber;
   @override
@@ -269,6 +290,8 @@ abstract class _PaymentPageState implements PaymentPageState {
   bool get buttonLoading;
   @override
   String get payButtonTxt;
+  @override
+  bool get initialized;
   @override
   @JsonKey(ignore: true)
   _$$_PaymentPageStateCopyWith<_$_PaymentPageState> get copyWith =>

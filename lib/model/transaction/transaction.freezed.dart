@@ -24,9 +24,10 @@ mixin _$Transaction {
   String? get targetId => throw _privateConstructorUsedError;
   String? get accountNumber => throw _privateConstructorUsedError;
   String? get routingNumber => throw _privateConstructorUsedError;
-  String? get amount => throw _privateConstructorUsedError;
-  String? get date => throw _privateConstructorUsedError;
+  int? get centAmount => throw _privateConstructorUsedError;
+  String? get timestamp => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String get transactionType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,9 +46,10 @@ abstract class $TransactionCopyWith<$Res> {
       String? targetId,
       String? accountNumber,
       String? routingNumber,
-      String? amount,
-      String? date,
-      String? description});
+      int? centAmount,
+      String? timestamp,
+      String? description,
+      String transactionType});
 }
 
 /// @nodoc
@@ -67,9 +69,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? targetId = freezed,
     Object? accountNumber = freezed,
     Object? routingNumber = freezed,
-    Object? amount = freezed,
-    Object? date = freezed,
+    Object? centAmount = freezed,
+    Object? timestamp = freezed,
     Object? description = freezed,
+    Object? transactionType = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -88,18 +91,22 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      centAmount: freezed == centAmount
+          ? _value.centAmount
+          : centAmount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      transactionType: null == transactionType
+          ? _value.transactionType
+          : transactionType // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -117,9 +124,10 @@ abstract class _$$_TransactionCopyWith<$Res>
       String? targetId,
       String? accountNumber,
       String? routingNumber,
-      String? amount,
-      String? date,
-      String? description});
+      int? centAmount,
+      String? timestamp,
+      String? description,
+      String transactionType});
 }
 
 /// @nodoc
@@ -137,9 +145,10 @@ class __$$_TransactionCopyWithImpl<$Res>
     Object? targetId = freezed,
     Object? accountNumber = freezed,
     Object? routingNumber = freezed,
-    Object? amount = freezed,
-    Object? date = freezed,
+    Object? centAmount = freezed,
+    Object? timestamp = freezed,
     Object? description = freezed,
+    Object? transactionType = null,
   }) {
     return _then(_$_Transaction(
       id: freezed == id
@@ -158,18 +167,22 @@ class __$$_TransactionCopyWithImpl<$Res>
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as String?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      centAmount: freezed == centAmount
+          ? _value.centAmount
+          : centAmount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      transactionType: null == transactionType
+          ? _value.transactionType
+          : transactionType // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -182,9 +195,10 @@ class _$_Transaction extends _Transaction {
       this.targetId,
       this.accountNumber,
       this.routingNumber,
-      this.amount,
-      this.date,
-      this.description})
+      this.centAmount,
+      this.timestamp,
+      this.description,
+      this.transactionType = ""})
       : super._();
 
   factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
@@ -199,15 +213,18 @@ class _$_Transaction extends _Transaction {
   @override
   final String? routingNumber;
   @override
-  final String? amount;
+  final int? centAmount;
   @override
-  final String? date;
+  final String? timestamp;
   @override
   final String? description;
+  @override
+  @JsonKey()
+  final String transactionType;
 
   @override
   String toString() {
-    return 'Transaction(id: $id, targetId: $targetId, accountNumber: $accountNumber, routingNumber: $routingNumber, amount: $amount, date: $date, description: $description)';
+    return 'Transaction(id: $id, targetId: $targetId, accountNumber: $accountNumber, routingNumber: $routingNumber, centAmount: $centAmount, timestamp: $timestamp, description: $description, transactionType: $transactionType)';
   }
 
   @override
@@ -222,16 +239,20 @@ class _$_Transaction extends _Transaction {
                 other.accountNumber == accountNumber) &&
             (identical(other.routingNumber, routingNumber) ||
                 other.routingNumber == routingNumber) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.centAmount, centAmount) ||
+                other.centAmount == centAmount) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.transactionType, transactionType) ||
+                other.transactionType == transactionType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, targetId, accountNumber,
-      routingNumber, amount, date, description);
+      routingNumber, centAmount, timestamp, description, transactionType);
 
   @JsonKey(ignore: true)
   @override
@@ -253,9 +274,10 @@ abstract class _Transaction extends Transaction {
       final String? targetId,
       final String? accountNumber,
       final String? routingNumber,
-      final String? amount,
-      final String? date,
-      final String? description}) = _$_Transaction;
+      final int? centAmount,
+      final String? timestamp,
+      final String? description,
+      final String transactionType}) = _$_Transaction;
   const _Transaction._() : super._();
 
   factory _Transaction.fromJson(Map<String, dynamic> json) =
@@ -270,11 +292,13 @@ abstract class _Transaction extends Transaction {
   @override
   String? get routingNumber;
   @override
-  String? get amount;
+  int? get centAmount;
   @override
-  String? get date;
+  String? get timestamp;
   @override
   String? get description;
+  @override
+  String get transactionType;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionCopyWith<_$_Transaction> get copyWith =>

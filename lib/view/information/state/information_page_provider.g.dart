@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$InformationItemsHash() => r'494d48e68ca15b9172ecff176f314c84e7cd78cf';
+String _$InformationItemsHash() => r'e090906e34d3801ef2ca702ef4aa9873d0c013de';
 
 /// See also [InformationItems].
 final informationItemsProvider =

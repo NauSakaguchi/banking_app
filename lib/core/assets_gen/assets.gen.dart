@@ -23,10 +23,21 @@ class $AssetsImgGen {
   List<AssetGenImage> get values => [bankLogo, flutterIcon];
 }
 
+class $AssetsJsonsGen {
+  const $AssetsJsonsGen();
+
+  /// File path: assets/jsons/google_map_style.json
+  String get googleMapStyle => 'assets/jsons/google_map_style.json';
+
+  /// List of all assets
+  List<String> get values => [googleMapStyle];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsImgGen img = $AssetsImgGen();
+  static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
 }
 
 class AssetGenImage {

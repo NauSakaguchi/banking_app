@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String _$TransferPageStateNotifierHash() =>
-    r'79d3f814b5dfe032599f556d3cbd5adc60cd91b8';
+    r'faf4937be5afda7f3d8d611242ad2a1c1531568d';
 
 /// See also [TransferPageStateNotifier].
 final transferPageStateNotifierProvider =

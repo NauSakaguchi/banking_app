@@ -18,11 +18,11 @@ class AccountInfo extends _$AccountInfo {
     state = state.copyWith(routingNumber: routingNumber);
   }
 
-  void updateAccountType(AccountType accountType) {
+  void updateAccountType(String accountType) {
     state = state.copyWith(accountType: accountType);
   }
 
-  void updateBalance(String balance) {
-    state = state.copyWith(balance: balance);
+  void updateBalance(int balance) {
+    state = state.copyWith(centBalance: balance);
   }
 }

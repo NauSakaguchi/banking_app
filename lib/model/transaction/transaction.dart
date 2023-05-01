@@ -10,14 +10,38 @@ class Transaction with _$Transaction {
     String? targetId,
     String? accountNumber,
     String? routingNumber,
-    String? amount,
-    String? date,
+    int? centAmount,
+    String? timestamp,
     String? description,
-    // TransactionType? transactionType,
+    @Default("") String transactionType,
   }) = _Transaction;
 
   const Transaction._();
 
   factory Transaction.fromJson(Map<String, dynamic> json) =>
       _$TransactionFromJson(json);
+}
+
+enum TransactionType {
+  @JsonValue('deposit')
+  deposit,
+  @JsonValue('withdrawal')
+  withdrawal,
+  @JsonValue('transfer')
+  transfer,
+}
+
+extension ParseToString on TransactionType {
+  String toDisplayString() {
+    switch (this) {
+      case TransactionType.deposit:
+        return "Deposit";
+      case TransactionType.withdrawal:
+        return "Withdrawal";
+      case TransactionType.transfer:
+        return "Transfer";
+      default:
+        return "";
+    }
+  }
 }

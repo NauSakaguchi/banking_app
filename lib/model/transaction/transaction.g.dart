@@ -12,9 +12,10 @@ _$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
       targetId: json['targetId'] as String?,
       accountNumber: json['accountNumber'] as String?,
       routingNumber: json['routingNumber'] as String?,
-      amount: json['amount'] as String?,
-      date: json['date'] as String?,
+      centAmount: json['centAmount'] as int?,
+      timestamp: json['timestamp'] as String?,
       description: json['description'] as String?,
+      transactionType: json['transactionType'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
@@ -23,7 +24,8 @@ Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
       'targetId': instance.targetId,
       'accountNumber': instance.accountNumber,
       'routingNumber': instance.routingNumber,
-      'amount': instance.amount,
-      'date': instance.date,
+      'centAmount': instance.centAmount,
+      'timestamp': instance.timestamp,
       'description': instance.description,
+      'transactionType': instance.transactionType,
     };

@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$CloseAccountItemsHash() => r'79cc3ed36b0f795c84503a38eaf1ca9f5fa0fc0a';
+String _$CloseAccountItemsHash() => r'd2122c371519e3d0f120232583f045def43e037e';
 
 /// See also [CloseAccountItems].
 final closeAccountItemsProvider =

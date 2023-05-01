@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:banking_app/core/firebase/auth.dart';
+import 'package:banking_app/infrastructure/netbank_api/netbank_api.dart';
+import 'package:banking_app/main.dart';
 import 'package:banking_app/view_model/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,8 +14,17 @@ part 'check_deposit_provider.g.dart';
 class CheckDepositItems extends _$CheckDepositItems {
   @override
   CheckDepositPageState build() {
-    final num = ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
-    return CheckDepositPageState(toAccountNumber: num);
+    ref.read(userInfoProvider.notifier).fetchAccounts().then((_) {
+      final String num =
+          ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+      updateToAccountNumber(num);
+      updateInitialized(true);
+    });
+    return const CheckDepositPageState();
+  }
+
+  void updateInitialized(bool initialized) {
+    state = state.copyWith(initialized: initialized);
   }
 
   void updateToAccountNumber(String str) {
@@ -63,5 +75,32 @@ class CheckDepositItems extends _$CheckDepositItems {
         depositButtonTxt: 'Deposit',
       );
     }
+  }
+
+  Future<void> submitCheckDeposit() async {
+    final idToken = ref.watch(authProvider).idToken;
+    if (idToken == null) {
+      logger.e('idToken is null');
+      // throw exception
+      throw Exception('idToken is null');
+    }
+
+    final String fromAccountNumber = state.fromAccountNumber;
+    final String fromRoutingNumber = state.routingNumber;
+    final String toAccountNumber = state.toAccountNumber!;
+    final String toRoutingNumber =
+        ref.watch(userInfoProvider).accounts[0].routingNumber;
+    const String description = "check deposit";
+    final double dollarAmount = state.checkAmount!.toDouble() / 100.0;
+
+    await NetBankApi.transferMethod(
+      idToken,
+      fromAccountNumber,
+      fromRoutingNumber,
+      toAccountNumber,
+      toRoutingNumber,
+      dollarAmount,
+      description,
+    );
   }
 }

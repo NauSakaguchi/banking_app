@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:banking_app/constant/route/route_path.dart';
 import 'package:banking_app/constant/string/globar_string.dart';
 import 'package:banking_app/constant/string/login_string.dart';
+import 'package:banking_app/core/firebase/auth.dart';
 import 'package:banking_app/core/hooks/useFlutterToast.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/login/state/login_page_provider.dart';
@@ -93,7 +94,11 @@ class LoginPage extends HookConsumerWidget {
                     logger.d('Username: ${loginItems.username}');
                     logger.d('Password: ${loginItems.password}');
 
-                    final String? errorMessage = await notifier.auth();
+                    final String? errorMessage =
+                        await ref.read(authProvider.notifier).singIn(
+                              username: loginItems.username,
+                              password: loginItems.password,
+                            );
                     notifier.updateButtonStatus(false, colorScheme);
                     if (errorMessage == null) {
                       context.router.pushNamed(RoutePath.topRoute);

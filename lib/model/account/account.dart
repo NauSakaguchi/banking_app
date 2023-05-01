@@ -7,9 +7,9 @@ part 'account.g.dart';
 class Account with _$Account {
   const factory Account({
     @Default("") String accountNumber,
-    String? routingNumber,
-    AccountType? accountType,
-    String? balance,
+    @Default("") routingNumber,
+    @Default("Saving") String accountType,
+    int? centBalance,
   }) = _Account;
 
   const Account._();
@@ -23,4 +23,17 @@ enum AccountType {
   saving,
   @JsonValue('checking')
   checking,
+}
+
+extension ParseToString on AccountType {
+  String toDisplayString() {
+    switch (this) {
+      case AccountType.saving:
+        return "Saving";
+      case AccountType.checking:
+        return "Checking";
+      default:
+        return "";
+    }
+  }
 }

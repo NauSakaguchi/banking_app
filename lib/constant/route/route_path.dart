@@ -10,4 +10,5 @@ class RoutePath {
   static const transactionHistoryRoute = '$topRoute/transaction';
   static const paymentRoute = '$topRoute/payment';
   static const informationRoute = '$topRoute/information';
+  static const withdrawRoute = '$topRoute/withdraw';
 }
