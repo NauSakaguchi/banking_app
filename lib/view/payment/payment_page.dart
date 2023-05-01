@@ -148,6 +148,22 @@ class PaymentPage extends HookConsumerWidget {
                                   return;
                                 }
 
+                                // if cent amount is greater than balance, print error toast message
+                                if (paymentPageItems.centAmount! >
+                                    ref
+                                        .watch(userInfoProvider.notifier)
+                                        .getAccountBalance(paymentPageItems
+                                                .fromAccountNumber ??
+                                            "")) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          "Amount must be less than balance"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
                                 // if all the fields are filled, show confirmation dialog
                                 showDialog(
                                     context: context,
@@ -202,9 +218,9 @@ class PaymentPage extends HookConsumerWidget {
                                               logger.d(
                                                   "memo: ${paymentPageItems.description}");
 
-                                              // wait for 2 sec
-                                              await Future.delayed(
-                                                  const Duration(seconds: 2));
+                                              await provider.makePayment();
+                                              // back to the previous page
+                                              Navigator.pop(context);
                                               provider
                                                   .updateButtonStatus(false);
                                             },

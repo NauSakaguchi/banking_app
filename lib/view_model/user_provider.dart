@@ -26,6 +26,13 @@ class UserInfo extends _$UserInfo {
     return numbers;
   }
 
+  int getAccountBalance(String accountNumber) {
+    final account = state.accounts.firstWhere(
+      (element) => element.accountNumber == accountNumber,
+    );
+    return account.centBalance ?? 0;
+  }
+
   Future<void> fetchUser() async {
     final authState = ref.watch(authProvider);
     if (authState.idToken == null) {
