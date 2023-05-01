@@ -22,7 +22,7 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
 mixin _$Account {
   String get accountNumber => throw _privateConstructorUsedError;
   dynamic get routingNumber => throw _privateConstructorUsedError;
-  AccountType get accountType => throw _privateConstructorUsedError;
+  String get accountType => throw _privateConstructorUsedError;
   int? get centBalance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $AccountCopyWith<$Res> {
   $Res call(
       {String accountNumber,
       dynamic routingNumber,
-      AccountType accountType,
+      String accountType,
       int? centBalance});
 }
 
@@ -72,7 +72,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
       accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
-              as AccountType,
+              as String,
       centBalance: freezed == centBalance
           ? _value.centBalance
           : centBalance // ignore: cast_nullable_to_non_nullable
@@ -91,7 +91,7 @@ abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
   $Res call(
       {String accountNumber,
       dynamic routingNumber,
-      AccountType accountType,
+      String accountType,
       int? centBalance});
 }
 
@@ -120,7 +120,7 @@ class __$$_AccountCopyWithImpl<$Res>
       accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
-              as AccountType,
+              as String,
       centBalance: freezed == centBalance
           ? _value.centBalance
           : centBalance // ignore: cast_nullable_to_non_nullable
@@ -135,7 +135,7 @@ class _$_Account extends _Account {
   const _$_Account(
       {this.accountNumber = "",
       this.routingNumber = "",
-      this.accountType = AccountType.saving,
+      this.accountType = "Saving",
       this.centBalance})
       : super._();
 
@@ -150,7 +150,7 @@ class _$_Account extends _Account {
   final dynamic routingNumber;
   @override
   @JsonKey()
-  final AccountType accountType;
+  final String accountType;
   @override
   final int? centBalance;
 
@@ -201,7 +201,7 @@ abstract class _Account extends Account {
   const factory _Account(
       {final String accountNumber,
       final dynamic routingNumber,
-      final AccountType accountType,
+      final String accountType,
       final int? centBalance}) = _$_Account;
   const _Account._() : super._();
 
@@ -212,7 +212,7 @@ abstract class _Account extends Account {
   @override
   dynamic get routingNumber;
   @override
-  AccountType get accountType;
+  String get accountType;
   @override
   int? get centBalance;
   @override

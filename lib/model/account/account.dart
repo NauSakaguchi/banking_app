@@ -8,7 +8,7 @@ class Account with _$Account {
   const factory Account({
     @Default("") String accountNumber,
     @Default("") routingNumber,
-    @Default(AccountType.saving) AccountType accountType,
+    @Default("Saving") String accountType,
     int? centBalance,
   }) = _Account;
 

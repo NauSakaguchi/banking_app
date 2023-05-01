@@ -115,8 +115,7 @@ class AccountPage extends ConsumerWidget {
     final _accountDetailItems = [
       AccountDetailItem(title: "Account number", value: account.accountNumber),
       AccountDetailItem(title: "Routing number", value: account.routingNumber),
-      AccountDetailItem(
-          title: "Account type", value: account.accountType.toDisplayString()),
+      AccountDetailItem(title: "Account type", value: account.accountType),
     ];
     return Container(
       decoration: BoxDecoration(

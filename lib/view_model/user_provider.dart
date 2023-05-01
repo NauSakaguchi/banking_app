@@ -91,7 +91,7 @@ class UserInfo extends _$UserInfo {
           Account(
             accountNumber: item['number'],
             routingNumber: item['routingNumber'],
-            accountType: AccountType.checking,
+            accountType: item['type'] ?? AccountType.checking.toDisplayString(),
             centBalance: (item['balance'] * 100).toInt(),
           ),
         );
