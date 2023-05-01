@@ -7,8 +7,8 @@ part 'transaction_page_provider.g.dart';
 @riverpod
 class TransactionItems extends _$TransactionItems {
   @override
-  TransactionPageState build() {
-    updateTransactions("accountNumber").then((value) {
+  TransactionPageState build(String accountNumber) {
+    updateTransactions(accountNumber).then((value) {
       updateInitialized(true);
     });
     return const TransactionPageState();

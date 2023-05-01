@@ -29,22 +29,91 @@ class _SystemHash {
   }
 }
 
-String _$TransactionItemsHash() => r'90c9ab090bd49fe1aa47314c1a4b2db6a9b3c4a6';
+String _$TransactionItemsHash() => r'cb06d556ff7be917a80b5758e3c66f6d33fbf123';
 
 /// See also [TransactionItems].
-final transactionItemsProvider =
-    AutoDisposeNotifierProvider<TransactionItems, TransactionPageState>(
-  TransactionItems.new,
-  name: r'transactionItemsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$TransactionItemsHash,
-);
+class TransactionItemsProvider extends AutoDisposeNotifierProviderImpl<
+    TransactionItems, TransactionPageState> {
+  TransactionItemsProvider(
+    this.accountNumber,
+  ) : super(
+          () => TransactionItems()..accountNumber = accountNumber,
+          from: transactionItemsProvider,
+          name: r'transactionItemsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$TransactionItemsHash,
+        );
+
+  final String accountNumber;
+
+  @override
+  bool operator ==(Object other) {
+    return other is TransactionItemsProvider &&
+        other.accountNumber == accountNumber;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, accountNumber.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+
+  @override
+  TransactionPageState runNotifierBuild(
+    covariant _$TransactionItems notifier,
+  ) {
+    return notifier.build(
+      accountNumber,
+    );
+  }
+}
+
 typedef TransactionItemsRef
     = AutoDisposeNotifierProviderRef<TransactionPageState>;
 
-abstract class _$TransactionItems
-    extends AutoDisposeNotifier<TransactionPageState> {
+/// See also [TransactionItems].
+final transactionItemsProvider = TransactionItemsFamily();
+
+class TransactionItemsFamily extends Family<TransactionPageState> {
+  TransactionItemsFamily();
+
+  TransactionItemsProvider call(
+    String accountNumber,
+  ) {
+    return TransactionItemsProvider(
+      accountNumber,
+    );
+  }
+
   @override
-  TransactionPageState build();
+  AutoDisposeNotifierProviderImpl<TransactionItems, TransactionPageState>
+      getProviderOverride(
+    covariant TransactionItemsProvider provider,
+  ) {
+    return call(
+      provider.accountNumber,
+    );
+  }
+
+  @override
+  List<ProviderOrFamily>? get allTransitiveDependencies => null;
+
+  @override
+  List<ProviderOrFamily>? get dependencies => null;
+
+  @override
+  String? get name => r'transactionItemsProvider';
+}
+
+abstract class _$TransactionItems
+    extends BuildlessAutoDisposeNotifier<TransactionPageState> {
+  late final String accountNumber;
+
+  TransactionPageState build(
+    String accountNumber,
+  );
 }

@@ -94,6 +94,8 @@ class UserInfo extends _$UserInfo {
   }
 
   Future<List<Transaction>> fetchTransactions(String accountNumber) async {
+    logger.d('accountNumber: $accountNumber');
+
     final authState = ref.watch(authProvider);
     if (authState.idToken == null) {
       logger.e('idToken is null');

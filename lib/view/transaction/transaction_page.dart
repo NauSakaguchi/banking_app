@@ -12,8 +12,10 @@ class TransactionHistoryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final transactionHistoryState = ref.watch(transactionItemsProvider);
-    final provider = ref.watch(transactionItemsProvider.notifier);
+    final transactionHistoryState =
+        ref.watch(transactionItemsProvider(accountNumber));
+    final provider =
+        ref.watch(transactionItemsProvider(accountNumber).notifier);
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: colorScheme.background,
