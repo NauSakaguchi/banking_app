@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:banking_app/core/tools/messages.dart';
+import 'package:banking_app/infrastructure/open_ai/messages.dart';
 import 'package:banking_app/main.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,4 +1,4 @@
-import 'package:banking_app/core/tools/oepn_ai.dart';
+import 'package:banking_app/infrastructure/open_ai/oepn_ai.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/model/chat_text/chat_text.dart';
 import 'package:banking_app/view/information/state/information_page_state.dart';

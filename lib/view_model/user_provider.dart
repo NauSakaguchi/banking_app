@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:banking_app/core/firebase/auth.dart';
+import 'package:banking_app/infrastructure/netbank_api/netbank_api.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/model/account/account.dart';
 import 'package:banking_app/model/transaction/transaction.dart';
@@ -27,27 +30,42 @@ class UserInfo extends _$UserInfo {
     final authState = ref.watch(authProvider);
     if (authState.idToken == null) {
       logger.e('idToken is null');
-      return;
+      // throw exception
+      throw Exception('idToken is null');
     }
-    // TODO: implement fetchUser with idToken
-    // wait 1 sec to get dummy user
-    await Future.delayed(const Duration(seconds: 1));
-    const User _user = User(
-      id: '1234567890',
-      firstName: 'John',
-      middleName: 'D',
-      lastName: 'Doe',
-      streetAddress: '123 Main St',
-      city: 'Anytown',
-      state: 'CA',
+
+    const endpoint = '/user';
+    final response = await NetBankApi.getHttp(
+      authState.idToken!,
+      endpoint: endpoint,
     );
-    logger.d('fetchUser success');
-    logger.d('user: $_user');
 
-    state = _user;
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      // String content = responseBody['choices'][0]['message']['content'];
+      logger.d('Content: $responseBody');
 
-    // TODO: implement fetchAccounts with idToken
-    await fetchAccounts();
+      User _user = User(
+        id: responseBody['uid'],
+        firstName: responseBody['firstName'],
+        middleName: responseBody['middleName'],
+        lastName: responseBody['lastName'],
+        streetAddress: responseBody['streetAddress'],
+        city: responseBody['city'],
+        state: responseBody['state'],
+      );
+      logger.d('fetchUser success');
+      logger.d('user: $_user');
+
+      state = _user;
+
+      // TODO: implement fetchAccounts with idToken
+      await fetchAccounts();
+    } else {
+      logger.e('Error: ${response.statusCode} ${response.reasonPhrase}');
+      // throw exception
+      throw Exception('Error: ${response.statusCode} ${response.reasonPhrase}');
+    }
   }
 
   Future<void> fetchAccounts() async {
