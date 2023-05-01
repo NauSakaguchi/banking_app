@@ -46,6 +46,7 @@ class Auth extends _$Auth {
     logger.d('Login Success');
     // get idToken
     final idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+    logger.d('idToken: $idToken');
     state = state.copyWith(email: username, idToken: idToken);
     return null;
   }
