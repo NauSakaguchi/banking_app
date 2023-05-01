@@ -39,4 +39,24 @@ class NetBankApi {
       body: jsonEncode(requestBody),
     );
   }
+
+  static Future<Response> deleteHttp(
+    String idToken, {
+    required String endpoint,
+    required Map<String, dynamic> requestBody,
+  }) async {
+    const apiUrl = 'http://localhost:8080/api';
+
+    logger.d(jsonEncode(requestBody));
+
+    return await http.delete(
+      Uri.parse(apiUrl + endpoint),
+      headers: {
+        'accept': '*/*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $idToken',
+      },
+      body: jsonEncode(requestBody),
+    );
+  }
 }

@@ -81,6 +81,7 @@ class CloseAccountPage extends HookConsumerWidget {
                                       password: closeAccountItems.password,
                                     );
                                 if (errorMessage == null) {
+                                  await provider.deleteAccount();
                                   toast.showInfoToast("Account closed");
                                   // back to the page
                                   Navigator.of(context).pop();
