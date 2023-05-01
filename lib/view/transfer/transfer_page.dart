@@ -189,9 +189,10 @@ class TransferPage extends HookConsumerWidget {
 
                                     logger.d("Transfer confirmed");
                                     // wait for 2 seconds
-                                    await Future.delayed(
-                                        const Duration(seconds: 2));
+                                    await notifier.transferMoney();
 
+                                    // back to the previous page
+                                    Navigator.pop(context);
                                     notifier.updateButtonStatus(false);
                                   } else {
                                     logger.d("Transfer cancelled");

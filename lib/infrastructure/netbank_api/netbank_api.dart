@@ -59,4 +59,42 @@ class NetBankApi {
       body: jsonEncode(requestBody),
     );
   }
+
+  static Future<void> transferMethod(
+      String idToken,
+      String fromAccountNumber,
+      String fromRoutingNumber,
+      String toAccountNumber,
+      String toRoutingNumber,
+      double dollarAmount,
+      String description) async {
+    const endpoint = '/processTransfer';
+    final response = await postHttp(
+      idToken,
+      endpoint: endpoint,
+      requestBody: {
+        "fromAccount": {
+          "number": fromAccountNumber,
+          "routingNumber": fromRoutingNumber,
+        },
+        "toAccount": {
+          "number": toAccountNumber,
+          "routingNumber": toRoutingNumber,
+        },
+        "amount": dollarAmount,
+        "description": description,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      // String content = responseBody['choices'][0]['message']['content'];
+      logger.d('Content: $responseBody');
+    } else {
+      logger.d(jsonDecode(response.body));
+      logger.e('Error: ${response.statusCode} ${response.reasonPhrase}');
+      // throw exception
+      throw Exception('Error: ${response.statusCode} ${response.reasonPhrase}');
+    }
+  }
 }
