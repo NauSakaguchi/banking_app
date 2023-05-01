@@ -3,11 +3,13 @@ import 'package:banking_app/constant/route/route_path.dart';
 import 'package:banking_app/core/ui_core/cent_balance_formatter.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/model/account/account.dart';
+import 'package:banking_app/view/account/state/account_page_provider.dart';
 import 'package:banking_app/view/route/app_route.gr.dart';
 import 'package:banking_app/view_model/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class AccountDetailItem {
   final String title;
@@ -31,6 +33,9 @@ class AccountPage extends ConsumerWidget {
     final userState = ref.watch(userInfoProvider);
     final accounts =
         ref.watch(userInfoProvider.select((value) => value.accounts));
+    final initialized =
+        ref.watch(accountItemsProvider.select((value) => value.initialized));
+    final provider = ref.watch(accountItemsProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -47,48 +52,58 @@ class AccountPage extends ConsumerWidget {
         ],
       ),
       backgroundColor: colorScheme.background,
-      body: Padding(
-          padding: const EdgeInsets.only(
-            left: padding,
-            right: padding,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    "Menu",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: initialized
+          ? LoaderOverlay(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: padding,
+                  right: padding,
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          "Menu",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      MenuWidget(
+                        width: screenWidth - padding * 2,
+                        colorScheme: colorScheme,
+                        renewState:
+                            ref.read(userInfoProvider.notifier).fetchUser,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          "${userState.firstName} ${userState.lastName}'s Accounts",
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      for (var account in accounts) ...{
+                        _buildAccountItem(
+                          context,
+                          colorScheme: colorScheme,
+                          account: account,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      }
+                    ],
                   ),
                 ),
-                MenuWidget(
-                    width: screenWidth - padding * 2, colorScheme: colorScheme),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    "${userState.firstName} ${userState.lastName}'s Accounts",
-                    style: const TextStyle(
-                        fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                for (var account in accounts) ...{
-                  _buildAccountItem(
-                    context,
-                    colorScheme: colorScheme,
-                    account: account,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                }
-              ],
-            ),
-          )),
+              ),
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 
@@ -173,10 +188,12 @@ class MenuWidget extends StatelessWidget {
   final double width;
   final double itemCount = 4;
   final ColorScheme colorScheme;
+  final Future<void> Function() renewState;
   const MenuWidget({
     Key? key,
     required this.width,
     required this.colorScheme,
+    required this.renewState,
   }) : super(key: key);
 
   @override
@@ -197,42 +214,49 @@ class MenuWidget extends StatelessWidget {
             icon: Icons.currency_exchange_outlined,
             title: "Transfer\n",
             path: RoutePath.transferRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.payments_outlined,
             title: "Check\nDeposit",
             path: RoutePath.checkDepositRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.account_balance_wallet_outlined,
             title: "Open\nAccount",
             path: RoutePath.openAccountRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.person_off_outlined,
             title: "Close\nAccount",
             path: RoutePath.closeAccountRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.payment_outlined,
             title: "Payment\n",
             path: RoutePath.paymentRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.account_balance_outlined,
             title: "Withdraw\n",
             path: RoutePath.withdrawRoute,
+            renewState: renewState,
           ),
           _buildMenuItem(
             context,
             icon: Icons.info_outline,
             title: "Information\n",
             path: RoutePath.informationRoute,
+            renewState: renewState,
           ),
           // dummy item
           SizedBox(
@@ -249,6 +273,7 @@ class MenuWidget extends StatelessWidget {
     required IconData icon,
     required String title,
     required String path,
+    required Future<void> Function() renewState,
   }) {
     double itemWidth = width / itemCount - 1;
     return MaterialButton(
@@ -258,9 +283,11 @@ class MenuWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       minWidth: 0,
-      onPressed: () {
+      onPressed: () async {
         logger.d("path: $path");
-        context.router.pushNamed(path);
+        context.loaderOverlay.show();
+        await context.router.pushNamed(path);
+        renewState().then((_) => context.loaderOverlay.hide());
       },
       child: Container(
         // color: Colors.red,

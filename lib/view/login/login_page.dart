@@ -6,7 +6,6 @@ import 'package:banking_app/core/firebase/auth.dart';
 import 'package:banking_app/core/hooks/useFlutterToast.dart';
 import 'package:banking_app/main.dart';
 import 'package:banking_app/view/login/state/login_page_provider.dart';
-import 'package:banking_app/view_model/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -100,13 +99,11 @@ class LoginPage extends HookConsumerWidget {
                               username: loginItems.username,
                               password: loginItems.password,
                             );
+                    notifier.updateButtonStatus(false, colorScheme);
                     if (errorMessage == null) {
-                      await ref.read(userInfoProvider.notifier).fetchUser();
-                      notifier.updateButtonStatus(false, colorScheme);
                       context.router.pushNamed(RoutePath.topRoute);
                     } else {
                       toast.showErrorToast(errorMessage);
-                      notifier.updateButtonStatus(false, colorScheme);
                       return;
                     }
                   },
