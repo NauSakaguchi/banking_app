@@ -57,6 +57,7 @@ dependencies:
   http:
   image_picker:
   loader_overlay: ^2.2.0
+  json_annotation: ^4.8.0
 
 
 dev_dependencies:
