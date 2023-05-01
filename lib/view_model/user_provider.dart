@@ -76,39 +76,33 @@ class UserInfo extends _$UserInfo {
     }
 
     //TODO: implement fetchAccounts with idToken
-
-    //wait 1 sec to get dummy accounts
-    await Future.delayed(const Duration(seconds: 1));
-    const List<Account> _accounts = [
-      Account(
-        accountNumber: '111111111',
-        routingNumber: '123456789',
-        accountType: AccountType.checking,
-        centBalance: 100000,
-      ),
-      Account(
-        accountNumber: '222222222',
-        routingNumber: '123456789',
-        accountType: AccountType.saving,
-        centBalance: 200010,
-      ),
-      Account(
-        accountNumber: '333333333',
-        routingNumber: '123456789',
-        accountType: AccountType.checking,
-        centBalance: 300000,
-      ),
-      Account(
-        accountNumber: '444444444',
-        routingNumber: '123456789',
-        accountType: AccountType.saving,
-        centBalance: 400034,
-      ),
-    ];
-    logger.d('fetchAccounts success');
-    logger.d('accounts: $_accounts');
-
-    state = state.copyWith(accounts: _accounts);
+    const endpoint = '/allAccounts';
+    final response = await NetBankApi.getHttp(
+      authState.idToken!,
+      endpoint: endpoint,
+    );
+    if (response.statusCode == 200) {
+      final List<Account> _accounts = [];
+      final List<dynamic> responseBodyList = jsonDecode(response.body);
+      logger.d('Content: $responseBodyList');
+      for (dynamic item in responseBodyList) {
+        logger.d('Content: ${item['number']}');
+        _accounts.add(
+          Account(
+            accountNumber: item['number'],
+            routingNumber: item['routingNumber'],
+            accountType: AccountType.checking,
+            centBalance: (item['balance'] * 100).toInt(),
+          ),
+        );
+      }
+      logger.d('fetchAccounts success');
+      logger.d('accounts: $_accounts');
+      state = state.copyWith(accounts: _accounts);
+    } else {
+      logger.e("Error: ${response.statusCode} ${response.reasonPhrase}");
+      throw Exception("Error: ${response.statusCode} ${response.reasonPhrase}");
+    }
   }
 
   Future<List<Transaction>> fetchTransactions(String accountNumber) async {
@@ -117,7 +111,7 @@ class UserInfo extends _$UserInfo {
     final authState = ref.watch(authProvider);
     if (authState.idToken == null) {
       logger.e('idToken is null');
-      return [];
+      throw Exception('idToken is null');
     }
 
     //TODO: implement fetchTransactions with idToken
