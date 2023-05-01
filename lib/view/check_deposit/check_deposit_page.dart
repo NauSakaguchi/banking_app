@@ -196,6 +196,7 @@ class CheckDepositPage extends HookConsumerWidget {
                                           Text("Amount must be greater than 0"),
                                     ),
                                   );
+                                  notifier.updateButtonStatus(false);
                                   return;
                                 }
 
@@ -209,9 +210,12 @@ class CheckDepositPage extends HookConsumerWidget {
                                     "Amount: ${checkDepositItems.checkAmount}");
                                 logger.d(
                                     "Check Date: ${checkDepositItems.checkDate}");
-                                // wait 2 seconds
-                                await Future.delayed(
-                                    const Duration(seconds: 2));
+
+                                // submit check deposit
+                                await notifier.submitCheckDeposit();
+
+                                // back to the previous page
+                                Navigator.pop(context);
 
                                 // stop loading
                                 notifier.updateButtonStatus(false);
