@@ -142,6 +142,19 @@ class TransferPage extends HookConsumerWidget {
                                           Text("Amount must be greater than 0"),
                                     ),
                                   );
+                                } else if (transferPageState.centAmount! >
+                                    ref
+                                        .watch(userInfoProvider.notifier)
+                                        .getAccountBalance(
+                                          transferPageState.fromAccountNumber ??
+                                              "",
+                                        )) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          "Insufficient balance in the account"),
+                                    ),
+                                  );
                                 } else {
                                   final centAmountTxt =
                                       "Transfer \$${(transferPageState.centAmount! / 100).toStringAsFixed(2)}";
