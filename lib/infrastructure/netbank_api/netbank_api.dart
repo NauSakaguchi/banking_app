@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:banking_app/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -14,6 +17,26 @@ class NetBankApi {
         'accept': '*/*',
         'Authorization': 'Bearer $idToken',
       },
+    );
+  }
+
+  static Future<Response> postHttp(
+    String idToken, {
+    required String endpoint,
+    required Map<String, dynamic> requestBody,
+  }) async {
+    const apiUrl = 'http://localhost:8080/api';
+
+    logger.d(jsonEncode(requestBody));
+
+    return await http.post(
+      Uri.parse(apiUrl + endpoint),
+      headers: {
+        'accept': '*/*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $idToken',
+      },
+      body: jsonEncode(requestBody),
     );
   }
 }
