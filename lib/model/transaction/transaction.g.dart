@@ -13,13 +13,9 @@ _$_Transaction _$$_TransactionFromJson(Map<String, dynamic> json) =>
       accountNumber: json['accountNumber'] as String?,
       routingNumber: json['routingNumber'] as String?,
       centAmount: json['centAmount'] as int?,
-      timestamp: json['timestamp'] == null
-          ? null
-          : DateTime.parse(json['timestamp'] as String),
+      timestamp: json['timestamp'] as String?,
       description: json['description'] as String?,
-      transactionType: $enumDecodeNullable(
-              _$TransactionTypeEnumMap, json['transactionType']) ??
-          TransactionType.deposit,
+      transactionType: json['transactionType'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
@@ -29,13 +25,7 @@ Map<String, dynamic> _$$_TransactionToJson(_$_Transaction instance) =>
       'accountNumber': instance.accountNumber,
       'routingNumber': instance.routingNumber,
       'centAmount': instance.centAmount,
-      'timestamp': instance.timestamp?.toIso8601String(),
+      'timestamp': instance.timestamp,
       'description': instance.description,
-      'transactionType': _$TransactionTypeEnumMap[instance.transactionType]!,
+      'transactionType': instance.transactionType,
     };
-
-const _$TransactionTypeEnumMap = {
-  TransactionType.deposit: 'deposit',
-  TransactionType.withdrawal: 'withdrawal',
-  TransactionType.transfer: 'transfer',
-};

@@ -121,75 +121,105 @@ class UserInfo extends _$UserInfo {
       throw Exception('idToken is null');
     }
 
-    //TODO: implement fetchTransactions with idToken
+    //get idToken
+    final idToken = ref.watch(authProvider).idToken;
+    if (idToken == null) {
+      logger.e('idToken is null');
+      // throw exception
+      throw Exception('idToken is null');
+    }
 
-    // wait 1 sec to get dummy transactions
-    await Future.delayed(const Duration(seconds: 1));
-    final List<Transaction> _transactions = [
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.deposit,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.withdrawal,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.transfer,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.withdrawal,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.deposit,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.withdrawal,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.deposit,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.withdrawal,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.deposit,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-      Transaction(
-        accountNumber: '111111111',
-        transactionType: TransactionType.withdrawal,
-        centAmount: 100000,
-        timestamp: DateTime.now(),
-      ),
-    ];
-    logger.d('fetchTransactions success');
-    logger.d('transactions: $_transactions');
+    final response = await NetBankApi.getTransactionHttp(idToken,
+        accountNumber: accountNumber);
 
-    return _transactions;
+    if (response.statusCode == 200) {
+      final List<dynamic> responseBody = jsonDecode(response.body);
+      final List<Transaction> _transactions = [];
+      for (dynamic item in responseBody) {
+        _transactions.add(
+          Transaction(
+            accountNumber: item['account']['number'],
+            transactionType: item['description'],
+            centAmount: (item['amount'] * 100).toInt(),
+            timestamp: item['date'],
+          ),
+        );
+      }
+
+      logger.d('fetchTransactions success');
+      logger.d('transactions: $_transactions');
+
+      return _transactions;
+    } else {
+      logger.d(jsonDecode(response.body));
+      logger.e('Error: ${response.statusCode} ${response.reasonPhrase}');
+      // throw exception
+      throw Exception('Error: ${response.statusCode} ${response.reasonPhrase}');
+    }
+
+    // // wait 1 sec to get dummy transactions
+    // await Future.delayed(const Duration(seconds: 1));
+    // final List<Transaction> _transactions = [
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.deposit,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.withdrawal,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.transfer,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.withdrawal,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.deposit,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.withdrawal,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.deposit,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.withdrawal,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.deposit,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    //   Transaction(
+    //     accountNumber: '111111111',
+    //     transactionType: TransactionType.withdrawal,
+    //     centAmount: 100000,
+    //     timestamp: DateTime.now(),
+    //   ),
+    // ];
   }
 }

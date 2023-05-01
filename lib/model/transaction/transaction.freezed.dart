@@ -25,9 +25,9 @@ mixin _$Transaction {
   String? get accountNumber => throw _privateConstructorUsedError;
   String? get routingNumber => throw _privateConstructorUsedError;
   int? get centAmount => throw _privateConstructorUsedError;
-  DateTime? get timestamp => throw _privateConstructorUsedError;
+  String? get timestamp => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  TransactionType get transactionType => throw _privateConstructorUsedError;
+  String get transactionType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,9 +47,9 @@ abstract class $TransactionCopyWith<$Res> {
       String? accountNumber,
       String? routingNumber,
       int? centAmount,
-      DateTime? timestamp,
+      String? timestamp,
       String? description,
-      TransactionType transactionType});
+      String transactionType});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
       timestamp: freezed == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -106,7 +106,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
       transactionType: null == transactionType
           ? _value.transactionType
           : transactionType // ignore: cast_nullable_to_non_nullable
-              as TransactionType,
+              as String,
     ) as $Val);
   }
 }
@@ -125,9 +125,9 @@ abstract class _$$_TransactionCopyWith<$Res>
       String? accountNumber,
       String? routingNumber,
       int? centAmount,
-      DateTime? timestamp,
+      String? timestamp,
       String? description,
-      TransactionType transactionType});
+      String transactionType});
 }
 
 /// @nodoc
@@ -174,7 +174,7 @@ class __$$_TransactionCopyWithImpl<$Res>
       timestamp: freezed == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -182,7 +182,7 @@ class __$$_TransactionCopyWithImpl<$Res>
       transactionType: null == transactionType
           ? _value.transactionType
           : transactionType // ignore: cast_nullable_to_non_nullable
-              as TransactionType,
+              as String,
     ));
   }
 }
@@ -198,7 +198,7 @@ class _$_Transaction extends _Transaction {
       this.centAmount,
       this.timestamp,
       this.description,
-      this.transactionType = TransactionType.deposit})
+      this.transactionType = ""})
       : super._();
 
   factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
@@ -215,12 +215,12 @@ class _$_Transaction extends _Transaction {
   @override
   final int? centAmount;
   @override
-  final DateTime? timestamp;
+  final String? timestamp;
   @override
   final String? description;
   @override
   @JsonKey()
-  final TransactionType transactionType;
+  final String transactionType;
 
   @override
   String toString() {
@@ -275,9 +275,9 @@ abstract class _Transaction extends Transaction {
       final String? accountNumber,
       final String? routingNumber,
       final int? centAmount,
-      final DateTime? timestamp,
+      final String? timestamp,
       final String? description,
-      final TransactionType transactionType}) = _$_Transaction;
+      final String transactionType}) = _$_Transaction;
   const _Transaction._() : super._();
 
   factory _Transaction.fromJson(Map<String, dynamic> json) =
@@ -294,11 +294,11 @@ abstract class _Transaction extends Transaction {
   @override
   int? get centAmount;
   @override
-  DateTime? get timestamp;
+  String? get timestamp;
   @override
   String? get description;
   @override
-  TransactionType get transactionType;
+  String get transactionType;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionCopyWith<_$_Transaction> get copyWith =>

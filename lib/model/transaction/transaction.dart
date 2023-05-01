@@ -11,9 +11,9 @@ class Transaction with _$Transaction {
     String? accountNumber,
     String? routingNumber,
     int? centAmount,
-    DateTime? timestamp,
+    String? timestamp,
     String? description,
-    @Default(TransactionType.deposit) TransactionType transactionType,
+    @Default("") String transactionType,
   }) = _Transaction;
 
   const Transaction._();

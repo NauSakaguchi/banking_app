@@ -1,5 +1,4 @@
 import 'package:banking_app/core/ui_core/cent_balance_formatter.dart';
-import 'package:banking_app/core/ui_core/date_time_formatter.dart';
 import 'package:banking_app/model/transaction/transaction.dart';
 import 'package:banking_app/view/transaction/state/transaction_page_provider.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +47,11 @@ class TransactionHistoryPage extends ConsumerWidget {
         children: [
           ListTile(
             title: Text(
-              transaction.transactionType.toDisplayString(),
+              transaction.transactionType,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              DateTimeFormatter.convertDateTimeToString(transaction.timestamp),
+              transaction.timestamp ?? "",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             trailing: Text(

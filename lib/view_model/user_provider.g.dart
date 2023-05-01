@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$UserInfoHash() => r'64372100e724b354b2523a83260051229236d5e1';
+String _$UserInfoHash() => r'6011c66863a63edf6ce6d2ed1826264c06738471';
 
 /// See also [UserInfo].
 final userInfoProvider = NotifierProvider<UserInfo, User>(

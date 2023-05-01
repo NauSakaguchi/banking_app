@@ -20,6 +20,22 @@ class NetBankApi {
     );
   }
 
+  static Future<Response> getTransactionHttp(
+    String idToken, {
+    required String accountNumber,
+  }) async {
+    final apiUrl =
+        'http://localhost:8080/api/account/$accountNumber/transaction';
+
+    return await http.get(
+      Uri.parse(apiUrl),
+      headers: {
+        'accept': '*/*',
+        'Authorization': 'Bearer $idToken',
+      },
+    );
+  }
+
   static Future<Response> postHttp(
     String idToken, {
     required String endpoint,
