@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$AccountItemsHash() => r'e1bc072eebfc8466fbc6ce36d1a51b1cbf947fdc';
+String _$AccountItemsHash() => r'ff304f6ec4139180e71e4ccffe0df9adb8bd5cbf';
 
 /// See also [AccountItems].
 final accountItemsProvider =

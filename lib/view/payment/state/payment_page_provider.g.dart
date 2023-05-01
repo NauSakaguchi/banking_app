@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$PaymentItemsHash() => r'143523f766892d774115f0fc7ed5f6d7bddfd400';
+String _$PaymentItemsHash() => r'bf9c50bf6a99f3a90f25c9ef7002d9ccf704bb6d';
 
 /// See also [PaymentItems].
 final paymentItemsProvider =

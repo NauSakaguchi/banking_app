@@ -11,9 +11,10 @@ class WithdrawPageState with _$WithdrawPageState {
   // buttonLoading is false
   // openAccountButtonTxt is 'Open Account'
   const factory WithdrawPageState({
-    required String accountNumber,
+    String? accountNumber,
     int? centAmount,
     @Default(false) bool buttonLoading,
     @Default('Withdraw') String withdrawButtonTxt,
+    @Default(false) bool initialized,
   }) = _WithdrawPageState;
 }

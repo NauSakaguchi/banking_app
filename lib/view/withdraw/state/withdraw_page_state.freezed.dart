@@ -16,10 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WithdrawPageState {
-  String get accountNumber => throw _privateConstructorUsedError;
+  String? get accountNumber => throw _privateConstructorUsedError;
   int? get centAmount => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get withdrawButtonTxt => throw _privateConstructorUsedError;
+  bool get initialized => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WithdrawPageStateCopyWith<WithdrawPageState> get copyWith =>
@@ -33,10 +34,11 @@ abstract class $WithdrawPageStateCopyWith<$Res> {
       _$WithdrawPageStateCopyWithImpl<$Res, WithdrawPageState>;
   @useResult
   $Res call(
-      {String accountNumber,
+      {String? accountNumber,
       int? centAmount,
       bool buttonLoading,
-      String withdrawButtonTxt});
+      String withdrawButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -52,16 +54,17 @@ class _$WithdrawPageStateCopyWithImpl<$Res, $Val extends WithdrawPageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = null,
+    Object? accountNumber = freezed,
     Object? centAmount = freezed,
     Object? buttonLoading = null,
     Object? withdrawButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_value.copyWith(
-      accountNumber: null == accountNumber
+      accountNumber: freezed == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       centAmount: freezed == centAmount
           ? _value.centAmount
           : centAmount // ignore: cast_nullable_to_non_nullable
@@ -74,6 +77,10 @@ class _$WithdrawPageStateCopyWithImpl<$Res, $Val extends WithdrawPageState>
           ? _value.withdrawButtonTxt
           : withdrawButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,10 +94,11 @@ abstract class _$$_WithdrawPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String accountNumber,
+      {String? accountNumber,
       int? centAmount,
       bool buttonLoading,
-      String withdrawButtonTxt});
+      String withdrawButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -104,16 +112,17 @@ class __$$_WithdrawPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accountNumber = null,
+    Object? accountNumber = freezed,
     Object? centAmount = freezed,
     Object? buttonLoading = null,
     Object? withdrawButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_$_WithdrawPageState(
-      accountNumber: null == accountNumber
+      accountNumber: freezed == accountNumber
           ? _value.accountNumber
           : accountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       centAmount: freezed == centAmount
           ? _value.centAmount
           : centAmount // ignore: cast_nullable_to_non_nullable
@@ -126,6 +135,10 @@ class __$$_WithdrawPageStateCopyWithImpl<$Res>
           ? _value.withdrawButtonTxt
           : withdrawButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -134,13 +147,14 @@ class __$$_WithdrawPageStateCopyWithImpl<$Res>
 
 class _$_WithdrawPageState implements _WithdrawPageState {
   const _$_WithdrawPageState(
-      {required this.accountNumber,
+      {this.accountNumber,
       this.centAmount,
       this.buttonLoading = false,
-      this.withdrawButtonTxt = 'Withdraw'});
+      this.withdrawButtonTxt = 'Withdraw',
+      this.initialized = false});
 
   @override
-  final String accountNumber;
+  final String? accountNumber;
   @override
   final int? centAmount;
   @override
@@ -149,10 +163,13 @@ class _$_WithdrawPageState implements _WithdrawPageState {
   @override
   @JsonKey()
   final String withdrawButtonTxt;
+  @override
+  @JsonKey()
+  final bool initialized;
 
   @override
   String toString() {
-    return 'WithdrawPageState(accountNumber: $accountNumber, centAmount: $centAmount, buttonLoading: $buttonLoading, withdrawButtonTxt: $withdrawButtonTxt)';
+    return 'WithdrawPageState(accountNumber: $accountNumber, centAmount: $centAmount, buttonLoading: $buttonLoading, withdrawButtonTxt: $withdrawButtonTxt, initialized: $initialized)';
   }
 
   @override
@@ -167,12 +184,14 @@ class _$_WithdrawPageState implements _WithdrawPageState {
             (identical(other.buttonLoading, buttonLoading) ||
                 other.buttonLoading == buttonLoading) &&
             (identical(other.withdrawButtonTxt, withdrawButtonTxt) ||
-                other.withdrawButtonTxt == withdrawButtonTxt));
+                other.withdrawButtonTxt == withdrawButtonTxt) &&
+            (identical(other.initialized, initialized) ||
+                other.initialized == initialized));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, accountNumber, centAmount, buttonLoading, withdrawButtonTxt);
+  int get hashCode => Object.hash(runtimeType, accountNumber, centAmount,
+      buttonLoading, withdrawButtonTxt, initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -184,19 +203,22 @@ class _$_WithdrawPageState implements _WithdrawPageState {
 
 abstract class _WithdrawPageState implements WithdrawPageState {
   const factory _WithdrawPageState(
-      {required final String accountNumber,
+      {final String? accountNumber,
       final int? centAmount,
       final bool buttonLoading,
-      final String withdrawButtonTxt}) = _$_WithdrawPageState;
+      final String withdrawButtonTxt,
+      final bool initialized}) = _$_WithdrawPageState;
 
   @override
-  String get accountNumber;
+  String? get accountNumber;
   @override
   int? get centAmount;
   @override
   bool get buttonLoading;
   @override
   String get withdrawButtonTxt;
+  @override
+  bool get initialized;
   @override
   @JsonKey(ignore: true)
   _$$_WithdrawPageStateCopyWith<_$_WithdrawPageState> get copyWith =>

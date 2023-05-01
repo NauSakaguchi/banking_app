@@ -18,13 +18,14 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CheckDepositPageState {
   String get fromAccountNumber => throw _privateConstructorUsedError;
   String get routingNumber => throw _privateConstructorUsedError;
-  String get toAccountNumber => throw _privateConstructorUsedError;
+  String? get toAccountNumber => throw _privateConstructorUsedError;
   int? get checkAmount => throw _privateConstructorUsedError;
   DateTime? get checkDate => throw _privateConstructorUsedError;
   File? get checkFrontImage => throw _privateConstructorUsedError;
   File? get checkBackImage => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get depositButtonTxt => throw _privateConstructorUsedError;
+  bool get initialized => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CheckDepositPageStateCopyWith<CheckDepositPageState> get copyWith =>
@@ -40,13 +41,14 @@ abstract class $CheckDepositPageStateCopyWith<$Res> {
   $Res call(
       {String fromAccountNumber,
       String routingNumber,
-      String toAccountNumber,
+      String? toAccountNumber,
       int? checkAmount,
       DateTime? checkDate,
       File? checkFrontImage,
       File? checkBackImage,
       bool buttonLoading,
-      String depositButtonTxt});
+      String depositButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -65,13 +67,14 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
   $Res call({
     Object? fromAccountNumber = null,
     Object? routingNumber = null,
-    Object? toAccountNumber = null,
+    Object? toAccountNumber = freezed,
     Object? checkAmount = freezed,
     Object? checkDate = freezed,
     Object? checkFrontImage = freezed,
     Object? checkBackImage = freezed,
     Object? buttonLoading = null,
     Object? depositButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_value.copyWith(
       fromAccountNumber: null == fromAccountNumber
@@ -82,10 +85,10 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      toAccountNumber: null == toAccountNumber
+      toAccountNumber: freezed == toAccountNumber
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       checkAmount: freezed == checkAmount
           ? _value.checkAmount
           : checkAmount // ignore: cast_nullable_to_non_nullable
@@ -110,6 +113,10 @@ class _$CheckDepositPageStateCopyWithImpl<$Res,
           ? _value.depositButtonTxt
           : depositButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -125,13 +132,14 @@ abstract class _$$_CheckDepositPageStateCopyWith<$Res>
   $Res call(
       {String fromAccountNumber,
       String routingNumber,
-      String toAccountNumber,
+      String? toAccountNumber,
       int? checkAmount,
       DateTime? checkDate,
       File? checkFrontImage,
       File? checkBackImage,
       bool buttonLoading,
-      String depositButtonTxt});
+      String depositButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -147,13 +155,14 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
   $Res call({
     Object? fromAccountNumber = null,
     Object? routingNumber = null,
-    Object? toAccountNumber = null,
+    Object? toAccountNumber = freezed,
     Object? checkAmount = freezed,
     Object? checkDate = freezed,
     Object? checkFrontImage = freezed,
     Object? checkBackImage = freezed,
     Object? buttonLoading = null,
     Object? depositButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_$_CheckDepositPageState(
       fromAccountNumber: null == fromAccountNumber
@@ -164,10 +173,10 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
           ? _value.routingNumber
           : routingNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      toAccountNumber: null == toAccountNumber
+      toAccountNumber: freezed == toAccountNumber
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       checkAmount: freezed == checkAmount
           ? _value.checkAmount
           : checkAmount // ignore: cast_nullable_to_non_nullable
@@ -192,6 +201,10 @@ class __$$_CheckDepositPageStateCopyWithImpl<$Res>
           ? _value.depositButtonTxt
           : depositButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -202,13 +215,14 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
   const _$_CheckDepositPageState(
       {this.fromAccountNumber = '',
       this.routingNumber = '',
-      required this.toAccountNumber,
+      this.toAccountNumber,
       this.checkAmount,
       this.checkDate,
       this.checkFrontImage,
       this.checkBackImage,
       this.buttonLoading = false,
-      this.depositButtonTxt = 'Deposit'});
+      this.depositButtonTxt = 'Deposit',
+      this.initialized = false});
 
   @override
   @JsonKey()
@@ -217,7 +231,7 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
   @JsonKey()
   final String routingNumber;
   @override
-  final String toAccountNumber;
+  final String? toAccountNumber;
   @override
   final int? checkAmount;
   @override
@@ -232,10 +246,13 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
   @override
   @JsonKey()
   final String depositButtonTxt;
+  @override
+  @JsonKey()
+  final bool initialized;
 
   @override
   String toString() {
-    return 'CheckDepositPageState(fromAccountNumber: $fromAccountNumber, routingNumber: $routingNumber, toAccountNumber: $toAccountNumber, checkAmount: $checkAmount, checkDate: $checkDate, checkFrontImage: $checkFrontImage, checkBackImage: $checkBackImage, buttonLoading: $buttonLoading, depositButtonTxt: $depositButtonTxt)';
+    return 'CheckDepositPageState(fromAccountNumber: $fromAccountNumber, routingNumber: $routingNumber, toAccountNumber: $toAccountNumber, checkAmount: $checkAmount, checkDate: $checkDate, checkFrontImage: $checkFrontImage, checkBackImage: $checkBackImage, buttonLoading: $buttonLoading, depositButtonTxt: $depositButtonTxt, initialized: $initialized)';
   }
 
   @override
@@ -260,7 +277,9 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
             (identical(other.buttonLoading, buttonLoading) ||
                 other.buttonLoading == buttonLoading) &&
             (identical(other.depositButtonTxt, depositButtonTxt) ||
-                other.depositButtonTxt == depositButtonTxt));
+                other.depositButtonTxt == depositButtonTxt) &&
+            (identical(other.initialized, initialized) ||
+                other.initialized == initialized));
   }
 
   @override
@@ -274,7 +293,8 @@ class _$_CheckDepositPageState implements _CheckDepositPageState {
       checkFrontImage,
       checkBackImage,
       buttonLoading,
-      depositButtonTxt);
+      depositButtonTxt,
+      initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -288,20 +308,21 @@ abstract class _CheckDepositPageState implements CheckDepositPageState {
   const factory _CheckDepositPageState(
       {final String fromAccountNumber,
       final String routingNumber,
-      required final String toAccountNumber,
+      final String? toAccountNumber,
       final int? checkAmount,
       final DateTime? checkDate,
       final File? checkFrontImage,
       final File? checkBackImage,
       final bool buttonLoading,
-      final String depositButtonTxt}) = _$_CheckDepositPageState;
+      final String depositButtonTxt,
+      final bool initialized}) = _$_CheckDepositPageState;
 
   @override
   String get fromAccountNumber;
   @override
   String get routingNumber;
   @override
-  String get toAccountNumber;
+  String? get toAccountNumber;
   @override
   int? get checkAmount;
   @override
@@ -314,6 +335,8 @@ abstract class _CheckDepositPageState implements CheckDepositPageState {
   bool get buttonLoading;
   @override
   String get depositButtonTxt;
+  @override
+  bool get initialized;
   @override
   @JsonKey(ignore: true)
   _$$_CheckDepositPageStateCopyWith<_$_CheckDepositPageState> get copyWith =>

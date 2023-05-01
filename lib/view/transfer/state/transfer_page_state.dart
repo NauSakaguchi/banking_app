@@ -11,11 +11,12 @@ class TransferPageState with _$TransferPageState {
   // buttonLoading is false
   // openAccountButtonTxt is 'Open Account'
   const factory TransferPageState({
-    required String fromAccountNumber,
-    required String toAccountNumber,
+    String? fromAccountNumber,
+    String? toAccountNumber,
     int? centAmount,
     @Default("") String description,
     @Default(false) bool buttonLoading,
     @Default('Transfer') String transferButtonTxt,
+    @Default(false) bool initialized,
   }) = _TransferPageState;
 }

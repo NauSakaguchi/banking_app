@@ -42,183 +42,191 @@ class CheckDepositPage extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: colorScheme.background,
       appBar: AppBar(title: const Text("Check Deposit")),
-      body: GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                // from
-                const Text(
-                  "From",
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: accountNumberController,
-                  // number keyboard
-                  keyboardType: TextInputType.number,
-                  decoration: Decorations.inputDecoration(
-                      "Account Number", colorScheme),
-                  onChanged: (value) {
-                    notifier.updateFromAccountNumber(value);
-                  },
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: routingNumberController,
-                  // number keyboard
-                  keyboardType: TextInputType.number,
-                  decoration: Decorations.inputDecoration(
-                      "Routing Number", colorScheme),
-                  onChanged: (value) {
-                    notifier.updateRoutingNumber(value);
-                  },
-                ),
-                // to
-                const SizedBox(height: 20),
-                const Text(
-                  "To",
-                  style: TextStyle(fontSize: 20),
-                ),
-                // account picker
-                AccountPicker(
-                  colorScheme: colorScheme,
-                  value: checkDepositItems.toAccountNumber,
-                  accountList:
-                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
-                  onChanged: (value) {
-                    if (value != null) {
-                      notifier.updateToAccountNumber(value);
-                    }
-                  },
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: centAmountController,
-                  // number keyboard
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [BalanceFormatter()],
-                  decoration:
-                      Decorations.inputDecoration("Amount", colorScheme),
-                  onChanged: (value) {
-                    // Remove all non-digit characters
-                    final newValue = value.replaceAll(RegExp(r'\D'), '');
+      body: checkDepositItems.initialized
+          ? GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      // from
+                      const Text(
+                        "From",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: accountNumberController,
+                        // number keyboard
+                        keyboardType: TextInputType.number,
+                        decoration: Decorations.inputDecoration(
+                            "Account Number", colorScheme),
+                        onChanged: (value) {
+                          notifier.updateFromAccountNumber(value);
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: routingNumberController,
+                        // number keyboard
+                        keyboardType: TextInputType.number,
+                        decoration: Decorations.inputDecoration(
+                            "Routing Number", colorScheme),
+                        onChanged: (value) {
+                          notifier.updateRoutingNumber(value);
+                        },
+                      ),
+                      // to
+                      const SizedBox(height: 20),
+                      const Text(
+                        "To",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      // account picker
+                      AccountPicker(
+                        colorScheme: colorScheme,
+                        value: checkDepositItems.toAccountNumber,
+                        accountList: ref
+                            .watch(userInfoProvider.notifier)
+                            .getAccountNumbers(),
+                        onChanged: (value) {
+                          if (value != null) {
+                            notifier.updateToAccountNumber(value);
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: centAmountController,
+                        // number keyboard
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [BalanceFormatter()],
+                        decoration:
+                            Decorations.inputDecoration("Amount", colorScheme),
+                        onChanged: (value) {
+                          // Remove all non-digit characters
+                          final newValue = value.replaceAll(RegExp(r'\D'), '');
 
-                    // Convert the cleaned string to a number
-                    int numberValue = int.tryParse(newValue) ?? 0;
+                          // Convert the cleaned string to a number
+                          int numberValue = int.tryParse(newValue) ?? 0;
 
-                    // convert str to int
-                    notifier.updateCheckAmount(numberValue);
-                  },
-                ),
-                // check date with showDatePicker
-                const SizedBox(height: 20),
-                Container(
-                  width: double.infinity,
-                  decoration: boxDecoration,
-                  child: TextButton(
-                    onPressed: () async {
-                      final DateTime? date = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        // 5years ago from now
-                        firstDate: DateTime(DateTime.now().year - 5),
-                        lastDate: DateTime.now(),
-                      );
-                      if (date != null) {
-                        notifier.updateCheckDate(date);
-                      }
-                    },
-                    child: checkDepositItems.checkDate == null
-                        ? const Text("Check Date")
-                        : Text(
-                            DateTimeFormatter.convertDateToString(
-                              checkDepositItems.checkDate!,
-                            ),
-                          ),
+                          // convert str to int
+                          notifier.updateCheckAmount(numberValue);
+                        },
+                      ),
+                      // check date with showDatePicker
+                      const SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        decoration: boxDecoration,
+                        child: TextButton(
+                          onPressed: () async {
+                            final DateTime? date = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              // 5years ago from now
+                              firstDate: DateTime(DateTime.now().year - 5),
+                              lastDate: DateTime.now(),
+                            );
+                            if (date != null) {
+                              notifier.updateCheckDate(date);
+                            }
+                          },
+                          child: checkDepositItems.checkDate == null
+                              ? const Text("Check Date")
+                              : Text(
+                                  DateTimeFormatter.convertDateToString(
+                                    checkDepositItems.checkDate!,
+                                  ),
+                                ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 20),
+                      _buildImagePickerButton(
+                        context,
+                        label: "Check Image (Front)",
+                        colorScheme: colorScheme,
+                        setState: notifier.updateCheckFrontImage,
+                        removeState: notifier.removeCheckFrontImage,
+                        image: checkDepositItems.checkFrontImage,
+                      ),
+                      const SizedBox(height: 20),
+                      _buildImagePickerButton(
+                        context,
+                        label: "Check Image (Back)",
+                        colorScheme: colorScheme,
+                        setState: notifier.updateCheckBackImage,
+                        removeState: notifier.removeCheckBackImage,
+                        image: checkDepositItems.checkBackImage,
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: checkDepositItems.buttonLoading
+                            ? null
+                            : () async {
+                                // start loading
+                                notifier.updateButtonStatus(true);
+
+                                // if there is an empty field or null field, show error toast message
+                                if (checkDepositItems
+                                        .fromAccountNumber.isEmpty ||
+                                    checkDepositItems.routingNumber.isEmpty ||
+                                    checkDepositItems.checkAmount == null ||
+                                    checkDepositItems.checkDate == null ||
+                                    checkDepositItems.checkFrontImage == null ||
+                                    checkDepositItems.checkBackImage == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Please fill all fields"),
+                                    ),
+                                  );
+                                  // stop loading
+                                  notifier.updateButtonStatus(false);
+                                  return;
+                                }
+
+                                // if cent amount is less than 0 or equal, print error toast message
+                                if (checkDepositItems.checkAmount! <= 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text("Amount must be greater than 0"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                logger.d(
+                                    "from Account Number: ${checkDepositItems.fromAccountNumber}");
+                                logger.d(
+                                    "from Routing Number: ${checkDepositItems.routingNumber}");
+                                logger.d(
+                                    "to Account Number: ${checkDepositItems.toAccountNumber}");
+                                logger.d(
+                                    "Amount: ${checkDepositItems.checkAmount}");
+                                logger.d(
+                                    "Check Date: ${checkDepositItems.checkDate}");
+                                // wait 2 seconds
+                                await Future.delayed(
+                                    const Duration(seconds: 2));
+
+                                // stop loading
+                                notifier.updateButtonStatus(false);
+                              },
+                        child: Text(checkDepositItems.depositButtonTxt),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
                 ),
-
-                const SizedBox(height: 20),
-                _buildImagePickerButton(
-                  context,
-                  label: "Check Image (Front)",
-                  colorScheme: colorScheme,
-                  setState: notifier.updateCheckFrontImage,
-                  removeState: notifier.removeCheckFrontImage,
-                  image: checkDepositItems.checkFrontImage,
-                ),
-                const SizedBox(height: 20),
-                _buildImagePickerButton(
-                  context,
-                  label: "Check Image (Back)",
-                  colorScheme: colorScheme,
-                  setState: notifier.updateCheckBackImage,
-                  removeState: notifier.removeCheckBackImage,
-                  image: checkDepositItems.checkBackImage,
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: checkDepositItems.buttonLoading
-                      ? null
-                      : () async {
-                          // start loading
-                          notifier.updateButtonStatus(true);
-
-                          // if there is an empty field or null field, show error toast message
-                          if (checkDepositItems.toAccountNumber.isEmpty ||
-                              checkDepositItems.fromAccountNumber.isEmpty ||
-                              checkDepositItems.routingNumber.isEmpty ||
-                              checkDepositItems.checkAmount == null ||
-                              checkDepositItems.checkDate == null ||
-                              checkDepositItems.checkFrontImage == null ||
-                              checkDepositItems.checkBackImage == null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Please fill all fields"),
-                              ),
-                            );
-                            // stop loading
-                            notifier.updateButtonStatus(false);
-                            return;
-                          }
-
-                          // if cent amount is less than 0 or equal, print error toast message
-                          if (checkDepositItems.checkAmount! <= 0) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Amount must be greater than 0"),
-                              ),
-                            );
-                            return;
-                          }
-
-                          logger.d(
-                              "from Account Number: ${checkDepositItems.fromAccountNumber}");
-                          logger.d(
-                              "from Routing Number: ${checkDepositItems.routingNumber}");
-                          logger.d(
-                              "to Account Number: ${checkDepositItems.toAccountNumber}");
-                          logger.d("Amount: ${checkDepositItems.checkAmount}");
-                          logger
-                              .d("Check Date: ${checkDepositItems.checkDate}");
-                          // wait 2 seconds
-                          await Future.delayed(const Duration(seconds: 2));
-
-                          // stop loading
-                          notifier.updateButtonStatus(false);
-                        },
-                  child: Text(checkDepositItems.depositButtonTxt),
-                ),
-                const SizedBox(height: 20),
-              ],
+              ),
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-        ),
-      ),
     );
   }
 

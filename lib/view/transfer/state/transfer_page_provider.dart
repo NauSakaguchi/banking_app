@@ -9,9 +9,14 @@ part 'transfer_page_provider.g.dart';
 class TransferPageStateNotifier extends _$TransferPageStateNotifier {
   @override
   TransferPageState build() {
-    final String num =
-        ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
-    return TransferPageState(fromAccountNumber: num, toAccountNumber: num);
+    ref.read(userInfoProvider.notifier).fetchAccounts().then((_) {
+      final String num =
+          ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+      updateFromAccountNumber(num);
+      updateToAccountNumber(num);
+      updateInitialized(true);
+    });
+    return const TransferPageState();
   }
 
   void updateToAccountNumber(String str) {
@@ -28,6 +33,10 @@ class TransferPageStateNotifier extends _$TransferPageStateNotifier {
 
   void updateDescription(String description) {
     state = state.copyWith(description: description);
+  }
+
+  void updateInitialized(bool initialized) {
+    state = state.copyWith(initialized: initialized);
   }
 
   void updateButtonStatus(bool isLoading) {

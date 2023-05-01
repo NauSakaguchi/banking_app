@@ -8,14 +8,22 @@ part 'close_account_provider.g.dart';
 class CloseAccountItems extends _$CloseAccountItems {
   @override
   CloseAccountPageState build() {
+    ref.read(userInfoProvider.notifier).fetchAccounts().then((_) {
+      final String num =
+          ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+      updateAccountNumber(num);
+      updateInitialized(true);
+    });
     // get the first account number
-    final String num =
-        ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
-    return CloseAccountPageState(accountNumber: num);
+    return const CloseAccountPageState();
   }
 
   void updateAccountNumber(String str) {
     state = state.copyWith(accountNumber: str);
+  }
+
+  void updateInitialized(bool initialized) {
+    state = state.copyWith(initialized: initialized);
   }
 
   void updatePassword(String str) {

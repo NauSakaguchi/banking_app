@@ -11,8 +11,17 @@ part 'check_deposit_provider.g.dart';
 class CheckDepositItems extends _$CheckDepositItems {
   @override
   CheckDepositPageState build() {
-    final num = ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
-    return CheckDepositPageState(toAccountNumber: num);
+    ref.read(userInfoProvider.notifier).fetchAccounts().then((_) {
+      final String num =
+          ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+      updateToAccountNumber(num);
+      updateInitialized(true);
+    });
+    return const CheckDepositPageState();
+  }
+
+  void updateInitialized(bool initialized) {
+    state = state.copyWith(initialized: initialized);
   }
 
   void updateToAccountNumber(String str) {

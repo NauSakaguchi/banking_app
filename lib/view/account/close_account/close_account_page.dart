@@ -25,74 +25,79 @@ class CloseAccountPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Close Account")),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                const Text(
-                  "Select account to close",
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 10),
-                AccountPicker(
-                  colorScheme: colorScheme,
-                  value: closeAccountItems.accountNumber,
-                  accountList:
-                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
-                  onChanged: (value) {
-                    if (value != null) provider.updateAccountNumber(value);
-                  },
-                ),
-                const SizedBox(height: 30),
-                const Text(
-                  "Enter your password",
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  obscureText: true,
-                  controller: passwordController,
-                  onChanged: (value) {
-                    provider.updatePassword(value);
-                  },
-                  decoration: Decorations.inputDecoration(
-                    "Password",
-                    colorScheme,
+      body: closeAccountItems.initialized
+          ? GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Select account to close",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      const SizedBox(height: 10),
+                      AccountPicker(
+                        colorScheme: colorScheme,
+                        value: closeAccountItems.accountNumber,
+                        accountList: ref
+                            .watch(userInfoProvider.notifier)
+                            .getAccountNumbers(),
+                        onChanged: (value) {
+                          if (value != null)
+                            provider.updateAccountNumber(value);
+                        },
+                      ),
+                      const SizedBox(height: 30),
+                      const Text(
+                        "Enter your password",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      const SizedBox(height: 10),
+                      TextField(
+                        obscureText: true,
+                        controller: passwordController,
+                        onChanged: (value) {
+                          provider.updatePassword(value);
+                        },
+                        decoration: Decorations.inputDecoration(
+                          "Password",
+                          colorScheme,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: closeAccountItems.buttonLoading
+                            ? null
+                            : () async {
+                                provider.updateButtonStatus(true);
+
+                                final String? errorMessage = await ref
+                                    .read(authProvider.notifier)
+                                    .singIn(
+                                      username: ref.watch(authProvider).email!,
+                                      password: closeAccountItems.password,
+                                    );
+                                if (errorMessage == null) {
+                                  toast.showInfoToast("Account closed");
+                                  // back to the page
+                                  Navigator.of(context).pop();
+                                } else {
+                                  toast.showErrorToast(errorMessage);
+                                }
+                                provider.updateButtonStatus(false);
+                              },
+                        child: Text(closeAccountItems.closeAccountButtonTxt),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: closeAccountItems.buttonLoading
-                      ? null
-                      : () async {
-                          provider.updateButtonStatus(true);
-
-                          final String? errorMessage =
-                              await ref.read(authProvider.notifier).singIn(
-                                    username: ref.watch(authProvider).email!,
-                                    password: closeAccountItems.password,
-                                  );
-                          if (errorMessage == null) {
-                            toast.showInfoToast("Account closed");
-                            // back to the page
-                            Navigator.of(context).pop();
-                          } else {
-                            toast.showErrorToast(errorMessage);
-                          }
-                          provider.updateButtonStatus(false);
-                        },
-                  child: Text(closeAccountItems.closeAccountButtonTxt),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }

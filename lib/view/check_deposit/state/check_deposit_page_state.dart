@@ -15,12 +15,13 @@ class CheckDepositPageState with _$CheckDepositPageState {
   const factory CheckDepositPageState({
     @Default('') String fromAccountNumber,
     @Default('') String routingNumber,
-    required String toAccountNumber,
+    String? toAccountNumber,
     int? checkAmount,
     DateTime? checkDate,
     File? checkFrontImage,
     File? checkBackImage,
     @Default(false) bool buttonLoading,
     @Default('Deposit') String depositButtonTxt,
+    @Default(false) bool initialized,
   }) = _CheckDepositPageState;
 }

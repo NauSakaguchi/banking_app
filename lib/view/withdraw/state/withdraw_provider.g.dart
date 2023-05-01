@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$WithdrawItemsHash() => r'5c256eb32c2e49ee15aa30f4f3feb87d5d587808';
+String _$WithdrawItemsHash() => r'c86b592fd220138669a335eb354a4591d631cc38';
 
 /// See also [WithdrawItems].
 final withdrawItemsProvider =

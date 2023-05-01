@@ -16,12 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TransferPageState {
-  String get fromAccountNumber => throw _privateConstructorUsedError;
-  String get toAccountNumber => throw _privateConstructorUsedError;
+  String? get fromAccountNumber => throw _privateConstructorUsedError;
+  String? get toAccountNumber => throw _privateConstructorUsedError;
   int? get centAmount => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get buttonLoading => throw _privateConstructorUsedError;
   String get transferButtonTxt => throw _privateConstructorUsedError;
+  bool get initialized => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransferPageStateCopyWith<TransferPageState> get copyWith =>
@@ -35,12 +36,13 @@ abstract class $TransferPageStateCopyWith<$Res> {
       _$TransferPageStateCopyWithImpl<$Res, TransferPageState>;
   @useResult
   $Res call(
-      {String fromAccountNumber,
-      String toAccountNumber,
+      {String? fromAccountNumber,
+      String? toAccountNumber,
       int? centAmount,
       String description,
       bool buttonLoading,
-      String transferButtonTxt});
+      String transferButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -56,22 +58,23 @@ class _$TransferPageStateCopyWithImpl<$Res, $Val extends TransferPageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fromAccountNumber = null,
-    Object? toAccountNumber = null,
+    Object? fromAccountNumber = freezed,
+    Object? toAccountNumber = freezed,
     Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? transferButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_value.copyWith(
-      fromAccountNumber: null == fromAccountNumber
+      fromAccountNumber: freezed == fromAccountNumber
           ? _value.fromAccountNumber
           : fromAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      toAccountNumber: null == toAccountNumber
+              as String?,
+      toAccountNumber: freezed == toAccountNumber
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       centAmount: freezed == centAmount
           ? _value.centAmount
           : centAmount // ignore: cast_nullable_to_non_nullable
@@ -88,6 +91,10 @@ class _$TransferPageStateCopyWithImpl<$Res, $Val extends TransferPageState>
           ? _value.transferButtonTxt
           : transferButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -101,12 +108,13 @@ abstract class _$$_TransferPageStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String fromAccountNumber,
-      String toAccountNumber,
+      {String? fromAccountNumber,
+      String? toAccountNumber,
       int? centAmount,
       String description,
       bool buttonLoading,
-      String transferButtonTxt});
+      String transferButtonTxt,
+      bool initialized});
 }
 
 /// @nodoc
@@ -120,22 +128,23 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fromAccountNumber = null,
-    Object? toAccountNumber = null,
+    Object? fromAccountNumber = freezed,
+    Object? toAccountNumber = freezed,
     Object? centAmount = freezed,
     Object? description = null,
     Object? buttonLoading = null,
     Object? transferButtonTxt = null,
+    Object? initialized = null,
   }) {
     return _then(_$_TransferPageState(
-      fromAccountNumber: null == fromAccountNumber
+      fromAccountNumber: freezed == fromAccountNumber
           ? _value.fromAccountNumber
           : fromAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      toAccountNumber: null == toAccountNumber
+              as String?,
+      toAccountNumber: freezed == toAccountNumber
           ? _value.toAccountNumber
           : toAccountNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       centAmount: freezed == centAmount
           ? _value.centAmount
           : centAmount // ignore: cast_nullable_to_non_nullable
@@ -152,6 +161,10 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
           ? _value.transferButtonTxt
           : transferButtonTxt // ignore: cast_nullable_to_non_nullable
               as String,
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -160,17 +173,18 @@ class __$$_TransferPageStateCopyWithImpl<$Res>
 
 class _$_TransferPageState implements _TransferPageState {
   const _$_TransferPageState(
-      {required this.fromAccountNumber,
-      required this.toAccountNumber,
+      {this.fromAccountNumber,
+      this.toAccountNumber,
       this.centAmount,
       this.description = "",
       this.buttonLoading = false,
-      this.transferButtonTxt = 'Transfer'});
+      this.transferButtonTxt = 'Transfer',
+      this.initialized = false});
 
   @override
-  final String fromAccountNumber;
+  final String? fromAccountNumber;
   @override
-  final String toAccountNumber;
+  final String? toAccountNumber;
   @override
   final int? centAmount;
   @override
@@ -182,10 +196,13 @@ class _$_TransferPageState implements _TransferPageState {
   @override
   @JsonKey()
   final String transferButtonTxt;
+  @override
+  @JsonKey()
+  final bool initialized;
 
   @override
   String toString() {
-    return 'TransferPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, centAmount: $centAmount, description: $description, buttonLoading: $buttonLoading, transferButtonTxt: $transferButtonTxt)';
+    return 'TransferPageState(fromAccountNumber: $fromAccountNumber, toAccountNumber: $toAccountNumber, centAmount: $centAmount, description: $description, buttonLoading: $buttonLoading, transferButtonTxt: $transferButtonTxt, initialized: $initialized)';
   }
 
   @override
@@ -204,7 +221,9 @@ class _$_TransferPageState implements _TransferPageState {
             (identical(other.buttonLoading, buttonLoading) ||
                 other.buttonLoading == buttonLoading) &&
             (identical(other.transferButtonTxt, transferButtonTxt) ||
-                other.transferButtonTxt == transferButtonTxt));
+                other.transferButtonTxt == transferButtonTxt) &&
+            (identical(other.initialized, initialized) ||
+                other.initialized == initialized));
   }
 
   @override
@@ -215,7 +234,8 @@ class _$_TransferPageState implements _TransferPageState {
       centAmount,
       description,
       buttonLoading,
-      transferButtonTxt);
+      transferButtonTxt,
+      initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -227,17 +247,18 @@ class _$_TransferPageState implements _TransferPageState {
 
 abstract class _TransferPageState implements TransferPageState {
   const factory _TransferPageState(
-      {required final String fromAccountNumber,
-      required final String toAccountNumber,
+      {final String? fromAccountNumber,
+      final String? toAccountNumber,
       final int? centAmount,
       final String description,
       final bool buttonLoading,
-      final String transferButtonTxt}) = _$_TransferPageState;
+      final String transferButtonTxt,
+      final bool initialized}) = _$_TransferPageState;
 
   @override
-  String get fromAccountNumber;
+  String? get fromAccountNumber;
   @override
-  String get toAccountNumber;
+  String? get toAccountNumber;
   @override
   int? get centAmount;
   @override
@@ -246,6 +267,8 @@ abstract class _TransferPageState implements TransferPageState {
   bool get buttonLoading;
   @override
   String get transferButtonTxt;
+  @override
+  bool get initialized;
   @override
   @JsonKey(ignore: true)
   _$$_TransferPageStateCopyWith<_$_TransferPageState> get copyWith =>

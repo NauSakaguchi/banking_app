@@ -8,9 +8,13 @@ part 'withdraw_provider.g.dart';
 class WithdrawItems extends _$WithdrawItems {
   @override
   WithdrawPageState build() {
-    final String num =
-        ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
-    return WithdrawPageState(accountNumber: num);
+    ref.read(userInfoProvider.notifier).fetchAccounts().then((_) {
+      final String num =
+          ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+      updateAccountNumber(num);
+      updateInitialized(true);
+    });
+    return const WithdrawPageState();
   }
 
   void updateAccountNumber(String accountNumber) {
@@ -37,5 +41,9 @@ class WithdrawItems extends _$WithdrawItems {
 
   void updateWithdrawButtonTxt(String withdrawButtonTxt) {
     state = state.copyWith(withdrawButtonTxt: withdrawButtonTxt);
+  }
+
+  void updateInitialized(bool initialized) {
+    state = state.copyWith(initialized: initialized);
   }
 }

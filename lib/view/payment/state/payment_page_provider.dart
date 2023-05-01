@@ -8,10 +8,17 @@ part 'payment_page_provider.g.dart';
 class PaymentItems extends _$PaymentItems {
   @override
   PaymentPageState build() {
-    // get the first account number
-    final String num =
-        ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
-    return PaymentPageState(fromAccountNumber: num);
+    ref.read(userInfoProvider.notifier).fetchAccounts().then((_) {
+      final String num =
+          ref.watch(userInfoProvider.notifier).getAccountNumbers()[0];
+      updateFromAccountNumber(num);
+      updateInitialized(true);
+    });
+    return const PaymentPageState();
+  }
+
+  void updateInitialized(bool initialized) {
+    state = state.copyWith(initialized: initialized);
   }
 
   // update fromAccountNumber

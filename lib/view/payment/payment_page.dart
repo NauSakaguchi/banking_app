@@ -29,191 +29,199 @@ class PaymentPage extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: colorScheme.background,
       appBar: AppBar(title: const Text("Payment")),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                const Text(
-                  "Pay from",
-                  style: TextStyle(fontSize: 20),
-                ),
-                // dropdown button to select account
-                const SizedBox(height: 20),
-                AccountPicker(
-                  colorScheme: colorScheme,
-                  value: paymentPageItems.fromAccountNumber,
-                  accountList:
-                      ref.watch(userInfoProvider.notifier).getAccountNumbers(),
-                  onChanged: (value) {
-                    if (value != null) provider.updateFromAccountNumber(value);
-                  },
-                ),
-
-                const SizedBox(height: 20),
-                const Text(
-                  "Pay to",
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: accountNumberController,
-                  // number keyboard
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    provider.updateToAccountNumber(value);
-                  },
-                  decoration: Decorations.inputDecoration(
-                    "Account Number",
-                    colorScheme,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: routingNumberController,
-                  // number keyboard
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    provider.updateToRoutingNumber(value);
-                  },
-                  decoration: Decorations.inputDecoration(
-                    "Routing Number",
-                    colorScheme,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: amountController,
-                  inputFormatters: [BalanceFormatter()],
-                  onChanged: (value) {
-                    // Remove all non-digit characters
-                    final newValue = value.replaceAll(RegExp(r'\D'), '');
-
-                    // Convert the cleaned string to a number
-                    int numberValue = int.tryParse(newValue) ?? 0;
-
-                    provider.updateCentAmount(numberValue);
-                  },
-                  // number keyboard
-                  keyboardType: TextInputType.number,
-                  decoration: Decorations.inputDecoration(
-                    "Amount",
-                    colorScheme,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: memoController,
-                  onChanged: (value) {
-                    provider.updateDescription(value);
-                  },
-                  decoration: Decorations.inputDecoration(
-                    "Memo",
-                    colorScheme,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: paymentPageItems.buttonLoading
-                      ? null
-                      : () async {
-                          // if there is a empty field or null value, print error toast message
-                          if (paymentPageItems.centAmount == null ||
-                              paymentPageItems.fromAccountNumber == "" ||
-                              paymentPageItems.toAccountNumber == "" ||
-                              paymentPageItems.toRoutingNumber == "" ||
-                              paymentPageItems.description == "") {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Please fill all the fields"),
-                              ),
-                            );
-                            return;
-                          }
-
-                          // if cent amount is less than 0 or equal, print error toast message
-                          if (paymentPageItems.centAmount! <= 0) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Amount must be greater than 0"),
-                              ),
-                            );
-                            return;
-                          }
-
-                          // if all the fields are filled, show confirmation dialog
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Confirm Payment"),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "From: ${paymentPageItems.fromAccountNumber}",
-                                      ),
-                                      Text(
-                                        "To: ${paymentPageItems.toAccountNumber}",
-                                      ),
-                                      Text(
-                                        "Amount: \$${paymentPageItems.centAmount! / 100}",
-                                      ),
-                                      Text(
-                                        "Memo: ${paymentPageItems.description}",
-                                      ),
-                                    ],
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        "Cancel",
-                                        style: TextStyle(
-                                            color: colorScheme.onBackground),
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        provider.updateButtonStatus(true);
-                                        Navigator.pop(context);
-
-                                        // print log
-                                        logger.d(
-                                            "from: ${paymentPageItems.fromAccountNumber}");
-                                        logger.d(
-                                            "to: ${paymentPageItems.toAccountNumber}");
-                                        logger.d(
-                                            "routing: ${paymentPageItems.toRoutingNumber}");
-                                        logger.d(
-                                            "amount: ${paymentPageItems.centAmount}");
-                                        logger.d(
-                                            "memo: ${paymentPageItems.description}");
-
-                                        // wait for 2 sec
-                                        await Future.delayed(
-                                            const Duration(seconds: 2));
-                                        provider.updateButtonStatus(false);
-                                      },
-                                      child: const Text("Confirm"),
-                                    ),
-                                  ],
-                                );
-                              });
+      body: paymentPageItems.initialized
+          ? GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Pay from",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      // dropdown button to select account
+                      const SizedBox(height: 20),
+                      AccountPicker(
+                        colorScheme: colorScheme,
+                        value: paymentPageItems.fromAccountNumber,
+                        accountList: ref
+                            .watch(userInfoProvider.notifier)
+                            .getAccountNumbers(),
+                        onChanged: (value) {
+                          if (value != null)
+                            provider.updateFromAccountNumber(value);
                         },
-                  child: Text(paymentPageItems.payButtonTxt),
+                      ),
+
+                      const SizedBox(height: 20),
+                      const Text(
+                        "Pay to",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: accountNumberController,
+                        // number keyboard
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          provider.updateToAccountNumber(value);
+                        },
+                        decoration: Decorations.inputDecoration(
+                          "Account Number",
+                          colorScheme,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: routingNumberController,
+                        // number keyboard
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          provider.updateToRoutingNumber(value);
+                        },
+                        decoration: Decorations.inputDecoration(
+                          "Routing Number",
+                          colorScheme,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: amountController,
+                        inputFormatters: [BalanceFormatter()],
+                        onChanged: (value) {
+                          // Remove all non-digit characters
+                          final newValue = value.replaceAll(RegExp(r'\D'), '');
+
+                          // Convert the cleaned string to a number
+                          int numberValue = int.tryParse(newValue) ?? 0;
+
+                          provider.updateCentAmount(numberValue);
+                        },
+                        // number keyboard
+                        keyboardType: TextInputType.number,
+                        decoration: Decorations.inputDecoration(
+                          "Amount",
+                          colorScheme,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: memoController,
+                        onChanged: (value) {
+                          provider.updateDescription(value);
+                        },
+                        decoration: Decorations.inputDecoration(
+                          "Memo",
+                          colorScheme,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: paymentPageItems.buttonLoading
+                            ? null
+                            : () async {
+                                // if there is a empty field or null value, print error toast message
+                                if (paymentPageItems.centAmount == null ||
+                                    paymentPageItems.fromAccountNumber == "" ||
+                                    paymentPageItems.toAccountNumber == "" ||
+                                    paymentPageItems.toRoutingNumber == "" ||
+                                    paymentPageItems.description == "") {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text("Please fill all the fields"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                // if cent amount is less than 0 or equal, print error toast message
+                                if (paymentPageItems.centAmount! <= 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content:
+                                          Text("Amount must be greater than 0"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                // if all the fields are filled, show confirmation dialog
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text("Confirm Payment"),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "From: ${paymentPageItems.fromAccountNumber}",
+                                            ),
+                                            Text(
+                                              "To: ${paymentPageItems.toAccountNumber}",
+                                            ),
+                                            Text(
+                                              "Amount: \$${paymentPageItems.centAmount! / 100}",
+                                            ),
+                                            Text(
+                                              "Memo: ${paymentPageItems.description}",
+                                            ),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "Cancel",
+                                              style: TextStyle(
+                                                  color:
+                                                      colorScheme.onBackground),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              provider.updateButtonStatus(true);
+                                              Navigator.pop(context);
+
+                                              // print log
+                                              logger.d(
+                                                  "from: ${paymentPageItems.fromAccountNumber}");
+                                              logger.d(
+                                                  "to: ${paymentPageItems.toAccountNumber}");
+                                              logger.d(
+                                                  "routing: ${paymentPageItems.toRoutingNumber}");
+                                              logger.d(
+                                                  "amount: ${paymentPageItems.centAmount}");
+                                              logger.d(
+                                                  "memo: ${paymentPageItems.description}");
+
+                                              // wait for 2 sec
+                                              await Future.delayed(
+                                                  const Duration(seconds: 2));
+                                              provider
+                                                  .updateButtonStatus(false);
+                                            },
+                                            child: const Text("Confirm"),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                        child: Text(paymentPageItems.payButtonTxt),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
