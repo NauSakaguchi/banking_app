@@ -1,6 +1,8 @@
 class RoutePath {
   static const topRoute = '/top';
   static const loginRoute = '/login';
+  static const signUpRoute = '/sign_up';
+  static const registerRoute = '/sign_up/register';
   static const atmMapRoute = '$topRoute/atm_map';
   static const transferRoute = '$topRoute/transfer';
   static const checkDepositRoute = '$topRoute/check_deposit';

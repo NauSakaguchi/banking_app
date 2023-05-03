@@ -50,7 +50,7 @@ class LoginPage extends HookConsumerWidget {
         border: Border.all(color: colorScheme.onPrimaryContainer),
         borderRadius: BorderRadius.circular(3),
       ),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 0),
       width: deviceWidth * 0.8,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -109,7 +109,15 @@ class LoginPage extends HookConsumerWidget {
                   },
             child: Text(loginItems.signInButtonTxt),
           ),
-          const Text(LoginString.forgot),
+          TextButton(
+            onPressed: () {
+              context.router.pushNamed(RoutePath.signUpRoute);
+            },
+            child: Text(
+              LoginString.signUp,
+              style: TextStyle(color: colorScheme.onBackground),
+            ),
+          ),
         ],
       ),
     );

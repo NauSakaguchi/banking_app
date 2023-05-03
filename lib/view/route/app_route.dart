@@ -7,6 +7,8 @@ import 'package:banking_app/view/check_deposit/check_deposit_page.dart';
 import 'package:banking_app/view/information/information_page.dart';
 import 'package:banking_app/view/login/login_page.dart';
 import 'package:banking_app/view/payment/payment_page.dart';
+import 'package:banking_app/view/sign_up/register_user_page.dart';
+import 'package:banking_app/view/sign_up/sign_up.dart';
 import 'package:banking_app/view/top/top_page.dart';
 import 'package:banking_app/view/transaction/transaction_page.dart';
 import 'package:banking_app/view/transfer/transfer_page.dart';
@@ -59,6 +61,14 @@ import 'package:banking_app/view/withdraw/withdraw_page.dart';
     AutoRoute(
       path: RoutePath.withdrawRoute,
       page: WithdrawPage,
+    ),
+    AutoRoute(
+      path: RoutePath.signUpRoute,
+      page: SignUpPage,
+    ),
+    AutoRoute(
+      path: RoutePath.registerRoute,
+      page: RegisterUserPage,
     ),
   ],
 )
