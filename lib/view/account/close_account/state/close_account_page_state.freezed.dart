@@ -149,7 +149,7 @@ class __$$_CloseAccountPageStateCopyWithImpl<$Res>
 class _$_CloseAccountPageState implements _CloseAccountPageState {
   const _$_CloseAccountPageState(
       {this.accountNumber,
-      this.password = 'password',
+      this.password = '',
       this.buttonLoading = false,
       this.closeAccountButtonTxt = 'Close Account',
       this.initialized = false});

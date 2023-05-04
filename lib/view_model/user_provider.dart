@@ -66,7 +66,6 @@ class UserInfo extends _$UserInfo {
 
       state = _user;
 
-      // TODO: implement fetchAccounts with idToken
       await fetchAccounts();
     } else {
       logger.e('Error: ${response.statusCode} ${response.reasonPhrase}');
@@ -83,7 +82,7 @@ class UserInfo extends _$UserInfo {
     }
 
     //TODO: implement fetchAccounts with idToken
-    const endpoint = '/allAccounts';
+    const endpoint = '/accounts';
     final response = await NetBankApi.getHttp(
       authState.idToken!,
       endpoint: endpoint,

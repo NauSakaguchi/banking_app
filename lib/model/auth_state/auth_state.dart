@@ -7,5 +7,6 @@ class AuthState with _$AuthState {
   const factory AuthState({
     String? email,
     String? idToken,
+    String? uid,
   }) = _AuthState;
 }

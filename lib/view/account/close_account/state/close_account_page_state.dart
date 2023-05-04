@@ -13,7 +13,7 @@ class CloseAccountPageState with _$CloseAccountPageState {
   // openAccountButtonTxt is 'Open Account'
   const factory CloseAccountPageState({
     String? accountNumber,
-    @Default('password') String password,
+    @Default('') String password,
     @Default(false) bool buttonLoading,
     @Default('Close Account') String closeAccountButtonTxt,
     @Default(false) bool initialized,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_provider.dart';
+part of 'sign_up_page_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$UserInfoHash() => r'4bd14e9bde4e33f976df611ce8d1f134dabf16d9';
+String _$SignUpPageHash() => r'd1d5d86ee53c69d79830e8f9cb69e69c5d442371';
 
-/// See also [UserInfo].
-final userInfoProvider = NotifierProvider<UserInfo, User>(
-  UserInfo.new,
-  name: r'userInfoProvider',
+/// See also [SignUpPage].
+final signUpPageProvider = NotifierProvider<SignUpPage, SignUpPageState>(
+  SignUpPage.new,
+  name: r'signUpPageProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$UserInfoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$SignUpPageHash,
 );
-typedef UserInfoRef = NotifierProviderRef<User>;
+typedef SignUpPageRef = NotifierProviderRef<SignUpPageState>;
 
-abstract class _$UserInfo extends Notifier<User> {
+abstract class _$SignUpPage extends Notifier<SignUpPageState> {
   @override
-  User build();
+  SignUpPageState build();
 }
