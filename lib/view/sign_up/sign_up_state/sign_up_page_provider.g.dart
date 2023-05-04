@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth.dart';
+part of 'sign_up_page_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,18 +29,18 @@ class _SystemHash {
   }
 }
 
-String _$AuthHash() => r'1d9dc8e68af38a500b4491edf2364cffb7bae63e';
+String _$SignUpPageHash() => r'ce90899b87273c5f0295c1d9ae7274bc9365c8c1';
 
-/// See also [Auth].
-final authProvider = NotifierProvider<Auth, AuthState>(
-  Auth.new,
-  name: r'authProvider',
+/// See also [SignUpPage].
+final signUpPageProvider = NotifierProvider<SignUpPage, SignUpPageState>(
+  SignUpPage.new,
+  name: r'signUpPageProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$AuthHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$SignUpPageHash,
 );
-typedef AuthRef = NotifierProviderRef<AuthState>;
+typedef SignUpPageRef = NotifierProviderRef<SignUpPageState>;
 
-abstract class _$Auth extends Notifier<AuthState> {
+abstract class _$SignUpPage extends Notifier<SignUpPageState> {
   @override
-  AuthState build();
+  SignUpPageState build();
 }

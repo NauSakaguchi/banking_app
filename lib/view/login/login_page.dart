@@ -95,7 +95,7 @@ class LoginPage extends HookConsumerWidget {
                     logger.d('Password: ${loginItems.password}');
 
                     final String? errorMessage =
-                        await ref.read(authProvider.notifier).singIn(
+                        await ref.read(authProvider.notifier).signIn(
                               username: loginItems.username,
                               password: loginItems.password,
                             );
@@ -115,7 +115,7 @@ class LoginPage extends HookConsumerWidget {
             },
             child: Text(
               LoginString.signUp,
-              style: TextStyle(color: colorScheme.onBackground),
+              style: TextStyle(fontSize: 12, color: colorScheme.onBackground),
             ),
           ),
         ],
