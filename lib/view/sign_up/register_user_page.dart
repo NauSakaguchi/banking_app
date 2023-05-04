@@ -204,6 +204,14 @@ class RegisterUserForm extends HookConsumerWidget {
                         return;
                       }
 
+                      try {
+                        pageProvider.singUp();
+                      } catch (e) {
+                        toast.showErrorToast(e.toString());
+                        pageProvider.updateButtonLoading(false);
+                        return;
+                      }
+
                       //back to previous page
                       context.router.pop().whenComplete(() {
                         // navigate to home page

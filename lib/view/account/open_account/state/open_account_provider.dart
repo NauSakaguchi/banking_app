@@ -53,7 +53,6 @@ class OpenAccountItems extends _$OpenAccountItems {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseBody = jsonDecode(response.body);
-      // String content = responseBody['choices'][0]['message']['content'];
       logger.d('Content: $responseBody');
     } else {
       logger.d(jsonDecode(response.body));

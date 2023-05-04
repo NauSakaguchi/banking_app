@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$SignUpPageHash() => r'ce90899b87273c5f0295c1d9ae7274bc9365c8c1';
+String _$SignUpPageHash() => r'd1d5d86ee53c69d79830e8f9cb69e69c5d442371';
 
 /// See also [SignUpPage].
 final signUpPageProvider = NotifierProvider<SignUpPage, SignUpPageState>(
