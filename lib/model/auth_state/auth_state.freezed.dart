@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthState {
   String? get email => throw _privateConstructorUsedError;
   String? get idToken => throw _privateConstructorUsedError;
+  String? get uid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({String? email, String? idToken});
+  $Res call({String? email, String? idToken, String? uid});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   $Res call({
     Object? email = freezed,
     Object? idToken = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_value.copyWith(
       email: freezed == email
@@ -56,6 +58,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
       idToken: freezed == idToken
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -68,7 +74,7 @@ abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       __$$_AuthStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? email, String? idToken});
+  $Res call({String? email, String? idToken, String? uid});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_AuthStateCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? idToken = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_$_AuthState(
       email: freezed == email
@@ -94,6 +101,10 @@ class __$$_AuthStateCopyWithImpl<$Res>
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -101,16 +112,18 @@ class __$$_AuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthState implements _AuthState {
-  const _$_AuthState({this.email, this.idToken});
+  const _$_AuthState({this.email, this.idToken, this.uid});
 
   @override
   final String? email;
   @override
   final String? idToken;
+  @override
+  final String? uid;
 
   @override
   String toString() {
-    return 'AuthState(email: $email, idToken: $idToken)';
+    return 'AuthState(email: $email, idToken: $idToken, uid: $uid)';
   }
 
   @override
@@ -119,11 +132,12 @@ class _$_AuthState implements _AuthState {
         (other.runtimeType == runtimeType &&
             other is _$_AuthState &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.idToken, idToken) || other.idToken == idToken));
+            (identical(other.idToken, idToken) || other.idToken == idToken) &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, idToken);
+  int get hashCode => Object.hash(runtimeType, email, idToken, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -133,13 +147,17 @@ class _$_AuthState implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState({final String? email, final String? idToken}) =
-      _$_AuthState;
+  const factory _AuthState(
+      {final String? email,
+      final String? idToken,
+      final String? uid}) = _$_AuthState;
 
   @override
   String? get email;
   @override
   String? get idToken;
+  @override
+  String? get uid;
   @override
   @JsonKey(ignore: true)
   _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>

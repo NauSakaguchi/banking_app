@@ -1,4 +1,5 @@
 class LoginString {
+  static const signUp = "Sign up";
   static const forgot = "Forgot username or password?";
   static const signIn = "Sign in";
   static const loading = "Loading...";

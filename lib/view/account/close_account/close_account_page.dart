@@ -76,7 +76,7 @@ class CloseAccountPage extends HookConsumerWidget {
 
                                 final String? errorMessage = await ref
                                     .read(authProvider.notifier)
-                                    .singIn(
+                                    .signIn(
                                       username: ref.watch(authProvider).email!,
                                       password: closeAccountItems.password,
                                     );

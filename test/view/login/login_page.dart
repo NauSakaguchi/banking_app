@@ -95,7 +95,7 @@ class LoginPage extends HookConsumerWidget {
                     logger.d('Password: ${loginItems.password}');
 
                     final String? errorMessage =
-                        await ref.read(authProvider.notifier).singIn(
+                        await ref.read(authProvider.notifier).signIn(
                               username: loginItems.username,
                               password: loginItems.password,
                             );
