@@ -64,6 +64,8 @@ class RegisterUserForm extends StatelessWidget {
             const SizedBox(height: 10),
             TextField(
               onChanged: (value) {},
+              // number only
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: "Social Security Number",
               ),
@@ -76,6 +78,8 @@ class RegisterUserForm extends StatelessWidget {
             const SizedBox(height: 10),
             TextField(
               onChanged: (value) {},
+              // number only
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: "Phone Number",
               ),
@@ -102,6 +106,8 @@ class RegisterUserForm extends StatelessWidget {
             const SizedBox(height: 10),
             TextField(
               onChanged: (value) {},
+              // number only
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 hintText: "Zip Code",
               ),
