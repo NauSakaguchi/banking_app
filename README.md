@@ -17,14 +17,14 @@ Tools • Dart 2.18.4 • DevTools 2.15.0
 
 This project is a starting point for a Flutter application.
 1. ### Install Flutter 3.3.8
-    1. Download from here: https://docs.flutter.dev/release/archive
+   Download from here: https://docs.flutter.dev/release/archive
 2. ### Set up the environment following the official instructions
-    1. Mac: https://docs.flutter.dev/get-started/install/macos
-    2. Windows: https://docs.flutter.dev/get-started/install/windows
-    3. Linux: https://docs.flutter.dev/get-started/install/linux
+    - Mac: https://docs.flutter.dev/get-started/install/macos
+    - Windows: https://docs.flutter.dev/get-started/install/windows
+    - Linux: https://docs.flutter.dev/get-started/install/linux
 3. ### Make sure using Flutter 3.3.8
    ```shell
-   flutter flutter --version
+   flutter --version
    ```
    output:
    ```shell
@@ -34,7 +34,7 @@ This project is a starting point for a Flutter application.
    Tools • Dart 2.18.4 • DevTools 2.15.0
    ```
 4. ### Download the source code
-    1. Git clone
+    Git clone
     ```shell
     git clone https://github.com/NauSakaguchi/banking_app.git
     ```
