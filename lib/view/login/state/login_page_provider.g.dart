@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$LoginItemsHash() => r'2793ac747e94ed786ce9caccc4c39ee39e888195';
+String _$LoginItemsHash() => r'57ed3e2ef0fc3a287f16afa2cac6268741171df8';
 
 /// See also [LoginItems].
 final loginItemsProvider =

@@ -10,8 +10,8 @@ class LoginItems extends _$LoginItems {
   @override
   LoginPageState build() {
     return const LoginPageState(
-      username: 'username@example.com',
-      password: 'password',
+      username: '',
+      password: '',
     );
   }
 

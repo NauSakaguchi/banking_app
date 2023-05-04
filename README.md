@@ -1,4 +1,10 @@
 # banking_app
+- [banking\_app](#banking_app)
+  - [Dev Environment](#dev-environment)
+  - [Getting Started](#getting-started)
+    - [Got Error?](#got-error)
+  - [Directory Structure](#directory-structure)
+  - [Sources](#sources)
 
 ## Dev Environment
 
@@ -10,9 +16,37 @@ Tools • Dart 2.18.4 • DevTools 2.15.0
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+1. ### Install Flutter 3.3.8
+    1. Download from here: https://docs.flutter.dev/release/archive
+2. ### Set up the environment following the official instructions
+    1. Mac: https://docs.flutter.dev/get-started/install/macos
+    2. Windows: https://docs.flutter.dev/get-started/install/windows
+    3. Linux: https://docs.flutter.dev/get-started/install/linux
+3. ### Make sure using Flutter 3.3.8
+   ```shell
+   flutter flutter --version
+   ```
+   output:
+   ```shell
+   Flutter 3.3.8 • channel stable • https://github.com/flutter/flutter.git
+   Framework • revision 52b3dc25f6 (6 months ago) • 2022-11-09 12:09:26 +0800
+   Engine • revision 857bd6b74c
+   Tools • Dart 2.18.4 • DevTools 2.15.0
+   ```
+4. ### Download the source code
+    1. Git clone
+    ```shell
+    git clone https://github.com/NauSakaguchi/banking_app.git
+    ```
+5. ### Run Flutter app
+```shell
+flutter run -d {device ID}
+```
 
+### Got Error?
 A few resources to get you started if this is your first Flutter project:
-
+- [Message "flutter run: No connected devices"](https://stackoverflow.com/questions/49045393/message-flutter-run-no-connected-devices)
+- [How to specify a device id in flutter?](https://stackoverflow.com/questions/49684621/flutter-how-to-specify-a-device-id-in-flutter)
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
@@ -25,7 +59,6 @@ samples, guidance on mobile development, and a full API reference.
 - **android**: This folder is automatically generated when you create a Flutter project. It contains settings and source files related to Android.
 - **ios**: This folder is automatically generated when you create a Flutter project. It contains settings and source files related to iOS.
 - **assets**: This folder stores assets related to the app, such as images and JSON files containing necessary information for the app.
-- **lib**: This folder manages the product code.
 
     - **component**: Manages common UI elements in the app and stores reusable UI components.
     - **constant**: Manages constants used in the app, similar to Resources in Android. Common files stored in the `constant` folder include:
